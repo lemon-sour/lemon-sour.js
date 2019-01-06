@@ -1,4 +1,4 @@
 'use strict';
 
 // beer!!
-console.log('🍺!!');
+console.log('🍺!!!');
