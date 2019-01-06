@@ -4,8 +4,6 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "thanks": "thanks"
   },
   "bin": {
     "lemon-sour": "bin/lemon-sour"
@@ -20,10 +18,6 @@
     "url": "https://github.com/lemon-sour/lemon-sour.js/issues"
   },
   "homepage": "https://github.com/lemon-sour/lemon-sour.js#readme",
-  "dependencies": {
-    "ora": "^3.0.0"
-  },
-  "devDependencies": {
-    "thanks": "^2.0.0"
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }
