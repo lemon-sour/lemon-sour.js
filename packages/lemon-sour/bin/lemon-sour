@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const path = __dirname + '/../lib/lemon-sour';
+const func = require(path);
+func();
