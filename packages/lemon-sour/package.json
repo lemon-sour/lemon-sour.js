@@ -1,6 +1,6 @@
 {
   "name": "lemon-sour",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "> TODO: description",
   "author": "hisasann <hisasann25@gmail.com>",
   "homepage": "https://github.com/lemon-sour/lemon-sour.js/tree/master/packages/lemon-sour#readme",
@@ -28,6 +28,6 @@
   },
   "gitHead": "e67de51fd6ca7bb7ba1410eabd128c1f831a1c25",
   "dependencies": {
-    "@lemon-sour/cli": "^1.0.4"
+    "@lemon-sour/cli": "^1.0.5"
   }
 }
