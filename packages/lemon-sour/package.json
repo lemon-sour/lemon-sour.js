@@ -1,0 +1,29 @@
+{
+  "name": "lemon-sour",
+  "version": "1.0.2",
+  "description": "> TODO: description",
+  "author": "hisasann <hisasann25@gmail.com>",
+  "homepage": "https://github.com/lemon-sour/lemon-sour.js/tree/master/packages/lemon-sour#readme",
+  "license": "ISC",
+  "main": "main.js",
+  "bin": {
+    "lemon-sour": "bin/lemon-sour"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lemon-sour/lemon-sour.js.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/lemon-sour/lemon-sour.js/issues"
+  }
+}
