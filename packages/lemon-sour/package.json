@@ -25,5 +25,9 @@
   },
   "bugs": {
     "url": "https://github.com/lemon-sour/lemon-sour.js/issues"
+  },
+  "gitHead": "e1406c90934d842c42eb7785f169b9fed3f2e0d0",
+  "dependencies": {
+    "@lemon-sour/cli": "^1.0.3"
   }
 }
