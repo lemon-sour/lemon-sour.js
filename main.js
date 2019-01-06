@@ -1,7 +1,6 @@
 'use strict';
 
 const ora = require('ora');
-const consola = require('consola');
 
 const HEARTS_SPINNER = {
   'interval': 100,
@@ -32,8 +31,3 @@ setTimeout(() => {
   spinner.succeed('thanks!');
 }, 4000);
 
-// See types section for all available types
-
-consola.success('Built!')
-consola.info('Reporter: Some info')
-// consola.error(new Error('Foo'))
