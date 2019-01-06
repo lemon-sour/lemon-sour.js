@@ -1,4 +1,4 @@
-# lemon-sour &middot; 
+# :lemon: lemon-sour :lemon:
   <a href="https://www.npmjs.com/package/lemon-sour"><img src="https://badgen.net/npm/dm/lemon-sour" alt="Downloads"></a>
   <a href="https://www.npmjs.com/package/lemon-sour"><img src="https://badgen.net/npm/v/lemon-sour" alt="Version"></a>
   <a href="https://www.npmjs.com/package/lemon-sour"><img src="https://badgen.net/npm/license/lemon-sour" alt="License"></a>
