@@ -1,10 +1,15 @@
 {
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "name": "lemon-sour",
   "version": "1.0.2",
   "description": "",
   "main": "main.js",
-  "scripts": {},
+  "scripts": {
+    "tsc:init": "tsc --init"
+  },
   "bin": {
     "lemon-sour": "packages/lemon-sour/bin/lemon-sour"
   },
