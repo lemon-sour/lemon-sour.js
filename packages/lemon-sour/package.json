@@ -22,7 +22,8 @@
     "url": "git+https://github.com/lemon-sour/lemon-sour.js.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build": "tsc -p tsconfig.json",
+    "tsc:init": "tsc --init"
   },
   "bugs": {
     "url": "https://github.com/lemon-sour/lemon-sour.js/issues"
@@ -30,5 +31,8 @@
   "gitHead": "b6ad574816588dd8328ca67b04347ee12d0e7076",
   "dependencies": {
     "@lemon-sour/cli": "^1.0.6"
+  },
+  "devDependencies": {
+    "typescript": "^3.2.2"
   }
 }
