@@ -10,7 +10,16 @@
     "build": "tsc -p tsconfig.json",
     "tsc:init": "tsc --init",
     "lint": "prettier --list-different \"src/**/*.{js,ts,tsx,json}\"",
-    "lint:format": "prettier --write \"src/**/*.{js,ts,tsx,json}\""
+    "lint:format": "prettier --write \"src/**/*.{js,ts,tsx,json}\"",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "linters": {
+      "src/**/*.{js,ts,tsx,json}": [
+        "npm run lint:format",
+        "git add"
+      ]
+    }
   },
   "directories": {
     "lib": "lib",
@@ -33,5 +42,8 @@
   "devDependencies": {
     "prettier": "^1.15.3",
     "typescript": "^3.2.2"
+  },
+  "dependencies": {
+    "lint-staged": "^8.1.0"
   }
 }

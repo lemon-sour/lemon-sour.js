@@ -11,7 +11,16 @@
     "dev": "node -r esm lib/index.js",
     "tsc:init": "tsc --init",
     "lint": "prettier --list-different \"src/**/*.{js,ts,tsx,json}\"",
-    "lint:format": "prettier --write \"src/**/*.{js,ts,tsx,json}\""
+    "lint:format": "prettier --write \"src/**/*.{js,ts,tsx,json}\"",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "linters": {
+      "src/**/*.{js,ts,tsx,json}": [
+        "npm run lint:format",
+        "git add"
+      ]
+    }
   },
   "bin": {
     "lemon-sour": "bin/lemon-sour"
@@ -33,7 +42,8 @@
   },
   "gitHead": "b6ad574816588dd8328ca67b04347ee12d0e7076",
   "dependencies": {
-    "@lemon-sour/cli": "^1.0.8"
+    "@lemon-sour/cli": "^1.0.8",
+    "lint-staged": "^8.1.0"
   },
   "devDependencies": {
     "@types/node": "^10.12.18",
