@@ -3,5 +3,4 @@
 'use strict';
 
 const path = __dirname + '/../lib/index';
-const func = require(path);
-func();
+require(path);
