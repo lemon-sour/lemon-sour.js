@@ -9,9 +9,10 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "node -r esm lib/index.js",
+    "test": "jest",
     "tsc:init": "tsc --init",
-    "lint": "prettier --list-different \"src/**/*.{js,ts,tsx,json}\"",
-    "lint:format": "prettier --write \"src/**/*.{js,ts,tsx,json}\"",
+    "lint": "prettier --list-different \"src/**/*.{js,ts,tsx,json}\" \"__tests__/**/*.{js,ts,tsx,json}\"",
+    "lint:format": "prettier --write \"src/**/*.{js,ts,tsx,json}\" \"__tests__/**/*.{js,ts,tsx,json}\"",
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
@@ -21,6 +22,20 @@
         "git add"
       ]
     }
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   },
   "bin": {
     "lemon-sour": "bin/lemon-sour"
@@ -46,9 +61,12 @@
     "lint-staged": "^8.1.0"
   },
   "devDependencies": {
+    "@types/jest": "^23.3.12",
     "@types/node": "^10.12.18",
     "esm": "^3.0.84",
+    "jest": "^23.6.0",
     "prettier": "^1.15.3",
+    "ts-jest": "^23.10.5",
     "typescript": "^3.2.2"
   }
 }

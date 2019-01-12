@@ -4,3 +4,7 @@ const cli_1 = require("@lemon-sour/cli");
 console.log(cli_1.cli());
 const s = 'lemon-sour';
 console.log(s);
+const lemonSour = () => {
+    return 'calling lemonSour';
+};
+exports.lemonSour = lemonSour;
