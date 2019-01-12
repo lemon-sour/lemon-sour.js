@@ -6,6 +6,11 @@
   "scripts": {
     "tsc:init": "tsc --init"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lerna exec npm run lint-staged"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lemon-sour/lemon-sour.js.git"
@@ -15,6 +20,7 @@
   },
   "homepage": "https://github.com/lemon-sour/lemon-sour.js#readme",
   "devDependencies": {
-    "lerna": "^3.8.5"
+    "lerna": "^3.8.5",
+    "husky": "^1.3.1"
   }
 }
