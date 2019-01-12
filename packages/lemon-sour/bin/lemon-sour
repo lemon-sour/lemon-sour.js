@@ -2,6 +2,6 @@
 
 'use strict';
 
-const path = __dirname + '/../lib/lemon-sour';
+const path = __dirname + '/../lib/index';
 const func = require(path);
 func();

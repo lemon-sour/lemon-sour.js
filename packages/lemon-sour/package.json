@@ -5,7 +5,12 @@
   "author": "hisasann <hisasann25@gmail.com>",
   "homepage": "https://github.com/lemon-sour/lemon-sour.js/tree/master/packages/lemon-sour#readme",
   "license": "ISC",
-  "main": "main.js",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "node -r esm lib/index.js",
+    "tsc:init": "tsc --init"
+  },
   "bin": {
     "lemon-sour": "bin/lemon-sour"
   },
@@ -21,10 +26,6 @@
     "type": "git",
     "url": "git+https://github.com/lemon-sour/lemon-sour.js.git"
   },
-  "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "tsc:init": "tsc --init"
-  },
   "bugs": {
     "url": "https://github.com/lemon-sour/lemon-sour.js/issues"
   },
@@ -33,6 +34,8 @@
     "@lemon-sour/cli": "^1.0.6"
   },
   "devDependencies": {
+    "@types/node": "^10.12.18",
+    "esm": "^3.0.84",
     "typescript": "^3.2.2"
   }
 }

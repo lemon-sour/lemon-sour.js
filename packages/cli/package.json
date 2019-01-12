@@ -5,7 +5,11 @@
   "author": "hisasann <hisasann25@gmail.com>",
   "homepage": "https://github.com/lemon-sour/lemon-sour.js/tree/master/packages/cli#readme",
   "license": "ISC",
-  "main": "lib/cli.js",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "tsc:init": "tsc --init"
+  },
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -16,10 +20,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lemon-sour/lemon-sour.js.git"
-  },
-  "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "tsc:init": "tsc --init"
   },
   "bugs": {
     "url": "https://github.com/lemon-sour/lemon-sour.js/issues"
