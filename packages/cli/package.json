@@ -8,7 +8,9 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "tsc:init": "tsc --init"
+    "tsc:init": "tsc --init",
+    "lint": "prettier --list-different \"src/**/*.{js,ts,tsx,json}\"",
+    "lint:format": "prettier --write \"src/**/*.{js,ts,tsx,json}\""
   },
   "directories": {
     "lib": "lib",
@@ -29,6 +31,7 @@
   },
   "gitHead": "b6ad574816588dd8328ca67b04347ee12d0e7076",
   "devDependencies": {
+    "prettier": "^1.15.3",
     "typescript": "^3.2.2"
   }
 }
