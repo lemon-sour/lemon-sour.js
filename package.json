@@ -3,22 +3,13 @@
   "workspaces": [
     "packages/*"
   ],
-  "name": "lemon-sour",
-  "version": "1.0.2",
-  "description": "",
-  "main": "main.js",
   "scripts": {
     "tsc:init": "tsc --init"
-  },
-  "bin": {
-    "lemon-sour": "packages/lemon-sour/bin/lemon-sour"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lemon-sour/lemon-sour.js.git"
   },
-  "author": "hisasann",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/lemon-sour/lemon-sour.js/issues"
   },
