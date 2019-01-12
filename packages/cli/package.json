@@ -11,13 +11,13 @@
     "dev": "node -r esm lib/index.js",
     "test": "jest",
     "tsc:init": "tsc --init",
-    "lint": "prettier --list-different \"src/**/*.{js,ts,tsx,json}\" \"__tests__/**/*.{js,ts,tsx,json}\"",
-    "lint:format": "prettier --write \"src/**/*.{js,ts,tsx,json}\" \"__tests__/**/*.{js,ts,tsx,json}\"",
+    "lint": "prettier --list-different \"{src,__tests__}/**/*.{js,ts,tsx,json}\"",
+    "lint:format": "prettier --write \"{src,__tests__}/**/*.{js,ts,tsx,json}\"",
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
     "linters": {
-      "src/**/*.{js,ts,tsx,json}": [
+      "{src,__tests__}/**/*.{js,ts,tsx,json}": [
         "npm run lint:format",
         "git add"
       ]
