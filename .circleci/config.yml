@@ -1,0 +1,100 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2.1
+executors:
+  node:
+    docker:
+      - image: circleci/node:8.10.0
+commands:
+  restore_built:
+    description: "Restore the build result from cache"
+    steps:
+      - restore_cache:
+          key: built-cli-{{ .Revision }}
+      - restore_cache:
+          key: built-lemon-sour-{{ .Revision }}
+  restore_dependency:
+    description: "Restore the dependencies result from cache"
+    steps:
+      - restore_cache:
+          keys:
+            - dependencies-root-{{ checksum "package.json" }}
+            - dependencies-root-
+      - restore_cache:
+          keys:
+            - dependencies-cli-{{ checksum "packages/api-schema/package.json" }}
+            - dependencies-cli-
+      - restore_cache:
+          keys:
+            - dependencies-lemon-sour-{{ checksum "packages/client/package.json" }}
+            - dependencies-lemon-sour-
+jobs:
+  install_dependency:
+    executor: node
+    steps:
+      - checkout
+      - restore_dependency
+      - run:
+          name: ルートの依存関係のインストール
+          command: npm install
+      - run:
+          name: サブプロジェクトの依存関係のインストール
+          command: npx lerna bootstrap
+      - run:
+          name: package.jsonの避難
+          command: cp ./package.json ./package.copy.json
+      - run:
+          name: package.jsonの避難
+          command: cp ./packages/cli/package.json ./packages/cli/package.copy.json
+      - run:
+          name: package.jsonの避難
+          command: cp ./packages/lemon-sour/package.json ./packages/lemon-sour/package.copy.json
+      - save_cache:
+          paths:
+            - ./node_modules/
+          key: dependencies-root-{{ checksum "package.copy.json" }}
+      - save_cache:
+          paths:
+            - ./packages/cli/node_modules/
+          key: dependencies-cli-{{ checksum "packages/cli/package.copy.json }}
+      - save_cache:
+          paths:
+            - ./packages/lemon-sour/node_modules/
+          key: dependencies-lemon-sour-{{ checksum "packages/lemon-sour/package.copy.json" }}
+  build:
+    executor: node
+    steps:
+      - checkout
+      - restore_dependency
+      - run:
+          name: ビルド
+          command: npx lerna run build
+      - save_cache:
+          paths:
+            - ./packages/cli/lib/
+          key: built-cli-{{ .Revision }}
+      - save_cache:
+          paths:
+            - ./packages/lemon-sour/dist/
+          key: built-lemon-sour-{{ .Revision }}
+  test:
+    executor: node
+    steps:
+      - checkout
+      - restore_dependency
+      - restore_built
+      - run:
+          name: テスト
+          command: npx lerna run test:coverage
+workflows:
+  main:
+    jobs:
+      - install_dependency
+      - build:
+          requires:
+            - install_dependency
+      - test:
+          requires:
+            - build
