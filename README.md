@@ -1,4 +1,6 @@
 # :lemon: lemon-sour :lemon:
+  <a href="https://circleci.com/gh/lemon-sour/lemon-sour.js"><img src="https://badgen.net/circleci/github/lemon-sour/lemon-sour.js/master" alt="Build Status"></a>
+  <a href="https://codecov.io/gh/lemon-sour/lemon-sour.js"><img src="https://badgen.net/codecov/c/github/lemon-sour/lemon-sour.js/master" alt="Coverage Status"></a>
   <a href="https://www.npmjs.com/package/lemon-sour"><img src="https://badgen.net/npm/dm/lemon-sour" alt="Downloads"></a>
   <a href="https://www.npmjs.com/package/lemon-sour"><img src="https://badgen.net/npm/v/lemon-sour" alt="Version"></a>
   <a href="https://www.npmjs.com/package/lemon-sour"><img src="https://badgen.net/npm/license/lemon-sour" alt="License"></a>
@@ -21,3 +23,13 @@ $ lemon-sour
 ```
 $ npm install lemon-sour -g
 ```
+
+## Maintainers
+
+- [hisasann (Yoshiyuki Hisamatsu)](https://github.com/hisasann)
+
+## License
+
+MIT © [hisasann (Yoshiyuki Hisamatsu)](https://github.com/hisasann)
+
+<a href="https://twitter.com/hisasann"><img src="https://badgen.net/twitter/follow/hisasann" alt="twitter"></a>
