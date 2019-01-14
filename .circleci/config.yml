@@ -113,7 +113,7 @@ jobs:
 
       - run:
           name: Send coverage of test to codecov
-          command: npx lerna run codecov
+          command: npx codecov
 
 workflows:
   main:
