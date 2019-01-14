@@ -24,7 +24,7 @@ commands:
             - dependencies-root-
       - restore_cache:
           keys:
-            - dependencies-cli-{{ checksum "packages/li/package.json" }}
+            - dependencies-cli-{{ checksum "packages/cli/package.json" }}
             - dependencies-cli-
       - restore_cache:
           keys:
