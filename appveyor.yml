@@ -18,12 +18,13 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - IF %nodejs_version% LSS 8 npm -g install npm@5
   - npm install --ignore-scripts
+  - npx lerna bootstrap
 
 build: off
 
 test_script:
   - node --version && npm --version
-  - npm test
+  - npx lerna run test
 
 matrix:
   fast_finish: false
