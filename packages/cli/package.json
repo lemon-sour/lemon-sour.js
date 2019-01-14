@@ -10,7 +10,7 @@
     "build": "tsc -p tsconfig.json",
     "dev": "node -r esm lib/index.js",
     "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test:coverage": "jest --no-cache --forceExit --coverage",
     "tsc:init": "tsc --init",
     "lint": "prettier --list-different \"{src,__tests__}/**/*.{js,ts,tsx,json}\"",
     "lint:format": "prettier --write \"{src,__tests__}/**/*.{js,ts,tsx,json}\"",
@@ -38,7 +38,10 @@
       "node"
     ],
     "coverageDirectory": "./coverage/",
-    "collectCoverage": true
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ]
   },
   "directories": {
     "lib": "lib",
