@@ -34,19 +34,19 @@ jobs:
       - checkout
       - restore_dependency
       - run:
-          name: ルートの依存関係のインストール
+          name: Installing the root dependencies
           command: npm install
       - run:
-          name: サブプロジェクトの依存関係のインストール
+          name: Installing the sub project dependencies
           command: npx lerna bootstrap
       - run:
-          name: package.jsonの避難
+          name: Evacuation of the root package.json
           command: cp ./package.json ./package.copy.json
       - run:
-          name: package.jsonの避難
+          name: Evacuation of the cli package.json
           command: cp ./packages/cli/package.json ./packages/cli/package.copy.json
       - run:
-          name: package.jsonの避難
+          name: Evacuation of the lemon-sour package.json
           command: cp ./packages/lemon-sour/package.json ./packages/lemon-sour/package.copy.json
       - save_cache:
           paths:
@@ -66,7 +66,7 @@ jobs:
       - checkout
       - restore_dependency
       - run:
-          name: ビルド
+          name: Build
           command: npx lerna run build
       - save_cache:
           paths:
@@ -83,7 +83,7 @@ jobs:
       - restore_dependency
       - restore_built
       - run:
-          name: テスト
+          name: Test
           command: npx lerna run test:coverage
 workflows:
   main:
