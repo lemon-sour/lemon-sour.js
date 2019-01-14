@@ -35,14 +35,25 @@ jobs:
   install_dependency:
     executor: node
     steps:
+      # Checkout repository
       - checkout
+
+      - run:
+          name: Nodejs Version
+          command: node --version
+
+      # Restore cache
       - restore_dependency
+
+      # Install dependencies
       - run:
           name: Installing the root dependencies
           command: npm install
       - run:
           name: Installing the sub project dependencies
           command: npx lerna bootstrap
+
+      # Evacuation of the package.json
       - run:
           name: Evacuation of the root package.json
           command: cp ./package.json ./package.copy.json
@@ -52,6 +63,8 @@ jobs:
       - run:
           name: Evacuation of the lemon-sour package.json
           command: cp ./packages/lemon-sour/package.json ./packages/lemon-sour/package.copy.json
+
+      # Save cache
       - save_cache:
           paths:
             - ./node_modules/
@@ -69,10 +82,13 @@ jobs:
     executor: node
     steps:
       - checkout
+
       - restore_dependency
+
       - run:
           name: Build
           command: npx lerna run build
+
       - save_cache:
           paths:
             - ./packages/cli/lib/
@@ -86,8 +102,11 @@ jobs:
     executor: node
     steps:
       - checkout
+
       - restore_dependency
+
       - restore_built
+
       - run:
           name: Test
           command: npx lerna run test:coverage
