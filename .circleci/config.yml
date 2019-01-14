@@ -24,11 +24,11 @@ commands:
             - dependencies-root-
       - restore_cache:
           keys:
-            - dependencies-cli-{{ checksum "packages/api-schema/package.json" }}
+            - dependencies-cli-{{ checksum "packages/li/package.json" }}
             - dependencies-cli-
       - restore_cache:
           keys:
-            - dependencies-lemon-sour-{{ checksum "packages/client/package.json" }}
+            - dependencies-lemon-sour-{{ checksum "packages/lemon-sour/package.json" }}
             - dependencies-lemon-sour-
 jobs:
   install_dependency:
