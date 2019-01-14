@@ -2,11 +2,14 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2.1
+version: 2
 executors:
   node:
     docker:
       - image: circleci/node:8.10.0
+    environment:
+      TZ: /usr/share/zoneinfo/Asia/Tokyo # add time zone
+
 commands:
   restore_built:
     description: "Restore the build result from cache"
@@ -27,6 +30,7 @@ commands:
       - restore_cache:
           keys:
             - dependencies-lemon-sour-{{ checksum "packages/lemon-sour/package.json" }}
+
 jobs:
   install_dependency:
     executor: node
@@ -60,6 +64,7 @@ jobs:
           paths:
             - ./packages/lemon-sour/node_modules/
           key: dependencies-lemon-sour-{{ checksum "packages/lemon-sour/package.copy.json" }}
+
   build:
     executor: node
     steps:
@@ -76,6 +81,7 @@ jobs:
           paths:
             - ./packages/lemon-sour/dist/
           key: built-lemon-sour-{{ .Revision }}
+
   test:
     executor: node
     steps:
@@ -85,6 +91,7 @@ jobs:
       - run:
           name: Test
           command: npx lerna run test:coverage
+
 workflows:
   main:
     jobs:
