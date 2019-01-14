@@ -58,7 +58,7 @@ jobs:
       - save_cache:
           paths:
             - ./packages/cli/node_modules/
-          key: dependencies-cli-{{ checksum "packages/cli/package.copy.json }}
+          key: dependencies-cli-{{ checksum "packages/cli/package.copy.json" }}
       - save_cache:
           paths:
             - ./packages/lemon-sour/node_modules/
