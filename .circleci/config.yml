@@ -95,7 +95,7 @@ jobs:
           key: built-cli-{{ .Revision }}
       - save_cache:
           paths:
-            - ./packages/lemon-sour/dist/
+            - ./packages/lemon-sour/lib/
           key: built-lemon-sour-{{ .Revision }}
 
   test:

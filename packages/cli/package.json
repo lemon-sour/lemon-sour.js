@@ -37,7 +37,9 @@
       "jsx",
       "json",
       "node"
-    ]
+    ],
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   },
   "directories": {
     "lib": "lib",
