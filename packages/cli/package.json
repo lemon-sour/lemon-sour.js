@@ -63,10 +63,12 @@
   "gitHead": "b6ad574816588dd8328ca67b04347ee12d0e7076",
   "dependencies": {
     "lint-staged": "^8.1.0",
+    "lodash": "^4.17.11",
     "minimist": "^1.2.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.12",
+    "@types/lodash": "^4.14.119",
     "@types/minimist": "^1.2.0",
     "@types/node": "^10.12.18",
     "jest": "^23.6.0",

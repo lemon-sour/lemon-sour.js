@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import minimist from 'minimist';
 import { CliArgsInterface } from './interface/cli-args-interface';
 
