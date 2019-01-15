@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class LemonSour {
-    constructor() {
-    }
+    constructor() { }
     run(args) {
         console.log(args.x);
     }

@@ -1,4 +1,5 @@
 import { CliArgsInterface } from '@lemon-sour/cli';
+import * as _ from 'lodash';
 
 class LemonSour {
   constructor() {}
