@@ -23,13 +23,19 @@ commands:
     steps:
       - restore_cache:
           keys:
+            # Find a cache corresponding to this specific package.json checksum
+            # when this file is changed, this key will fail
             - dependencies-root-{{ checksum "package.json" }}
+            # Find the most recent cache used from any branch
+            - dependencies-root-
       - restore_cache:
           keys:
             - dependencies-cli-{{ checksum "packages/cli/package.json" }}
+            - dependencies-cli-
       - restore_cache:
           keys:
             - dependencies-lemon-sour-{{ checksum "packages/lemon-sour/package.json" }}
+            - dependencies-lemon-sour-
 
 jobs:
   install_dependency:
