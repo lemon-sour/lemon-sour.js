@@ -1,11 +1,7 @@
 import { cli } from '@lemon-sour/cli';
-console.log(cli());
+import { CliArgsInterface } from '@lemon-sour/cli';
+import { lemonSour } from './lemon-sour';
 
-const s: string = 'lemon-sour';
-console.log(s);
+const args: CliArgsInterface = cli();
 
-const lemonSour = () => {
-  return 'calling lemonSour' as string;
-};
-
-export { lemonSour };
+lemonSour.run(args);

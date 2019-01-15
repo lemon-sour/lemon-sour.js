@@ -8,7 +8,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "dev": "node -r esm lib/index.js",
+    "dev": "npm run build && node -r esm lib/index.js -x 3 -y 4 -n5 -abc --beep=boop foo bar baz",
     "test": "jest",
     "test:coverage": "jest --no-cache --forceExit --coverage",
     "tsc:init": "tsc --init",
@@ -62,10 +62,13 @@
   },
   "gitHead": "b6ad574816588dd8328ca67b04347ee12d0e7076",
   "dependencies": {
-    "lint-staged": "^8.1.0"
+    "lint-staged": "^8.1.0",
+    "minimist": "^1.2.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.12",
+    "@types/minimist": "^1.2.0",
+    "@types/node": "^10.12.18",
     "jest": "^23.6.0",
     "prettier": "^1.15.3",
     "ts-jest": "^23.10.5",

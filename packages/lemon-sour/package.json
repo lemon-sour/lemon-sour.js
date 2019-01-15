@@ -8,7 +8,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "dev": "node -r esm lib/index.js",
+    "dev": "npm run build && node -r esm bin/lemon-sour -x 1",
     "test": "jest",
     "test:coverage": "jest --no-cache --forceExit --coverage",
     "tsc:init": "tsc --init",
@@ -64,6 +64,7 @@
   "gitHead": "b6ad574816588dd8328ca67b04347ee12d0e7076",
   "dependencies": {
     "@lemon-sour/cli": "^1.0.11",
+    "js-yaml": "^3.12.1",
     "lint-staged": "^8.1.0"
   },
   "devDependencies": {
