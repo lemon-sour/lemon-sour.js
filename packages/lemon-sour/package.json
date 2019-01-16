@@ -7,7 +7,7 @@
   "license": "ISC",
   "main": "lib/index.js",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc",
     "dev": "npm run build && node -r esm bin/lemon-sour -x 1",
     "test": "jest",
     "test:coverage": "jest --no-cache --forceExit --coverage",
