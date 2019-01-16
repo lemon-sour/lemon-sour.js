@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import minimist from 'minimist';
+import * as minimist from 'minimist';
 import { CliArgsInterface } from './interface/cli-args-interface';
 
 const convertArgv = minimist(process.argv.slice(2));
