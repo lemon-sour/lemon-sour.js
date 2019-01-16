@@ -54,7 +54,7 @@ jobs:
       # Install dependencies
       - run:
           name: Installing the root dependencies
-          command: npm install
+          command: yarn install
       - run:
           name: Installing the sub project dependencies
           command: npx lerna bootstrap
