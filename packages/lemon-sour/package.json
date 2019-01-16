@@ -70,7 +70,6 @@
   },
   "devDependencies": {
     "@types/jest": "^23.3.12",
-    "@types/lodash": "^4.14.119",
     "@types/node": "^10.12.18",
     "esm": "^3.0.84",
     "jest": "^23.6.0",
