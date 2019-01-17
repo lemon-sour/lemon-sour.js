@@ -15,9 +15,9 @@ commands:
     description: "Restore the build result from cache"
     steps:
       - restore_cache:
-          key: built-cli-{{ .Revision }}
+          key: v{{ CACHE_VERSION }}-built-cli-{{ .Revision }}
       - restore_cache:
-          key: built-lemon-sour-{{ .Revision }}
+          key: v{{ CACHE_VERSION }}-built-lemon-sour-{{ .Revision }}
   restore_dependency:
     description: "Restore the dependencies result from cache"
     steps:
@@ -25,17 +25,17 @@ commands:
           keys:
             # Find a cache corresponding to this specific package.json checksum
             # when this file is changed, this key will fail
-            - dependencies-root-{{ checksum "package.json" }}
+            - v{{ CACHE_VERSION }}-dependencies-root-{{ checksum "package.json" }}
             # Find the most recent cache used from any branch
-            - dependencies-root-
+            - v{{ CACHE_VERSION }}-dependencies-root-
       - restore_cache:
           keys:
-            - dependencies-cli-{{ checksum "packages/cli/package.json" }}
-            - dependencies-cli-
+            - v{{ CACHE_VERSION }}-dependencies-cli-{{ checksum "packages/cli/package.json" }}
+            - v{{ CACHE_VERSION }}-dependencies-cli-
       - restore_cache:
           keys:
-            - dependencies-lemon-sour-{{ checksum "packages/lemon-sour/package.json" }}
-            - dependencies-lemon-sour-
+            - v{{ CACHE_VERSION }}-dependencies-lemon-sour-{{ checksum "packages/lemon-sour/package.json" }}
+            - v{{ CACHE_VERSION }}-dependencies-lemon-sour-
 
 jobs:
   install_dependency:
@@ -74,15 +74,15 @@ jobs:
       - save_cache:
           paths:
             - ./node_modules/
-          key: dependencies-root-{{ checksum "package.copy.json" }}
+          key: v{{ CACHE_VERSION }}-dependencies-root-{{ checksum "package.copy.json" }}
       - save_cache:
           paths:
             - ./packages/cli/node_modules/
-          key: dependencies-cli-{{ checksum "packages/cli/package.copy.json" }}
+          key: v{{ CACHE_VERSION }}-dependencies-cli-{{ checksum "packages/cli/package.copy.json" }}
       - save_cache:
           paths:
             - ./packages/lemon-sour/node_modules/
-          key: dependencies-lemon-sour-{{ checksum "packages/lemon-sour/package.copy.json" }}
+          key: v{{ CACHE_VERSION }}-dependencies-lemon-sour-{{ checksum "packages/lemon-sour/package.copy.json" }}
 
   build:
     executor: node
