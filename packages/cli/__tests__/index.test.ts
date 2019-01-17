@@ -1,3 +1,4 @@
+// https://github.com/facebook/jest/issues/5089
 process.argv.push('-x', '1');
 
 import { cli } from '../src/index';
