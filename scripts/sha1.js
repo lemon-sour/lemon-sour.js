@@ -1,5 +1,7 @@
 'use strict'
 
+// https://qiita.com/niusounds/items/0b042ee83c751643bf86
+
 const crypto = require('crypto');
 const fs = require('fs');
 const shasum = crypto.createHash('sha1');
