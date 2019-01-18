@@ -10,22 +10,52 @@
   <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160" style="max-width:100%;">
 </a>
 
-## Installation
+## Links
+
+- 📘 Documentation: https://github.com/lemon-sour/docs
+- 🐦 Twitter: [@hisasann](https://twitter.com/hisasann)
+
+## Getting started
 
 ```
 $ yarn global add lemon-sour
 ```
 
-## Usage
+Make index.yml inside your project:
+
+```yaml
+version: 1.0
+jobs:
+  install_app_a:
+    latest_json_url: https://s3-ap-northeast-1.amazonaws.com/lemon-sour-example/app_a/latest.json
+    is_archive: false
+    output_path: C:\lemon-sour\app_a
+    events:
+      - checking_for_update:
+      - update_not_available:
+      - update_available:
+        steps:
+            - run:
+                name: Nodejs Version
+                command: node --version
+            - run:
+                name: Npm Version
+                command: npm --version
+      - download_progress:
+      - update_downloaded:
+      - error:
+
+workflows:
+  main:
+    jobs:
+      - install_app_a
+```
+
+And then run:
 
 ```
 $ lemon-sour --yml ./example.yml
 ```
-
-## Document
-
-[lemon-sour/docs: Documentation of lemon-sour.js](https://github.com/lemon-sour/docs)
-
 
 ## Maintainers
 
