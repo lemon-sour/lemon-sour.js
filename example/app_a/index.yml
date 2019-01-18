@@ -1,0 +1,23 @@
+version: 1.0
+jobs:
+  install_app_a:
+    latest:
+    events:
+      - checking_for_update:
+      - update_not_available:
+      - update_available:
+        steps:
+            - run:
+                name: Nodejs Version
+                command: node --version
+            - run:
+                name: Npm Version
+                command: npm --version
+      - download_progress:
+      - update_downloaded:
+      - error:
+
+workflows:
+  main:
+    jobs:
+      - install_app_a
