@@ -10,19 +10,18 @@
   <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160" style="max-width:100%;">
 </a>
 
+## Installation
+
+```
+$ yarn global add lemon-sour
+```
 
 ## Usage
 
 ```
-$ lemon-sour
+$ lemon-sour --yml ./example.yml
 ```
 
-
-## Installation
-
-```
-$ npm install lemon-sour -g
-```
 
 ## Maintainers
 
