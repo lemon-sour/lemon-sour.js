@@ -2,8 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const yaml_loader_1 = require("./yaml-loader");
 class LemonSour {
-    constructor() {
-    }
+    constructor() { }
     run(args) {
         console.log('yml', args.yml);
         const doc = yaml_loader_1.yamlLoader(args.yml);

@@ -2,9 +2,16 @@ import { CliArgsInterface } from '@lemon-sour/cli';
 import { yamlLoader } from './yaml-loader';
 import { YmlInterface } from './interface/yml-interface';
 
+/**
+ * LemonSour クラス
+ */
 class LemonSour {
   constructor() {}
 
+  /**
+   * run
+   * @param args
+   */
   run(args: CliArgsInterface) {
     console.log('yml', args.yml);
     const doc: YmlInterface = yamlLoader(args.yml);
