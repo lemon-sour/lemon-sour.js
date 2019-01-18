@@ -1,6 +1,6 @@
 {
   "latestVersion": "1.0.0",
-  "fileUrl": "https://s3-ap-northeast-1.amazonaws.com/jr-vm-deploy/400/staging/VM_controller/1.1.50/VM_controller.zip",
-  "sha1": "227501c63ea726645fbbedb39a70686cb8244583",
+  "fileUrl": "https://s3-ap-northeast-1.amazonaws.com/lemon-sour-example/app_a/index.txt",
+  "sha1": "3f786850e387550fdab836ed7e6dc881de23001b",
   "releaseDate": "2019-01-18 19:29:45"
 }
