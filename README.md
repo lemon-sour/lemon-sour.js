@@ -54,7 +54,7 @@ workflows:
 And then run:
 
 ```
-$ lemon-sour --yml ./example.yml
+$ lemon-sour --yml index.yml
 ```
 
 ## Maintainers
