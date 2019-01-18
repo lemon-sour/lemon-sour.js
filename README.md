@@ -21,7 +21,7 @@
 $ yarn global add lemon-sour
 ```
 
-Make index.yml inside your project:
+Make `index.yml` inside your project:
 
 ```yaml
 version: 1.0
