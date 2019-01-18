@@ -22,6 +22,10 @@ $ yarn global add lemon-sour
 $ lemon-sour --yml ./example.yml
 ```
 
+## Document
+
+[lemon-sour/docs: Documentation of lemon-sour.js](https://github.com/lemon-sour/docs)
+
 
 ## Maintainers
 
