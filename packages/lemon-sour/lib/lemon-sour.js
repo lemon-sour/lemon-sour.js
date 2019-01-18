@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const fs = require("fs");
-const yaml = require("js-yaml");
-let doc = yaml.safeLoad(fs.readFileSync(__dirname + '/../../../example/app_a/index.yml', 'utf8'));
-console.log(JSON.stringify(doc, undefined, 2));
+const yaml_loader_1 = require("./yaml-loader");
 class LemonSour {
-    constructor() { }
+    constructor() {
+    }
     run(args) {
-        console.log(args.x);
+        console.log('yml', args.yml);
+        const doc = yaml_loader_1.yamlLoader(args.yml);
+        console.log(JSON.stringify(doc, undefined, 2));
     }
 }
 const lemonSour = new LemonSour();

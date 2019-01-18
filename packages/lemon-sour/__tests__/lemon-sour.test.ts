@@ -8,7 +8,7 @@ describe('lemon-sour', () => {
     'run do not have return value.',
     () => {
       const args: CliArgsInterface = {
-        x: 1,
+        yml: '../../../example/app_a/index.yml',
       };
 
       expect(lemonSour.run(args)).toBe(undefined);

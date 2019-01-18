@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import * as minimist from 'minimist';
 import { CliArgsInterface } from './interface/cli-args-interface';
 
@@ -6,7 +5,7 @@ const convertArgv = minimist(process.argv.slice(2));
 console.log('convertArgv: ', convertArgv);
 
 const argv = {
-  x: convertArgv.x,
+  yml: convertArgv.yml,
 } as CliArgsInterface;
 
 const cli = (): CliArgsInterface => {

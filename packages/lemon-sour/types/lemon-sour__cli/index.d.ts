@@ -1,5 +1,5 @@
 export interface CliArgsInterface {
-  x: number;
+  yml?: string;
 }
 
 export function cli(): CliArgsInterface;

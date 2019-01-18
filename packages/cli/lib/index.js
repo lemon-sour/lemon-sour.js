@@ -4,7 +4,7 @@ const minimist = require("minimist");
 const convertArgv = minimist(process.argv.slice(2));
 console.log('convertArgv: ', convertArgv);
 const argv = {
-    x: convertArgv.x,
+    yml: convertArgv.yml,
 };
 const cli = () => {
     return argv;
