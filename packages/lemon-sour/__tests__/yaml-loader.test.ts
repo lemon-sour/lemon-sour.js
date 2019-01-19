@@ -9,7 +9,7 @@ describe('yaml-loader', () => {
     'run to load yaml file.',
     () => {
       const args: CliArgsInterface = {
-        yml: '../../../example/app_a/index.yml',
+        yml: '../../example/app_a/index.yml',
       };
       const doc: YmlInterface = yamlLoader(args.yml);
 

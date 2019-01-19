@@ -8,7 +8,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "npm run build && node -r esm bin/lemon-sour --yml ../../../example/app_a/index.yml",
+    "dev": "npm run build && node -r esm bin/lemon-sour --yml ../../example/app_a/index.yml",
     "test": "jest",
     "test:coverage": "jest --no-cache --forceExit --coverage",
     "tsc:init": "tsc --init",

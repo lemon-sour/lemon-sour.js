@@ -9,7 +9,8 @@ import { YmlInterface } from './interface/yml-interface';
  */
 const yamlLoader = (yml: string = '') => {
   let doc: YmlInterface = yaml.safeLoad(
-    fs.readFileSync(__dirname + '/' + yml, 'utf8'),
+    // https://stackoverflow.com/questions/15149274/getting-directory-from-which-node-js-was-executed
+    fs.readFileSync(process.cwd() + '/' + yml, 'utf8'),
   ) as YmlInterface;
 
   return doc;

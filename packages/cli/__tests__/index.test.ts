@@ -1,5 +1,5 @@
 // https://github.com/facebook/jest/issues/5089
-process.argv.push('--yml', '../../../example/app_a/index.yml');
+process.argv.push('--yml', '../../example/app_a/index.yml');
 
 import { cli } from '../src/index';
 import { CliArgsInterface } from '../src/interface/cli-args-interface';
