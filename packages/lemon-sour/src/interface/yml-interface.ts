@@ -13,18 +13,22 @@ export interface Jobs {
   [key: string]: InstallApp;
 }
 export interface InstallApp {
+  name: string;
   latest_json_url: string;
   is_archive: boolean;
-  events?: (EventsEntity)[] | null;
+  output_path: string;
+  events: Events;
 }
-export interface EventsEntity {
-  checking_for_update?: null;
-  update_not_available?: null;
-  update_available?: null;
+export interface Events {
+  checking_for_update: Steps;
+  update_not_available: Steps;
+  update_available: Steps;
+  download_progress: Steps;
+  update_downloaded: Steps;
+  error: Steps;
+}
+export interface Steps {
   steps?: (StepsEntity)[] | null;
-  download_progress?: null;
-  update_downloaded?: null;
-  error?: null;
 }
 export interface StepsEntity {
   run: Run;

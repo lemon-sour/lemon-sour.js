@@ -68,12 +68,15 @@
     "@lemon-sour/cli": "^1.0.13",
     "js-yaml": "^3.12.1",
     "lint-staged": "^8.1.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "node-fetch": "^2.3.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.12",
     "@types/js-yaml": "^3.11.4",
     "@types/node": "^10.12.18",
+    "@types/node-fetch": "^2.1.4",
+    "@types/request": "^2.48.1",
     "esm": "^3.0.84",
     "jest": "^23.6.0",
     "nodemon": "^1.18.9",

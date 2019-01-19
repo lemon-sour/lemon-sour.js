@@ -11,7 +11,7 @@ describe('lemon-sour', () => {
         yml: '../../example/app_a/index.yml',
       };
 
-      expect(lemonSour.run(args)).toBe(undefined);
+      expect(typeof lemonSour.run(args)).toBe('object');
     },
     timeout,
   );
