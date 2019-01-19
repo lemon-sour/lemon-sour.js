@@ -11,7 +11,6 @@ class LemonSour {
      * @param args
      */
     run(args) {
-        console.log('yml', args.yml);
         const doc = yaml_loader_1.yamlLoader(args.yml);
         console.log(JSON.stringify(doc, undefined, 2));
     }

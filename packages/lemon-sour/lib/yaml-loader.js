@@ -8,7 +8,9 @@ const yaml = require("js-yaml");
  * @param yml
  */
 const yamlLoader = (yml = '') => {
-    let doc = yaml.safeLoad(fs.readFileSync(process.cwd() + '/' + yml, 'utf8'));
+    let doc = yaml.safeLoad(
+    // https://stackoverflow.com/questions/15149274/getting-directory-from-which-node-js-was-executed
+    fs.readFileSync(process.cwd() + '/' + yml, 'utf8'));
     return doc;
 };
 exports.yamlLoader = yamlLoader;
