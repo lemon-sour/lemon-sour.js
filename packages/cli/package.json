@@ -7,7 +7,7 @@
   "license": "ISC",
   "main": "lib/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "rimraf lib/* && tsc",
     "watch": "tsc -w",
     "dev": "npm run build && node -r esm lib/index.js --yml ../../example/app_a/index.yml",
     "node:watch": "nodemon lib/index.js --yml ../../example/app_a/index.yml",
@@ -76,6 +76,7 @@
     "jest": "^23.6.0",
     "nodemon": "^1.18.9",
     "prettier": "^1.15.3",
+    "rimraf": "^2.6.3",
     "ts-jest": "^23.10.5",
     "typescript": "^3.2.2"
   }
