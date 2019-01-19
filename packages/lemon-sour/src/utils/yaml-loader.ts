@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as yaml from 'js-yaml';
-import { YmlInterface } from './interface/yml-interface';
+import { YmlInterface } from '../interface/yml-interface';
 
 /**
  * yml ファイルを load する関数

@@ -1,5 +1,5 @@
 import { CliArgsInterface } from '@lemon-sour/cli';
-import { yamlLoader } from './yaml-loader';
+import { yamlLoader } from './utils/yaml-loader';
 import { YmlInterface } from './interface/yml-interface';
 
 /**
