@@ -41,5 +41,5 @@ export interface Workflows {
   main: Main;
 }
 export interface Main {
-  jobs?: (string)[] | null;
+  jobs: (string)[];
 }

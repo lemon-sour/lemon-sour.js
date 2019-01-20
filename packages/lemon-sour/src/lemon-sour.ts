@@ -14,6 +14,8 @@ class LemonSour {
    * @param args
    */
   async run(args: CliArgsInterface) {
+    // TODO オフラインか判定うまくできるならここでやりたい
+
     // Load yml file
     const doc: YmlInterface = yamlLoader(args.yml);
     // console.log(JSON.stringify(doc, undefined, 2));
@@ -26,5 +28,6 @@ class LemonSour {
   }
 }
 
+// シングルトンで使ってもらうためにここで new しちゃいます
 const lemonSour = new LemonSour();
 export { lemonSour };

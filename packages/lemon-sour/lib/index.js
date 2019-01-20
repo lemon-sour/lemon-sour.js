@@ -5,5 +5,11 @@ const lemon_sour_1 = require("./lemon-sour");
 /**
  * bootstrap
  */
-const args = cli_1.cli();
-lemon_sour_1.lemonSour.run(args);
+try {
+    const args = cli_1.cli();
+    lemon_sour_1.lemonSour.run(args);
+}
+catch (e) {
+    // エラー処理はここまでエスカレーションしてここだけで出力する
+    console.error(e);
+}

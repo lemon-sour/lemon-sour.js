@@ -15,29 +15,50 @@ const app_updater_1 = require("./app-updater");
  */
 class UpdateOrchestration {
     constructor(doc) {
+        this.version = doc.version;
         this.doc = doc;
         this.appUpdaters = [];
         this.updaterSetup(doc);
     }
+    /**
+     * updaterSetup - AppUpdater たちのインスタンスを配列に push していく
+     * @param doc
+     */
     updaterSetup(doc) {
+        console.log('version: ', doc.version);
         const keys = Object.keys(doc.jobs);
         _.forEach(keys, (value, index) => {
-            console.log('app name', doc.jobs[value]);
+            console.log('app: ', doc.jobs[value]);
             const appUpdater = new app_updater_1.AppUpdater();
             appUpdater.appSetup(doc.jobs[value]);
             this.add(appUpdater);
         });
     }
+    /**
+     * add - AppUpdaters 配列に AppUpdater を add する
+     * @param appUpdater
+     */
     add(appUpdater) {
         this.appUpdaters.push(appUpdater);
     }
+    /**
+     * checkForUpdates - アップデートがあるかチェックするための外から呼ばれる関数
+     */
     checkForUpdates() {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('checkForUpdates...');
             try {
-                console.log('checkForUpdates...');
                 for (let i = 0, len = this.appUpdaters.length; i < len; i++) {
-                    let latest = yield this.appUpdaters[i].loadLatestJsonUrl();
+                    // latest.json
+                    const latest = yield this.appUpdaters[i].loadLatestJsonUrl();
                     console.log('latest: ', latest);
+                    console.log('name: ', this.appUpdaters[i].name);
+                    console.log('latest_json_url: ', this.appUpdaters[i].latest_json_url);
+                    console.log('is_archive: ', this.appUpdaters[i].is_archive);
+                    console.log('output_path: ', this.appUpdaters[i].output_path);
+                    console.log('events: ', this.appUpdaters[i].events);
+                    // Events
+                    // Workflow
                 }
             }
             catch (e) { }

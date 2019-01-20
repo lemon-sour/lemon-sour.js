@@ -14,8 +14,13 @@ const base_app_updater_1 = require("./base-app-updater");
  */
 class AppUpdater extends base_app_updater_1.BaseAppUpdater {
     constructor() {
+        console.log('AppUpdater: ', 'constructor');
         super();
     }
+    /**
+     * appSetup - InstallApp の中身を格納する
+     * @param installApp
+     */
     appSetup(installApp) {
         this.name = installApp.name;
         this.latest_json_url = installApp.latest_json_url;
@@ -23,6 +28,9 @@ class AppUpdater extends base_app_updater_1.BaseAppUpdater {
         this.output_path = installApp.output_path;
         this.events = installApp.events;
     }
+    /**
+     * loadLatestJsonUrl - latestJsonUrl を返す関数
+     */
     loadLatestJsonUrl() {
         const _super = Object.create(null, {
             loadLatestJsonUrl: { get: () => super.loadLatestJsonUrl }

@@ -6,9 +6,15 @@ import { BaseAppUpdater } from './base-app-updater';
  */
 class AppUpdater extends BaseAppUpdater {
   constructor() {
+    console.log('AppUpdater: ', 'constructor');
+
     super();
   }
 
+  /**
+   * appSetup - InstallApp の中身を格納する
+   * @param installApp
+   */
   appSetup(installApp: InstallApp) {
     this.name = installApp.name;
     this.latest_json_url = installApp.latest_json_url;
@@ -17,6 +23,9 @@ class AppUpdater extends BaseAppUpdater {
     this.events = installApp.events;
   }
 
+  /**
+   * loadLatestJsonUrl - latestJsonUrl を返す関数
+   */
   async loadLatestJsonUrl() {
     return await super.loadLatestJsonUrl();
   }
