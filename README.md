@@ -27,6 +27,7 @@ Make `index.yml` inside your project:
 version: 1.0
 jobs:
   install_app_a:
+    name: app_a
     latest_json_url: https://s3-ap-northeast-1.amazonaws.com/lemon-sour-example/app_a/latest.json
     is_archive: false
     output_path: C:\lemon-sour\app_a
