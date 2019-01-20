@@ -44,7 +44,7 @@ function fetchWithTimeout(_fullUrl, myInit) {
             }
             resolve(Object.assign({}, json), response);
         })
-            .catch((error) => {
+            .catch(error => {
             console.log(`fetch catch: ${_fullUrl} onRejected: ${error}`);
             // Clear the timeout as cleanup
             clearTimeout(timeout);

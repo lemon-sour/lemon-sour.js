@@ -26,12 +26,9 @@ class BaseAppUpdater {
             return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                 console.log('loadLatestJsonUrl: ', this.latest_json_url);
                 let myInit = {
-                    method: 'POST',
+                    method: 'GET',
                     mode: 'cors',
-                    credentials: 'include',
-                    body: JSON.stringify({
-                        message: 'from javascript'
-                    })
+                    credentials: 'include'
                 };
                 yield fetch_with_timeout_1.fetchWithTimeout(this.latest_json_url, myInit)
                     .then((json) => {

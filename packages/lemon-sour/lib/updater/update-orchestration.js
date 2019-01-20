@@ -40,8 +40,7 @@ class UpdateOrchestration {
                     console.log('latest: ', latest);
                 }
             }
-            catch (e) {
-            }
+            catch (e) { }
         });
     }
 }

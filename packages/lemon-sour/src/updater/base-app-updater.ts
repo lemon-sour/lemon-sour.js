@@ -25,14 +25,13 @@ class BaseAppUpdater {
     return new Promise<object>(
       async (resolve: (value?: object) => void, reject: (err: any) => void) => {
         console.log('loadLatestJsonUrl: ', this.latest_json_url);
+
         let myInit = {
-          method: 'POST',
+          method: 'GET',
           mode: 'cors',
           credentials: 'include',
-          body: JSON.stringify({
-            message: 'from javascript',
-          }),
         };
+
         await fetchWithTimeout(this.latest_json_url, myInit)
           .then((json: object) => {
             resolve(json);
