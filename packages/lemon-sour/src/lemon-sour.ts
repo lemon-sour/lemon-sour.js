@@ -15,6 +15,7 @@ class LemonSour {
    */
   async run(args: CliArgsInterface) {
     // TODO オフラインか判定うまくできるならここでやりたい
+    // TODO args.yml がない場合の処理をここでやりたい
 
     // Load yml file
     const doc: YmlInterface = yamlLoader(args.yml);
