@@ -22,6 +22,7 @@ class LemonSour {
     run(args) {
         return __awaiter(this, void 0, void 0, function* () {
             // TODO オフラインか判定うまくできるならここでやりたい
+            // TODO args.yml がない場合の処理をここでやりたい
             // Load yml file
             const doc = yaml_loader_1.yamlLoader(args.yml);
             // console.log(JSON.stringify(doc, undefined, 2));
