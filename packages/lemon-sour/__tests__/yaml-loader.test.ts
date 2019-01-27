@@ -7,11 +7,11 @@ describe('yaml-loader', () => {
 
   test(
     'run to load yaml file.',
-    () => {
+    async () => {
       const args: CliArgsInterface = {
-        yml: '../../example/app_a/index.yml',
+        yml: '../../example/app_basic_no_archive/index.yml',
       };
-      const doc: YmlInterface = yamlLoader(args.yml);
+      const doc: YmlInterface = await yamlLoader(args.yml);
 
       expect(typeof doc).toBe('object');
     },
