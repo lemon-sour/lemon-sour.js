@@ -1,4 +1,3 @@
-import * as childProcess from 'child_process';
 import { Events, StepsEntity, Run } from '../interface/yml-interface';
 import { AppEvent } from './app-event';
 import { EventNamesEnum } from '../enum/event-names-enum';
@@ -11,6 +10,7 @@ class EventsManager {
   checkingForUpdate: AppEvent;
   updateNotAvailable: AppEvent;
   updateAvailable: AppEvent;
+  downloadProgress: AppEvent;
   updateDownloaded: AppEvent;
   error: AppEvent;
 
@@ -28,6 +28,10 @@ class EventsManager {
     this.updateAvailable = this.makeAppEvent(
       events,
       EventNamesEnum.UpdateAvailable,
+    );
+    this.downloadProgress = this.makeAppEvent(
+      events,
+      EventNamesEnum.DownloadProgress,
     );
     this.updateDownloaded = this.makeAppEvent(
       events,
@@ -47,7 +51,7 @@ class EventsManager {
 
     _.forEach(event.steps, (value: StepsEntity, index) => {
       const run: Run = value.run;
-      appEvent.add(run.name, run.command);
+      appEvent.add(run.name, run.command, run.sync);
     });
 
     return appEvent;

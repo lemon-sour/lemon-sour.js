@@ -15,19 +15,11 @@ const fetch_with_timeout_1 = require("../utils/fetch-with-timeout");
 class BaseAppUpdater {
     constructor() {
         console.log('BaseAppUpdater: ', 'constructor');
-        // TODO: ローカルに保存したバージョンをロードしておくこと
-        this.currentVersion = '0.0.1';
-        this.eventsManager = null;
-        this.name = '';
-        this.latest_json_url = '';
-        this.is_archive = false;
-        this.output_path = '';
-        this.events = undefined;
     }
     /**
      * loadLatestJsonUrl
      */
-    loadLatestJsonUrl() {
+    loadLatestJsonUrl(url) {
         return __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                 const myInit = {
@@ -35,7 +27,7 @@ class BaseAppUpdater {
                     mode: 'cors',
                     credentials: 'include',
                 };
-                yield fetch_with_timeout_1.fetchWithTimeout(this.latest_json_url, myInit)
+                yield fetch_with_timeout_1.fetchWithTimeout(url, myInit)
                     .then((json) => {
                     resolve(json);
                 })

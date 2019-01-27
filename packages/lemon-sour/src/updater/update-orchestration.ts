@@ -49,10 +49,9 @@ class UpdateOrchestration {
     _.forEach(keys, (value, index) => {
       console.log('app: ', doc.jobs[value]);
 
-      const appUpdater: AppUpdater = new AppUpdater();
-      appUpdater.appSetup(doc.jobs[value]);
+      const appUpdater: AppUpdater = new AppUpdater(value, doc.jobs[value]);
 
-      this.add(appUpdater);
+      this.addAppUpdater(appUpdater);
     });
   }
 
@@ -60,7 +59,7 @@ class UpdateOrchestration {
    * add - AppUpdaters 配列に AppUpdater を add する
    * @param appUpdater
    */
-  private add(appUpdater: AppUpdater) {
+  private addAppUpdater(appUpdater: AppUpdater) {
     this.appUpdaters.push(appUpdater);
   }
 
@@ -80,17 +79,30 @@ class UpdateOrchestration {
         console.log('events: ', this.appUpdaters[i].events);
 
         // Events
-
-        // Workflow
+        await this.appUpdaters[i].eventsManager.checkingForUpdate.exec();
+        await this.appUpdaters[i].eventsManager.updateAvailable.exec();
+        await this.appUpdaters[i].eventsManager.downloadProgress.exec();
       }
-    } catch (e) {}
+
+      // Workflow
+      for (let i = 0, len = this.appUpdaters.length; i < len; i++) {
+        await this.appUpdaters[i].eventsManager.updateNotAvailable.exec();
+        await this.appUpdaters[i].eventsManager.updateDownloaded.exec();
+      }
+    } catch (e) {
+      for (let i = 0, len = this.appUpdaters.length; i < len; i++) {
+        await this.appUpdaters[i].eventsManager.error.exec();
+      }
+    }
   }
 
   private async getLatestJson(i: number) {
     // latest.json
     const latest: LatestJsonInterface = (await this.appUpdaters[
       i
-    ].loadLatestJsonUrl()) as LatestJsonInterface;
+    ].loadLatestJsonUrl(
+      this.appUpdaters[i].latest_json_url,
+    )) as LatestJsonInterface;
     return latest;
   }
 }

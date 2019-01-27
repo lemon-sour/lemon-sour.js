@@ -6,8 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class Workflow {
     constructor(workflows) {
         this.workflows = workflows;
-    }
-    workSetup() {
         console.log(this.workflows.main.jobs.length);
     }
 }

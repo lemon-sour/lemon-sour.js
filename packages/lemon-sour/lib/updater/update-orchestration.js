@@ -43,16 +43,15 @@ class UpdateOrchestration {
         const keys = Object.keys(doc.jobs);
         _.forEach(keys, (value, index) => {
             console.log('app: ', doc.jobs[value]);
-            const appUpdater = new app_updater_1.AppUpdater();
-            appUpdater.appSetup(doc.jobs[value]);
-            this.add(appUpdater);
+            const appUpdater = new app_updater_1.AppUpdater(value, doc.jobs[value]);
+            this.addAppUpdater(appUpdater);
         });
     }
     /**
      * add - AppUpdaters 配列に AppUpdater を add する
      * @param appUpdater
      */
-    add(appUpdater) {
+    addAppUpdater(appUpdater) {
         this.appUpdaters.push(appUpdater);
     }
     /**
@@ -71,16 +70,27 @@ class UpdateOrchestration {
                     console.log('output_path: ', this.appUpdaters[i].output_path);
                     console.log('events: ', this.appUpdaters[i].events);
                     // Events
-                    // Workflow
+                    yield this.appUpdaters[i].eventsManager.checkingForUpdate.exec();
+                    yield this.appUpdaters[i].eventsManager.updateAvailable.exec();
+                    yield this.appUpdaters[i].eventsManager.downloadProgress.exec();
+                }
+                // Workflow
+                for (let i = 0, len = this.appUpdaters.length; i < len; i++) {
+                    yield this.appUpdaters[i].eventsManager.updateNotAvailable.exec();
+                    yield this.appUpdaters[i].eventsManager.updateDownloaded.exec();
                 }
             }
-            catch (e) { }
+            catch (e) {
+                for (let i = 0, len = this.appUpdaters.length; i < len; i++) {
+                    yield this.appUpdaters[i].eventsManager.error.exec();
+                }
+            }
         });
     }
     getLatestJson(i) {
         return __awaiter(this, void 0, void 0, function* () {
             // latest.json
-            const latest = (yield this.appUpdaters[i].loadLatestJsonUrl());
+            const latest = (yield this.appUpdaters[i].loadLatestJsonUrl(this.appUpdaters[i].latest_json_url));
             return latest;
         });
     }

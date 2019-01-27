@@ -9,9 +9,6 @@ class Workflow {
 
   constructor(workflows: Workflows) {
     this.workflows = workflows;
-  }
-
-  workSetup() {
     console.log(this.workflows.main.jobs.length);
   }
 }

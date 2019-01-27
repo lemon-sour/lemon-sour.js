@@ -18,10 +18,11 @@ class AppEvent {
         this.eventName = eventName;
         this.steps = [];
     }
-    add(name, command) {
+    add(name, command, sync) {
         this.steps.push({
             name,
             command,
+            sync,
         });
     }
     exec() {
@@ -29,7 +30,12 @@ class AppEvent {
             try {
                 for (let run of this.steps) {
                     console.log(run.name);
-                    yield this.execCommand(run.command, reject);
+                    if (run.sync) {
+                        yield this.execCommandSync(run.command);
+                    }
+                    else {
+                        yield this.execCommand(run.command);
+                    }
                 }
                 resolve();
             }
@@ -38,16 +44,59 @@ class AppEvent {
             }
         }));
     }
-    execCommand(sh, reject) {
+    execCommand(sh) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield childProcess.exec(sh, (err, stdout, stderr) => {
+            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+                try {
+                    const args = this.commandArgs2Array(sh);
+                    const c = args.shift() || '';
+                    let p = childProcess.spawn(c, [...args], {
+                        detached: true,
+                        stdio: ['ignore', 'ignore', 'ignore'],
+                    });
+                    p.unref();
+                    setTimeout(() => {
+                        resolve();
+                    }, 5000);
+                }
+                catch (e) {
+                    reject(e);
+                }
+            }));
+        });
+    }
+    execCommandSync(sh) {
+        return new Promise((resolve, reject) => {
+            childProcess.exec(sh, (err, stdout, stderr) => {
                 if (err) {
                     console.log(err);
                     reject(err);
                     return;
                 }
+                console.log(stdout);
+                resolve();
             });
         });
+    }
+    commandArgs2Array(text) {
+        const re = /^"[^"]*"$/; // Check if argument is surrounded with double-quotes
+        const re2 = /^([^"]|[^"].*?[^"])$/; // Check if argument is NOT surrounded with double-quotes
+        let arr = [];
+        let argPart = null;
+        text && text.split(" ").forEach(function (arg) {
+            if ((re.test(arg) || re2.test(arg)) && !argPart) {
+                arr.push(arg);
+            }
+            else {
+                argPart = argPart ? argPart + " " + arg : arg;
+                // If part is complete (ends with a double quote), we can add it to the array
+                if (/"$/.test(argPart)) {
+                    arr.push(argPart);
+                    argPart = null;
+                }
+            }
+        });
+        return arr;
     }
 }
 exports.AppEvent = AppEvent;

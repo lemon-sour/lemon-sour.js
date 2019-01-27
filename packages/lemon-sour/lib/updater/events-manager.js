@@ -12,6 +12,7 @@ class EventsManager {
         this.checkingForUpdate = this.makeAppEvent(events, event_names_enum_1.EventNamesEnum.CheckingForUpdate);
         this.updateNotAvailable = this.makeAppEvent(events, event_names_enum_1.EventNamesEnum.UpdateNotAvailable);
         this.updateAvailable = this.makeAppEvent(events, event_names_enum_1.EventNamesEnum.UpdateAvailable);
+        this.downloadProgress = this.makeAppEvent(events, event_names_enum_1.EventNamesEnum.DownloadProgress);
         this.updateDownloaded = this.makeAppEvent(events, event_names_enum_1.EventNamesEnum.UpdateDownload);
         this.error = this.makeAppEvent(events, event_names_enum_1.EventNamesEnum.Error);
     }
@@ -24,7 +25,7 @@ class EventsManager {
         }
         _.forEach(event.steps, (value, index) => {
             const run = value.run;
-            appEvent.add(run.name, run.command);
+            appEvent.add(run.name, run.command, run.sync);
         });
         return appEvent;
     }

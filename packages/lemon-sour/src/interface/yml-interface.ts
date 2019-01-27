@@ -36,6 +36,7 @@ export interface StepsEntity {
 export interface Run {
   name: string;
   command: string;
+  sync: boolean;
 }
 export interface Workflows {
   main: Main;

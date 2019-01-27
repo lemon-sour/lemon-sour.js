@@ -14,8 +14,9 @@ jobs:
       update_not_available:
         steps:
           - run:
-              name: Nodejs Version
-              command: node --version
+              name: NPM Version
+              command: npm --version
+              sync: true
       update_available:
       download_progress:
       update_downloaded:
