@@ -1,5 +1,6 @@
 import { Events } from '../interface/yml-interface';
 import { fetchWithTimeout } from '../utils/fetch-with-timeout';
+import { EventsManager } from './events-manager';
 
 /**
  * 個々のアプリのアップデート処理を実行、イベントを実行する親クラス
@@ -7,6 +8,8 @@ import { fetchWithTimeout } from '../utils/fetch-with-timeout';
 class BaseAppUpdater {
   // 現在のバージョン
   currentVersion: string;
+  // イベントマネージャー
+  eventsManager: EventsManager | null;
 
   // アプリの名前
   name: string;
@@ -24,6 +27,7 @@ class BaseAppUpdater {
 
     // TODO: ローカルに保存したバージョンをロードしておくこと
     this.currentVersion = '0.0.1';
+    this.eventsManager = null;
 
     this.name = '';
     this.latest_json_url = '';

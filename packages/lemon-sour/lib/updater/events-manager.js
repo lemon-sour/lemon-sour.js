@@ -1,86 +1,32 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const childProcess = require("child_process");
+const app_event_1 = require("./app-event");
+const event_names_enum_1 = require("../enum/event-names-enum");
+const _ = require("lodash");
 /**
  * EventsManager
  */
 class EventsManager {
-    constructor() {
+    constructor(events) {
         console.log('EventsManager: ', 'constructor');
+        this.checkingForUpdate = this.makeAppEvent(events, event_names_enum_1.EventNamesEnum.CheckingForUpdate);
+        this.updateNotAvailable = this.makeAppEvent(events, event_names_enum_1.EventNamesEnum.UpdateNotAvailable);
+        this.updateAvailable = this.makeAppEvent(events, event_names_enum_1.EventNamesEnum.UpdateAvailable);
+        this.updateDownloaded = this.makeAppEvent(events, event_names_enum_1.EventNamesEnum.UpdateDownload);
+        this.error = this.makeAppEvent(events, event_names_enum_1.EventNamesEnum.Error);
     }
-    updateAvailable(sh, outputPath) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield this._bootCommand(sh, reject);
-                resolve();
-            }
-            catch (e) {
-                reject(e);
-            }
-        }));
-    }
-    updateDownloaded(sh, outputPath) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield this._bootCommand(sh, reject);
-                resolve();
-            }
-            catch (e) {
-                reject(e);
-            }
-        }));
-    }
-    error(sh, outputPath) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield this._bootCommand(sh, reject);
-                resolve();
-            }
-            catch (e) {
-                reject(e);
-            }
-        }));
-    }
-    checkingForUpdate(sh, outputPath) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield this._bootCommand(sh, reject);
-                resolve();
-            }
-            catch (e) {
-                reject(e);
-            }
-        }));
-    }
-    updateNotAvailable(sh, outputPath) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield this._bootCommand(sh, reject);
-                resolve();
-            }
-            catch (e) {
-                reject(e);
-            }
-        }));
-    }
-    _bootCommand(sh, reject) {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield childProcess.exec(sh, (err, stdout, stderr) => {
-                if (err) {
-                    console.log(err);
-                    reject(err);
-                    return;
-                }
-            });
+    makeAppEvent(events, eventName) {
+        const appEvent = new app_event_1.AppEvent(eventName);
+        const event = events[eventName];
+        // イベントで何も処理をしない場合
+        if (!event || !event.steps) {
+            return appEvent;
+        }
+        _.forEach(event.steps, (value, index) => {
+            const run = value.run;
+            appEvent.add(run.name, run.command);
         });
+        return appEvent;
     }
 }
 exports.EventsManager = EventsManager;

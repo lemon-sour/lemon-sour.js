@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const base_app_updater_1 = require("./base-app-updater");
+const events_manager_1 = require("./events-manager");
 /**
  * 個々のアプリのアップデート処理を実行、イベントを実行するクラス
  */
@@ -27,6 +28,10 @@ class AppUpdater extends base_app_updater_1.BaseAppUpdater {
         this.is_archive = installApp.is_archive;
         this.output_path = installApp.output_path;
         this.events = installApp.events;
+        this.appEventSetup(this.events);
+    }
+    appEventSetup(events) {
+        const eventManager = new events_manager_1.EventsManager(events);
     }
     /**
      * loadLatestJsonUrl - latestJsonUrl を返す関数

@@ -2,7 +2,6 @@ import * as _ from 'lodash';
 import { YmlInterface } from '../interface/yml-interface';
 import { LatestJsonInterface } from '../interface/latest-json-interface';
 import { AppUpdater } from './app-updater';
-import { EventsManager } from './events-manager';
 
 /**
  * アプリケーションのアップデートの指揮者となるオーケストレーション
@@ -26,7 +25,7 @@ class UpdateOrchestration {
 
     this.validateYml(doc);
 
-    this.updaterSetup(doc);
+    this.appUpdatersSetup(doc);
   }
 
   /**
@@ -43,7 +42,7 @@ class UpdateOrchestration {
    * updaterSetup - AppUpdater たちのインスタンスを配列に push していく
    * @param doc
    */
-  private updaterSetup(doc: YmlInterface) {
+  private appUpdatersSetup(doc: YmlInterface) {
     console.log('version: ', doc.version);
 
     const keys: string[] = Object.keys(doc.jobs);

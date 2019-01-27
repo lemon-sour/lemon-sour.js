@@ -23,7 +23,7 @@ class UpdateOrchestration {
         this.doc = doc;
         this.appUpdaters = [];
         this.validateYml(doc);
-        this.updaterSetup(doc);
+        this.appUpdatersSetup(doc);
     }
     /**
      * validateYml
@@ -38,7 +38,7 @@ class UpdateOrchestration {
      * updaterSetup - AppUpdater たちのインスタンスを配列に push していく
      * @param doc
      */
-    updaterSetup(doc) {
+    appUpdatersSetup(doc) {
         console.log('version: ', doc.version);
         const keys = Object.keys(doc.jobs);
         _.forEach(keys, (value, index) => {

@@ -17,6 +17,7 @@ class BaseAppUpdater {
         console.log('BaseAppUpdater: ', 'constructor');
         // TODO: ローカルに保存したバージョンをロードしておくこと
         this.currentVersion = '0.0.1';
+        this.eventsManager = null;
         this.name = '';
         this.latest_json_url = '';
         this.is_archive = false;

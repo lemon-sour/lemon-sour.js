@@ -1,87 +1,132 @@
 import * as childProcess from 'child_process';
+import { Events, StepsEntity, Run } from '../interface/yml-interface';
+import { AppEvent } from './app-event';
+import { EventNamesEnum } from '../enum/event-names-enum';
+import * as _ from 'lodash';
 
 /**
  * EventsManager
  */
 class EventsManager {
-  constructor() {
+  checkingForUpdate: AppEvent;
+  updateNotAvailable: AppEvent;
+  updateAvailable: AppEvent;
+  updateDownloaded: AppEvent;
+  error: AppEvent;
+
+  constructor(events: Events) {
     console.log('EventsManager: ', 'constructor');
-  }
 
-  public updateAvailable(sh: string, outputPath: string) {
-    return new Promise<object>(
-      async (resolve: (value?: object) => void, reject: (err: any) => void) => {
-        try {
-          await this._bootCommand(sh, reject);
-          resolve();
-        } catch (e) {
-          reject(e);
-        }
-      },
+    this.checkingForUpdate = this.makeAppEvent(
+      events,
+      EventNamesEnum.CheckingForUpdate,
     );
-  }
-
-  public updateDownloaded(sh: string, outputPath: string) {
-    return new Promise<object>(
-      async (resolve: (value?: object) => void, reject: (err: any) => void) => {
-        try {
-          await this._bootCommand(sh, reject);
-          resolve();
-        } catch (e) {
-          reject(e);
-        }
-      },
+    this.updateNotAvailable = this.makeAppEvent(
+      events,
+      EventNamesEnum.UpdateNotAvailable,
     );
-  }
-
-  public error(sh: string, outputPath: string) {
-    return new Promise<object>(
-      async (resolve: (value?: object) => void, reject: (err: any) => void) => {
-        try {
-          await this._bootCommand(sh, reject);
-          resolve();
-        } catch (e) {
-          reject(e);
-        }
-      },
+    this.updateAvailable = this.makeAppEvent(
+      events,
+      EventNamesEnum.UpdateAvailable,
     );
-  }
-
-  public checkingForUpdate(sh: string, outputPath: string) {
-    return new Promise<object>(
-      async (resolve: (value?: object) => void, reject: (err: any) => void) => {
-        try {
-          await this._bootCommand(sh, reject);
-          resolve();
-        } catch (e) {
-          reject(e);
-        }
-      },
+    this.updateDownloaded = this.makeAppEvent(
+      events,
+      EventNamesEnum.UpdateDownload,
     );
+    this.error = this.makeAppEvent(events, EventNamesEnum.Error);
   }
 
-  public updateNotAvailable(sh: string, outputPath: string) {
-    return new Promise<object>(
-      async (resolve: (value?: object) => void, reject: (err: any) => void) => {
-        try {
-          await this._bootCommand(sh, reject);
-          resolve();
-        } catch (e) {
-          reject(e);
-        }
-      },
-    );
-  }
+  private makeAppEvent(events: Events, eventName: EventNamesEnum) {
+    const appEvent: AppEvent = new AppEvent(eventName);
+    const event = events[eventName];
 
-  private async _bootCommand(sh: string, reject: (err: any) => void) {
-    await childProcess.exec(sh, (err, stdout, stderr) => {
-      if (err) {
-        console.log(err);
-        reject(err);
-        return;
-      }
+    // イベントで何も処理をしない場合
+    if (!event || !event.steps) {
+      return appEvent;
+    }
+
+    _.forEach(event.steps, (value: StepsEntity, index) => {
+      const run: Run = value.run;
+      appEvent.add(run.name, run.command);
     });
+
+    return appEvent;
   }
+
+  // public checkingForUpdate(sh: string, outputPath: string) {
+  //   return new Promise<object>(
+  //     async (resolve: (value?: object) => void, reject: (err: any) => void) => {
+  //       try {
+  //         await this._command(sh, reject);
+  //         resolve();
+  //       } catch (e) {
+  //         reject(e);
+  //       }
+  //     },
+  //   );
+  // }
+  //
+  // public updateNotAvailable(sh: string, outputPath: string) {
+  //   return new Promise<object>(
+  //     async (resolve: (value?: object) => void, reject: (err: any) => void) => {
+  //       try {
+  //         await this._command(sh, reject);
+  //         resolve();
+  //       } catch (e) {
+  //         reject(e);
+  //       }
+  //     },
+  //   );
+  // }
+  //
+  // public updateAvailable(sh: string, outputPath: string) {
+  //   return new Promise<object>(
+  //     async (resolve: (value?: object) => void, reject: (err: any) => void) => {
+  //       try {
+  //         await this._command(sh, reject);
+  //         resolve();
+  //       } catch (e) {
+  //         reject(e);
+  //       }
+  //     },
+  //   );
+  // }
+  //
+  // public updateDownloaded(sh: string, outputPath: string) {
+  //   return new Promise<object>(
+  //     async (resolve: (value?: object) => void, reject: (err: any) => void) => {
+  //       try {
+  //         await this._command(sh, reject);
+  //         resolve();
+  //       } catch (e) {
+  //         reject(e);
+  //       }
+  //     },
+  //   );
+  // }
+  //
+  // public error(sh: string, outputPath: string) {
+  //   return new Promise<object>(
+  //     async (resolve: (value?: object) => void, reject: (err: any) => void) => {
+  //       try {
+  //         await this._command(sh, reject);
+  //         resolve();
+  //       } catch (e) {
+  //         reject(e);
+  //       }
+  //     },
+  //   );
+  // }
+  //
+  // private async _command(sh: string, reject: (err: any) => void) {
+  //   await childProcess.exec(sh, (err, stdout, stderr) => {
+  //     if (err) {
+  //       console.log(err);
+  //       reject(err);
+  //       return;
+  //     }
+  //   });
+  // }
 }
 
 export { EventsManager };
