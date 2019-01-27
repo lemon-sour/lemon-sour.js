@@ -22,7 +22,17 @@ class UpdateOrchestration {
         this.version = doc.version;
         this.doc = doc;
         this.appUpdaters = [];
+        this.validateYml(doc);
         this.updaterSetup(doc);
+    }
+    /**
+     * validateYml
+     * @param doc
+     */
+    validateYml(doc) {
+        if (!doc.hasOwnProperty('version')) {
+            throw new Error('yml does not has version');
+        }
     }
     /**
      * updaterSetup - AppUpdater たちのインスタンスを配列に push していく

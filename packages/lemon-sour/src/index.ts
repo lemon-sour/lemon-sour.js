@@ -5,10 +5,7 @@ import { lemonSour } from './lemon-sour';
 /**
  * bootstrap
  */
-try {
-  const args: CliArgsInterface = cli();
-  lemonSour.run(args);
-} catch (e) {
-  // エラー処理はここまでエスカレーションしてここだけで出力する
+const args: CliArgsInterface = cli();
+lemonSour.run(args).catch(e => {
   console.error(e);
-}
+});

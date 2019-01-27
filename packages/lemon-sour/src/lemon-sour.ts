@@ -14,18 +14,22 @@ class LemonSour {
    * @param args
    */
   async run(args: CliArgsInterface) {
-    // TODO オフラインか判定うまくできるならここでやりたい
-    // TODO args.yml がない場合の処理をここでやりたい
+    try {
+      // TODO オフラインか判定うまくできるならここでやりたい
+      // TODO args.yml がない場合の処理をここでやりたい
 
-    // Load yml file
-    const doc: YmlInterface = await yamlLoader(args.yml);
-    // console.log(JSON.stringify(doc, undefined, 2));
+      // Load yml file
+      const doc: YmlInterface = await yamlLoader(args.yml);
+      // console.log(JSON.stringify(doc, undefined, 2));
 
-    // Call to updateOrchestration
-    const updateOrchestration: UpdateOrchestration = new UpdateOrchestration(
-      doc,
-    );
-    await updateOrchestration.checkForUpdates();
+      // Call to updateOrchestration
+      const updateOrchestration: UpdateOrchestration = new UpdateOrchestration(
+        doc,
+      );
+      await updateOrchestration.checkForUpdates();
+    } catch (e) {
+      throw e;
+    }
   }
 }
 
