@@ -10,6 +10,12 @@
   <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160" style="max-width:100%;">
 </a>
 
+---
+
+<p>
+  <img src="https://github.com/lemon-sour/lemon-sour.js/blob/master/internals/images/lemon-sour.jpg?raw=true" alt="lemon-sour.jpg">
+</p>
+
 ## Links
 
 - 📘 Documentation: https://github.com/lemon-sour/docs
