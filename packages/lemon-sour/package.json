@@ -9,8 +9,8 @@
   "scripts": {
     "build": "rimraf lib/* && tsc",
     "watch": "tsc -w",
-    "dev": "npm run build && node -r esm bin/lemon-sour --yml ../../example/app_a/index.yml",
-    "node:watch": "nodemon bin/lemon-sour --yml ../../example/app_a/index.yml",
+    "dev": "npm run build && node -r esm bin/lemon-sour --yml ../../example/app_basic_no_archive/index.yml",
+    "node:watch": "nodemon bin/lemon-sour --yml ../../example/app_basic_no_archive/index.yml",
     "test": "jest",
     "test:coverage": "jest --no-cache --forceExit --coverage",
     "tsc:init": "tsc --init",
@@ -66,6 +66,7 @@
   "gitHead": "b6ad574816588dd8328ca67b04347ee12d0e7076",
   "dependencies": {
     "@lemon-sour/cli": "^1.0.15",
+    "eventemitter3": "^3.1.0",
     "js-yaml": "^3.12.1",
     "lint-staged": "^8.1.0",
     "lodash": "^4.17.11",

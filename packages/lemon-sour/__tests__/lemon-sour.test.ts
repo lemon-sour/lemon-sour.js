@@ -6,9 +6,9 @@ describe('lemon-sour', () => {
 
   test(
     'run do not have return value.',
-    () => {
+    async () => {
       const args: CliArgsInterface = {
-        yml: '../../example/app_a/index.yml',
+        yml: '../../example/app_basic_no_archive/index.yml',
       };
 
       expect(typeof lemonSour.run(args)).toBe('object');
