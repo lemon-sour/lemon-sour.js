@@ -24,7 +24,7 @@ class LemonSour {
             // TODO オフラインか判定うまくできるならここでやりたい
             // TODO args.yml がない場合の処理をここでやりたい
             // Load yml file
-            const doc = yaml_loader_1.yamlLoader(args.yml);
+            const doc = yield yaml_loader_1.yamlLoader(args.yml);
             // console.log(JSON.stringify(doc, undefined, 2));
             // Call to updateOrchestration
             const updateOrchestration = new update_orchestration_1.UpdateOrchestration(doc);

@@ -18,7 +18,7 @@ class LemonSour {
     // TODO args.yml がない場合の処理をここでやりたい
 
     // Load yml file
-    const doc: YmlInterface = yamlLoader(args.yml);
+    const doc: YmlInterface = await yamlLoader(args.yml);
     // console.log(JSON.stringify(doc, undefined, 2));
 
     // Call to updateOrchestration
