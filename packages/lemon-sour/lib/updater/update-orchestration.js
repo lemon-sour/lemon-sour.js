@@ -14,6 +14,10 @@ const app_updater_1 = require("./app-updater");
  * アプリケーションのアップデートの指揮者となるオーケストレーション
  */
 class UpdateOrchestration {
+    /**
+     * constructor
+     * @param doc
+     */
     constructor(doc) {
         this.version = doc.version;
         this.doc = doc;
