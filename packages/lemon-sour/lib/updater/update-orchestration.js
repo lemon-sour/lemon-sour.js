@@ -49,8 +49,7 @@ class UpdateOrchestration {
             console.log('checkForUpdates...');
             try {
                 for (let i = 0, len = this.appUpdaters.length; i < len; i++) {
-                    // latest.json
-                    const latest = yield this.appUpdaters[i].loadLatestJsonUrl();
+                    const latest = yield this.getLatestJson(i);
                     console.log('latest: ', latest);
                     console.log('name: ', this.appUpdaters[i].name);
                     console.log('latest_json_url: ', this.appUpdaters[i].latest_json_url);
@@ -62,6 +61,13 @@ class UpdateOrchestration {
                 }
             }
             catch (e) { }
+        });
+    }
+    getLatestJson(i) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // latest.json
+            const latest = (yield this.appUpdaters[i].loadLatestJsonUrl());
+            return latest;
         });
     }
 }

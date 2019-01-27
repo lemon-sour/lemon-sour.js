@@ -8,12 +8,17 @@ import { EventsManager } from './events-manager';
  * アプリケーションのアップデートの指揮者となるオーケストレーション
  */
 class UpdateOrchestration {
+  // バージョン
   version: number;
   // yml の内容
   doc: YmlInterface;
   // アップデートする AppUpdater 用配列
   appUpdaters: AppUpdater[];
 
+  /**
+   * constructor
+   * @param doc
+   */
   constructor(doc: YmlInterface) {
     this.version = doc.version;
     this.doc = doc;
@@ -55,10 +60,7 @@ class UpdateOrchestration {
     console.log('checkForUpdates...');
     try {
       for (let i = 0, len = this.appUpdaters.length; i < len; i++) {
-        // latest.json
-        const latest: LatestJsonInterface = (await this.appUpdaters[
-          i
-        ].loadLatestJsonUrl()) as LatestJsonInterface;
+        const latest = await this.getLatestJson(i);
         console.log('latest: ', latest);
         console.log('name: ', this.appUpdaters[i].name);
         console.log('latest_json_url: ', this.appUpdaters[i].latest_json_url);
@@ -71,6 +73,14 @@ class UpdateOrchestration {
         // Workflow
       }
     } catch (e) {}
+  }
+
+  private async getLatestJson(i: number) {
+    // latest.json
+    const latest: LatestJsonInterface = (await this.appUpdaters[
+      i
+    ].loadLatestJsonUrl()) as LatestJsonInterface;
+    return latest;
   }
 }
 
