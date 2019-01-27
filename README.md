@@ -28,23 +28,25 @@ version: 1.0
 jobs:
   install_app_a:
     name: app_a
-    latest_json_url: https://s3-ap-northeast-1.amazonaws.com/lemon-sour-example/app_a/latest.json
+    latest_json_url: http://localhost:3000/app_basic_no_archive/latest.json
     is_archive: false
-    output_path: C:\lemon-sour\app_a
+    output_path: C:\lemon-sour\app_basic_no_archive
     events:
-      - checking_for_update:
-      - update_not_available:
-      - update_available:
+      checking_for_update:
         steps:
-            - run:
-                name: Nodejs Version
-                command: node --version
-            - run:
-                name: Npm Version
-                command: npm --version
-      - download_progress:
-      - update_downloaded:
-      - error:
+          - run:
+              name: Nodejs Version
+              command: node --version
+      update_not_available:
+        steps:
+          - run:
+              name: NPM Version
+              command: npm --version
+              sync: true
+      update_available:
+      download_progress:
+      update_downloaded:
+      error:
 
 workflows:
   main:
