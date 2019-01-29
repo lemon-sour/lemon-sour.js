@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const _ = require("lodash");
 const app_updater_1 = require("./app-updater");
+const workflow_1 = require("./workflow");
 /**
  * アプリケーションのアップデートの指揮者となるオーケストレーション
  */
@@ -22,8 +23,10 @@ class UpdateOrchestration {
         this.version = doc.version;
         this.doc = doc;
         this.appUpdaters = [];
+        this.workflows = [];
         this.validateYml(doc);
         this.appUpdatersSetup(doc);
+        this.workflowsSetup(doc);
     }
     /**
      * validateYml
@@ -35,7 +38,7 @@ class UpdateOrchestration {
         }
     }
     /**
-     * updaterSetup - AppUpdater たちのインスタンスを配列に push していく
+     * appUpdatersSetup - AppUpdater のインスタンスを配列に push していく
      * @param doc
      */
     appUpdatersSetup(doc) {
@@ -48,11 +51,39 @@ class UpdateOrchestration {
         });
     }
     /**
-     * add - AppUpdaters 配列に AppUpdater を add する
+     * workflowsSetup - Workflow のインスタンスを配列に push していく
+     * @param doc
+     */
+    workflowsSetup(doc) {
+        const jobs = doc.workflows.main.jobs;
+        _.forEach(jobs, (value, index) => {
+            console.log('workflow: ', value);
+            const workflow = new workflow_1.Workflow(value);
+            this.addWorkflow(workflow);
+        });
+    }
+    /**
+     * addAppUpdater - AppUpdaters 配列に AppUpdater を add する
      * @param appUpdater
      */
     addAppUpdater(appUpdater) {
         this.appUpdaters.push(appUpdater);
+    }
+    /**
+     * addWorkflow - Workflows 配列に Workflow を add する
+     * @param workflow
+     */
+    addWorkflow(workflow) {
+        this.workflows.push(workflow);
+    }
+    /**
+     * findAppUpdater
+     * @param keyName
+     */
+    findAppUpdater(keyName) {
+        return (_.find(this.appUpdaters, (o) => {
+            return o.keyName === keyName;
+        }) || null);
     }
     /**
      * checkForUpdates - アップデートがあるかチェックするための外から呼ばれる関数
@@ -61,36 +92,51 @@ class UpdateOrchestration {
         return __awaiter(this, void 0, void 0, function* () {
             console.log('checkForUpdates...');
             try {
-                for (let i = 0, len = this.appUpdaters.length; i < len; i++) {
-                    const latest = yield this.getLatestJson(i);
+                for (let i = 0, len = this.workflows.length; i < len; i++) {
+                    let appUpdatersOrderByWorkflow = this.findAppUpdater(this.workflows[i].keyName);
+                    if (!appUpdatersOrderByWorkflow) {
+                        continue;
+                    }
+                    const latest = yield this.getLatestJson(appUpdatersOrderByWorkflow);
                     console.log('latest: ', latest);
-                    console.log('name: ', this.appUpdaters[i].name);
-                    console.log('latest_json_url: ', this.appUpdaters[i].latest_json_url);
-                    console.log('is_archive: ', this.appUpdaters[i].is_archive);
-                    console.log('output_path: ', this.appUpdaters[i].output_path);
-                    console.log('events: ', this.appUpdaters[i].events);
+                    console.log('name: ', appUpdatersOrderByWorkflow.name);
+                    console.log('latest_json_url: ', appUpdatersOrderByWorkflow.latest_json_url);
+                    console.log('is_archive: ', appUpdatersOrderByWorkflow.is_archive);
+                    console.log('output_path: ', appUpdatersOrderByWorkflow.output_path);
+                    console.log('events: ', appUpdatersOrderByWorkflow.events);
                     // Events
-                    yield this.appUpdaters[i].eventsManager.checkingForUpdate.exec();
-                    yield this.appUpdaters[i].eventsManager.updateAvailable.exec();
-                    yield this.appUpdaters[i].eventsManager.downloadProgress.exec();
+                    yield appUpdatersOrderByWorkflow.eventsManager.checkingForUpdate.exec();
+                    yield appUpdatersOrderByWorkflow.eventsManager.updateAvailable.exec();
+                    yield appUpdatersOrderByWorkflow.eventsManager.downloadProgress.exec();
                 }
                 // Workflow
-                for (let i = 0, len = this.appUpdaters.length; i < len; i++) {
-                    yield this.appUpdaters[i].eventsManager.updateNotAvailable.exec();
-                    yield this.appUpdaters[i].eventsManager.updateDownloaded.exec();
+                for (let i = 0, len = this.workflows.length; i < len; i++) {
+                    let appUpdatersOrderByWorkflow = this.findAppUpdater(this.workflows[i].keyName);
+                    if (!appUpdatersOrderByWorkflow) {
+                        continue;
+                    }
+                    yield appUpdatersOrderByWorkflow.eventsManager.updateNotAvailable.exec();
+                    yield appUpdatersOrderByWorkflow.eventsManager.updateDownloaded.exec();
                 }
             }
             catch (e) {
-                for (let i = 0, len = this.appUpdaters.length; i < len; i++) {
-                    yield this.appUpdaters[i].eventsManager.error.exec();
+                for (let i = 0, len = this.workflows.length; i < len; i++) {
+                    let appUpdatersOrderByWorkflow = this.findAppUpdater(this.workflows[i].keyName);
+                    if (!appUpdatersOrderByWorkflow) {
+                        continue;
+                    }
+                    yield appUpdatersOrderByWorkflow.eventsManager.error.exec();
                 }
             }
         });
     }
-    getLatestJson(i) {
+    getLatestJson(appUpdaters) {
         return __awaiter(this, void 0, void 0, function* () {
+            if (!appUpdaters) {
+                return;
+            }
             // latest.json
-            const latest = (yield this.appUpdaters[i].loadLatestJsonUrl(this.appUpdaters[i].latest_json_url));
+            const latest = (yield appUpdaters.loadLatestJsonUrl(appUpdaters.latest_json_url));
             return latest;
         });
     }

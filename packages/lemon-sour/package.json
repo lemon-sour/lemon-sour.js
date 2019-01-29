@@ -10,7 +10,7 @@
     "build": "rimraf lib/* && tsc",
     "watch": "tsc -w",
     "dev": "npm run build && node -r esm bin/lemon-sour --yml ../../example/app_basic_no_archive/index.yml",
-    "node:watch": "nodemon bin/lemon-sour --yml ../../example/app_basic_no_archive/index.yml",
+    "node:watch": "nodemon bin/lemon-sour --yml ../../example/app_two-app_no_archive/index.yml",
     "test": "jest",
     "test:coverage": "jest --no-cache --forceExit --coverage",
     "tsc:init": "tsc --init",

@@ -1,15 +1,12 @@
-import { Workflows } from '../interface/yml-interface';
-
 /**
  * Workflow
  */
 class Workflow {
-  // アプリケーションの実行順番
-  workflows: Workflows;
+  // jobs の中のアプリのキー名
+  keyName: string;
 
-  constructor(workflows: Workflows) {
-    this.workflows = workflows;
-    console.log(this.workflows.main.jobs.length);
+  constructor(keyName: string) {
+    this.keyName = keyName;
   }
 }
 

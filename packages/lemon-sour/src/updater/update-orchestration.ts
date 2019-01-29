@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { YmlInterface } from '../interface/yml-interface';
 import { LatestJsonInterface } from '../interface/latest-json-interface';
 import { AppUpdater } from './app-updater';
+import { Workflow } from './workflow';
 
 /**
  * アプリケーションのアップデートの指揮者となるオーケストレーション
@@ -13,6 +14,8 @@ class UpdateOrchestration {
   doc: YmlInterface;
   // アップデートする AppUpdater 用配列
   appUpdaters: AppUpdater[];
+  // アップデートする Workflow 用配列
+  workflows: Workflow[];
 
   /**
    * constructor
@@ -22,10 +25,13 @@ class UpdateOrchestration {
     this.version = doc.version;
     this.doc = doc;
     this.appUpdaters = [];
+    this.workflows = [];
 
     this.validateYml(doc);
 
     this.appUpdatersSetup(doc);
+
+    this.workflowsSetup(doc);
   }
 
   /**
@@ -39,7 +45,7 @@ class UpdateOrchestration {
   }
 
   /**
-   * updaterSetup - AppUpdater たちのインスタンスを配列に push していく
+   * appUpdatersSetup - AppUpdater のインスタンスを配列に push していく
    * @param doc
    */
   private appUpdatersSetup(doc: YmlInterface) {
@@ -56,11 +62,46 @@ class UpdateOrchestration {
   }
 
   /**
-   * add - AppUpdaters 配列に AppUpdater を add する
+   * workflowsSetup - Workflow のインスタンスを配列に push していく
+   * @param doc
+   */
+  private workflowsSetup(doc: YmlInterface) {
+    const jobs: string[] = doc.workflows.main.jobs;
+    _.forEach(jobs, (value, index) => {
+      console.log('workflow: ', value);
+
+      const workflow: Workflow = new Workflow(value);
+
+      this.addWorkflow(workflow);
+    });
+  }
+
+  /**
+   * addAppUpdater - AppUpdaters 配列に AppUpdater を add する
    * @param appUpdater
    */
   private addAppUpdater(appUpdater: AppUpdater) {
     this.appUpdaters.push(appUpdater);
+  }
+
+  /**
+   * addWorkflow - Workflows 配列に Workflow を add する
+   * @param workflow
+   */
+  private addWorkflow(workflow: Workflow) {
+    this.workflows.push(workflow);
+  }
+
+  /**
+   * findAppUpdater
+   * @param keyName
+   */
+  private findAppUpdater(keyName: string): AppUpdater | null {
+    return (
+      _.find(this.appUpdaters, (o: AppUpdater) => {
+        return o.keyName === keyName;
+      }) || null
+    );
   }
 
   /**
@@ -69,39 +110,65 @@ class UpdateOrchestration {
   public async checkForUpdates() {
     console.log('checkForUpdates...');
     try {
-      for (let i = 0, len = this.appUpdaters.length; i < len; i++) {
-        const latest = await this.getLatestJson(i);
+      for (let i = 0, len = this.workflows.length; i < len; i++) {
+        let appUpdatersOrderByWorkflow = this.findAppUpdater(
+          this.workflows[i].keyName,
+        );
+        if (!appUpdatersOrderByWorkflow) {
+          continue;
+        }
+
+        const latest = await this.getLatestJson(appUpdatersOrderByWorkflow);
         console.log('latest: ', latest);
-        console.log('name: ', this.appUpdaters[i].name);
-        console.log('latest_json_url: ', this.appUpdaters[i].latest_json_url);
-        console.log('is_archive: ', this.appUpdaters[i].is_archive);
-        console.log('output_path: ', this.appUpdaters[i].output_path);
-        console.log('events: ', this.appUpdaters[i].events);
+        console.log('name: ', appUpdatersOrderByWorkflow.name);
+        console.log(
+          'latest_json_url: ',
+          appUpdatersOrderByWorkflow.latest_json_url,
+        );
+        console.log('is_archive: ', appUpdatersOrderByWorkflow.is_archive);
+        console.log('output_path: ', appUpdatersOrderByWorkflow.output_path);
+        console.log('events: ', appUpdatersOrderByWorkflow.events);
 
         // Events
-        await this.appUpdaters[i].eventsManager.checkingForUpdate.exec();
-        await this.appUpdaters[i].eventsManager.updateAvailable.exec();
-        await this.appUpdaters[i].eventsManager.downloadProgress.exec();
+        await appUpdatersOrderByWorkflow.eventsManager.checkingForUpdate.exec();
+        await appUpdatersOrderByWorkflow.eventsManager.updateAvailable.exec();
+        await appUpdatersOrderByWorkflow.eventsManager.downloadProgress.exec();
       }
 
       // Workflow
-      for (let i = 0, len = this.appUpdaters.length; i < len; i++) {
-        await this.appUpdaters[i].eventsManager.updateNotAvailable.exec();
-        await this.appUpdaters[i].eventsManager.updateDownloaded.exec();
+      for (let i = 0, len = this.workflows.length; i < len; i++) {
+        let appUpdatersOrderByWorkflow = this.findAppUpdater(
+          this.workflows[i].keyName,
+        );
+        if (!appUpdatersOrderByWorkflow) {
+          continue;
+        }
+
+        await appUpdatersOrderByWorkflow.eventsManager.updateNotAvailable.exec();
+        await appUpdatersOrderByWorkflow.eventsManager.updateDownloaded.exec();
       }
     } catch (e) {
-      for (let i = 0, len = this.appUpdaters.length; i < len; i++) {
-        await this.appUpdaters[i].eventsManager.error.exec();
+      for (let i = 0, len = this.workflows.length; i < len; i++) {
+        let appUpdatersOrderByWorkflow = this.findAppUpdater(
+          this.workflows[i].keyName,
+        );
+        if (!appUpdatersOrderByWorkflow) {
+          continue;
+        }
+
+        await appUpdatersOrderByWorkflow.eventsManager.error.exec();
       }
     }
   }
 
-  private async getLatestJson(i: number) {
+  private async getLatestJson(appUpdaters: AppUpdater | null) {
+    if (!appUpdaters) {
+      return;
+    }
+
     // latest.json
-    const latest: LatestJsonInterface = (await this.appUpdaters[
-      i
-    ].loadLatestJsonUrl(
-      this.appUpdaters[i].latest_json_url,
+    const latest: LatestJsonInterface = (await appUpdaters.loadLatestJsonUrl(
+      appUpdaters.latest_json_url,
     )) as LatestJsonInterface;
     return latest;
   }
