@@ -60,6 +60,17 @@ workflows:
       - install_app_a
 ```
 
+`latest.json` like this
+
+```json
+{
+  "latestVersion": "1.0.0",
+  "fileUrl": "http://localhost:3000/app_basic_no_archive/index.txt",
+  "sha1": "3f786850e387550fdab836ed7e6dc881de23001b",
+  "releaseDate": "2019-01-18 19:29:45"
+}
+```
+
 And then run:
 
 ```
