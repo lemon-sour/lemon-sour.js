@@ -3,6 +3,8 @@ import { lemonSour } from '../src/lemon-sour';
 
 describe('lemon-sour', () => {
   test('return value is promise object.', async () => {
+    expect.assertions(1);
+
     const args: CliArgsInterface = {
       yml: '../../example/app_basic_no_archive/index.yml',
     };
@@ -12,6 +14,8 @@ describe('lemon-sour', () => {
   });
 
   test('type of catch error object is string.', async () => {
+    expect.assertions(1);
+
     const args: CliArgsInterface = {
       yml: '../../example/app_no_version/index.yml',
     };
@@ -22,6 +26,8 @@ describe('lemon-sour', () => {
   });
 
   test('yml does not has version.', async () => {
+    expect.assertions(1);
+
     const args: CliArgsInterface = {
       yml: '../../example/app_no_version/index.yml',
     };

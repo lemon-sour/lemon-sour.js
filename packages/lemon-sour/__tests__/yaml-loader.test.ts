@@ -4,6 +4,8 @@ import { yamlLoader } from '../src/utils/yaml-loader';
 
 describe('yaml-loader', () => {
   test('run to load yaml file.', async () => {
+    expect.assertions(1);
+
     const args: CliArgsInterface = {
       yml: '../../example/app_basic_no_archive/index.yml',
     };
