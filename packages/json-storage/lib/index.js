@@ -8,7 +8,7 @@ const jsonfile = require("jsonfile");
  */
 function setJson(file, obj) {
     return new Promise((resolve, reject) => {
-        jsonfile.writeFile(file, obj, (err) => {
+        jsonfile.writeFile(file, obj, err => {
             if (err) {
                 console.error(err);
                 return;
@@ -24,7 +24,8 @@ exports.setJson = setJson;
  */
 function getJson(file) {
     return new Promise((resolve, reject) => {
-        jsonfile.readFile(file)
+        jsonfile
+            .readFile(file)
             .then(obj => resolve(obj))
             .catch(err => reject(err));
     });
