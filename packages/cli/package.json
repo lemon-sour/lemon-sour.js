@@ -4,7 +4,7 @@
   "description": "> TODO: description",
   "author": "hisasann <hisasann25@gmail.com>",
   "homepage": "https://github.com/lemon-sour/lemon-sour.js/tree/master/packages/cli#readme",
-  "license": "ISC",
+  "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
     "build": "rimraf lib/* && tsc",
