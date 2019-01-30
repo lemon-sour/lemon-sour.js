@@ -1,0 +1,80 @@
+{
+  "name": "@lemon-sour/json-storage",
+  "version": "1.0.17",
+  "description": "> TODO: description",
+  "author": "hisasann <hisasann25@gmail.com>",
+  "homepage": "https://github.com/lemon-sour/lemon-sour.js#readme",
+  "license": "ISC",
+  "main": "lib/index.ts",
+  "scripts": {
+    "build": "rimraf lib/* && tsc",
+    "watch": "tsc -w",
+    "dev": "npm run build && node -r esm lib/index.js",
+    "node:watch": "nodemon lib/index.js",
+    "test": "jest",
+    "test:coverage": "jest --no-cache --forceExit --coverage",
+    "tsc:init": "tsc --init",
+    "lint": "prettier --list-different \"{src,__tests__}/**/*.{js,ts,tsx,json}\"",
+    "lint:format": "prettier --write \"{src,__tests__}/**/*.{js,ts,tsx,json}\"",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "linters": {
+      "{src,__tests__}/**/*.{js,ts,tsx,json}": [
+        "npm run lint:format",
+        "git add"
+      ]
+    }
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": false,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ]
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lemon-sour/lemon-sour.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lemon-sour/lemon-sour.js/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "lint-staged": "^8.1.0",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.12",
+    "@types/lodash": "^4.14.119",
+    "@types/node": "^10.12.18",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.9",
+    "prettier": "^1.15.3",
+    "rimraf": "^2.6.3",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.2.2"
+  }
+}

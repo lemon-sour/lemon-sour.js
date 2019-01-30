@@ -17,6 +17,8 @@ commands:
       - restore_cache:
           key: v{{ .Environment.CACHE_VERSION }}-built-cli-{{ .Revision }}
       - restore_cache:
+          key: v{{ .Environment.CACHE_VERSION }}-built-json-storage-{{ .Revision }}
+      - restore_cache:
           key: v{{ .Environment.CACHE_VERSION }}-built-lemon-sour-{{ .Revision }}
   restore_dependency:
     description: "Restore the dependencies result from cache"
@@ -32,6 +34,10 @@ commands:
           keys:
             - v{{ .Environment.CACHE_VERSION }}-dependencies-cli-{{ checksum "packages/cli/package.json" }}
             - v{{ .Environment.CACHE_VERSION }}-dependencies-cli-
+      - restore_cache:
+          keys:
+            - v{{ .Environment.CACHE_VERSION }}-dependencies-json-storage-{{ checksum "packages/json-storage/package.json" }}
+            - v{{ .Environment.CACHE_VERSION }}-dependencies-json-storage-
       - restore_cache:
           keys:
             - v{{ .Environment.CACHE_VERSION }}-dependencies-lemon-sour-{{ checksum "packages/lemon-sour/package.json" }}
@@ -67,6 +73,9 @@ jobs:
           name: Evacuation of the cli package.json
           command: cp ./packages/cli/package.json ./packages/cli/package.copy.json
       - run:
+          name: Evacuation of the json-storage package.json
+          command: cp ./packages/json-storage/package.json ./packages/json-storage/package.copy.json
+      - run:
           name: Evacuation of the lemon-sour package.json
           command: cp ./packages/lemon-sour/package.json ./packages/lemon-sour/package.copy.json
 
@@ -79,6 +88,10 @@ jobs:
           paths:
             - ./packages/cli/node_modules/
           key: v{{ .Environment.CACHE_VERSION }}-dependencies-cli-{{ checksum "packages/cli/package.copy.json" }}
+      - save_cache:
+          paths:
+            - ./packages/json-storage/node_modules/
+          key: v{{ .Environment.CACHE_VERSION }}-dependencies-json-storage-{{ checksum "packages/json-storage/package.copy.json" }}
       - save_cache:
           paths:
             - ./packages/lemon-sour/node_modules/
@@ -99,6 +112,10 @@ jobs:
           paths:
             - ./packages/cli/lib/
           key: built-cli-{{ .Revision }}
+      - save_cache:
+          paths:
+            - ./packages/json-storage/lib/
+          key: built-json-storage-{{ .Revision }}
       - save_cache:
           paths:
             - ./packages/lemon-sour/lib/
