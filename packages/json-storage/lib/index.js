@@ -18,13 +18,13 @@ const APP_NAME = 'json-storage';
 const BASE_DIR = find_json_path_1.default(process.env.npm_package_name || APP_NAME);
 function makeDirectoryAndJsonFile(jsonKeyName) {
     return new Promise((resolve, reject) => {
-        mkdirp(`${BASE_DIR}`, (err) => {
+        mkdirp(`${BASE_DIR}`, err => {
             if (err) {
                 console.error(err);
                 reject(err);
                 return;
             }
-            fs.writeFile(`${BASE_DIR}${jsonKeyName}.json`, null, (err) => {
+            fs.writeFile(`${BASE_DIR}${jsonKeyName}.json`, null, err => {
                 if (err) {
                     console.error(err);
                     reject(err);
