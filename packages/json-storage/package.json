@@ -65,12 +65,14 @@
   "dependencies": {
     "jsonfile": "^5.0.0",
     "lint-staged": "^8.1.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "mkdirp": "^0.5.1"
   },
   "devDependencies": {
     "@types/jest": "^23.3.12",
     "@types/jsonfile": "^5.0.0",
     "@types/lodash": "^4.14.119",
+    "@types/mkdirp": "^0.5.2",
     "@types/node": "^10.12.18",
     "jest": "^23.6.0",
     "nodemon": "^1.18.9",
