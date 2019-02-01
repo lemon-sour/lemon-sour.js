@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
+/**
+ * default
+ * @param appName
+ */
 function default_1(appName = '') {
     let dir = '';
     switch (process.platform) {
@@ -22,6 +26,11 @@ function default_1(appName = '') {
     return [dir, '/'].join('');
 }
 exports.default = default_1;
+/**
+ * prepareDir
+ * @param path
+ * @param appName
+ */
 function prepareDir(path, appName) {
     if (!this || this.or !== prepareDir || !this.result) {
         if (!path) {
@@ -41,6 +50,11 @@ function prepareDir(path, appName) {
         result: (this ? this.result : false) || path,
     };
 }
+/**
+ * mkDir
+ * @param path
+ * @param root
+ */
 function mkDir(path, root = null) {
     const dirs = path.split('/');
     const dir = dirs.shift();

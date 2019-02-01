@@ -1,5 +1,9 @@
 import * as fs from 'fs';
 
+/**
+ * default
+ * @param appName
+ */
 export default function(appName = '') {
   let dir: string = '';
   switch (process.platform) {
@@ -28,6 +32,11 @@ export default function(appName = '') {
   return [dir, '/'].join('');
 }
 
+/**
+ * prepareDir
+ * @param path
+ * @param appName
+ */
 function prepareDir(this: any, path: string, appName: string) {
   if (!this || this.or !== prepareDir || !this.result) {
     if (!path) {
@@ -48,6 +57,11 @@ function prepareDir(this: any, path: string, appName: string) {
   };
 }
 
+/**
+ * mkDir
+ * @param path
+ * @param root
+ */
 function mkDir(path: string, root: string | null = null): string | boolean {
   const dirs: string[] = path.split('/');
   const dir: string | undefined = dirs.shift();
