@@ -21,11 +21,21 @@
 - 📘 Documentation: https://github.com/lemon-sour/docs
 - 🐦 Twitter: [@hisasann](https://twitter.com/hisasann)
 
-## Getting started
+## Installation
 
+Using yarn:
+
+```bash
+yarn global add lemon-sour
 ```
-$ yarn global add lemon-sour
+
+Using npm:
+
+```bash
+npm i lemon-sour -g
 ```
+
+## Getting started
 
 Make `index.yml` inside your project:
 
