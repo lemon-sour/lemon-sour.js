@@ -9,7 +9,7 @@ import { Workflow } from './workflow';
  */
 class UpdateOrchestration {
   // バージョン
-  version: number;
+  version: number | string;
   // yml の内容
   doc: YmlInterface;
   // アップデートする AppUpdater 用配列

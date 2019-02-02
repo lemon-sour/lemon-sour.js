@@ -4,7 +4,7 @@
  * http://json2ts.com/
  */
 export interface YmlInterface {
-  version: number;
+  version: number | string;
   jobs: Jobs;
   workflows: Workflows;
 }
