@@ -1,8 +1,8 @@
+import { getJson, setJson } from '@lemon-sour/json-storage';
 import { InstallApp, Events } from '../interface/yml-interface';
 import { BaseAppUpdater } from './base-app-updater';
 import { EventsManager } from './events-manager';
-import { EventNamesEnum } from '../enum/event-names-enum';
-import { AppEvent } from './app-event';
+import { VersionInterface } from '../interface/version-interface';
 import C from '../common/constants';
 
 /**
@@ -13,6 +13,8 @@ class AppUpdater extends BaseAppUpdater {
   currentVersion: string;
   // イベントマネージャー
   eventsManager: EventsManager;
+  // アップデートがあるかどうか
+  isHasUpdate: boolean;
 
   // jobs の中のアプリのキー名
   keyName: string;
@@ -28,14 +30,18 @@ class AppUpdater extends BaseAppUpdater {
   // 各イベントたち
   events: Events;
 
+  /**
+   * constructor
+   * @param keyName
+   * @param installApp
+   */
   constructor(keyName: string, installApp: InstallApp) {
     console.log('AppUpdater: ', 'constructor');
 
     super();
 
-    // TODO: ローカルに保存したバージョンをロードしておくこと
-    this.currentVersion = '0.0.1';
-
+    this.currentVersion = '';
+    this.isHasUpdate = false;
     this.keyName = keyName;
     this.name = installApp.name;
     this.latest_json_url = installApp.latest_json_url;
@@ -51,11 +57,31 @@ class AppUpdater extends BaseAppUpdater {
     return eventsManager;
   }
 
+  public async loadCurrentVersion(_version: string = '') {
+    const json: VersionInterface | null = (await getJson(
+      this.keyName,
+    )) as VersionInterface;
+    let version = _version || C.INITIAL_VERSION;
+    if (json && json.version) {
+      version = json.version;
+    }
+    this.currentVersion = version;
+  }
+
+  public async saveCurrentVersion(_version: string = '') {
+    this.currentVersion = _version;
+    await setJson(this.keyName, { version: _version } as VersionInterface);
+  }
+
+  public async getCurrentVersion(): Promise<string> {
+    return this.currentVersion;
+  }
+
   /**
    * loadLatestJsonUrl - latestJsonUrl を返す関数
    * @param url
    */
-  async loadLatestJsonUrl(url: string) {
+  public async loadLatestJsonUrl(url: string) {
     return await super.loadLatestJsonUrl(url);
   }
 }

@@ -108,8 +108,8 @@ class UpdateOrchestration {
    * checkForUpdates - アップデートがあるかチェックするための外から呼ばれる関数
    */
   public async checkForUpdates() {
-    console.log('checkForUpdates...');
     try {
+      console.log('checkForUpdates...');
       for (let i = 0, len = this.workflows.length; i < len; i++) {
         let appUpdatersOrderByWorkflow = this.findAppUpdater(
           this.workflows[i].keyName,
@@ -118,7 +118,16 @@ class UpdateOrchestration {
           continue;
         }
 
-        const latest = await this.getLatestJson(appUpdatersOrderByWorkflow);
+        // 現在のバージョンをロードしておく
+        await appUpdatersOrderByWorkflow.loadCurrentVersion();
+
+        // event fire - checkingForUpdate
+        await appUpdatersOrderByWorkflow.eventsManager.checkingForUpdate.exec();
+
+        // latestJson をロードする
+        const latest: LatestJsonInterface = (await this.getLatestJson(
+          appUpdatersOrderByWorkflow,
+        )) as LatestJsonInterface;
         console.log('latest: ', latest);
         console.log('name: ', appUpdatersOrderByWorkflow.name);
         console.log(
@@ -130,9 +139,25 @@ class UpdateOrchestration {
         console.log('events: ', appUpdatersOrderByWorkflow.events);
 
         // Events
-        await appUpdatersOrderByWorkflow.eventsManager.checkingForUpdate.exec();
+        const currentVersion = await appUpdatersOrderByWorkflow.getCurrentVersion();
+        console.log(
+          appUpdatersOrderByWorkflow.name,
+          'currentVersion:',
+          currentVersion,
+          'latestVersion:',
+          latest.latestVersion,
+        );
+        // アップデートがある場合
+        if (currentVersion <= latest.latestVersion) {
+          appUpdatersOrderByWorkflow.isHasUpdate = true;
+        }
         await appUpdatersOrderByWorkflow.eventsManager.updateAvailable.exec();
         await appUpdatersOrderByWorkflow.eventsManager.downloadProgress.exec();
+
+        // 現在のバージョンを保存する
+        await appUpdatersOrderByWorkflow.saveCurrentVersion(
+          latest.latestVersion,
+        );
       }
 
       // Workflow
@@ -161,6 +186,10 @@ class UpdateOrchestration {
     }
   }
 
+  /**
+   * getLatestJson
+   * @param appUpdaters
+   */
   private async getLatestJson(appUpdaters: AppUpdater | null) {
     if (!appUpdaters) {
       return;

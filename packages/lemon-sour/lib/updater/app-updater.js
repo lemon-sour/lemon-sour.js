@@ -8,17 +8,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const json_storage_1 = require("@lemon-sour/json-storage");
 const base_app_updater_1 = require("./base-app-updater");
 const events_manager_1 = require("./events-manager");
+const constants_1 = require("../common/constants");
 /**
  * 個々のアプリのアップデート処理を実行、イベントを実行するクラス
  */
 class AppUpdater extends base_app_updater_1.BaseAppUpdater {
+    /**
+     * constructor
+     * @param keyName
+     * @param installApp
+     */
     constructor(keyName, installApp) {
         console.log('AppUpdater: ', 'constructor');
         super();
-        // TODO: ローカルに保存したバージョンをロードしておくこと
-        this.currentVersion = '0.0.1';
+        this.currentVersion = '';
+        this.isHasUpdate = false;
         this.keyName = keyName;
         this.name = installApp.name;
         this.latest_json_url = installApp.latest_json_url;
@@ -30,6 +37,27 @@ class AppUpdater extends base_app_updater_1.BaseAppUpdater {
     appEventsSetup(events) {
         const eventsManager = new events_manager_1.EventsManager(events);
         return eventsManager;
+    }
+    loadCurrentVersion(_version = '') {
+        return __awaiter(this, void 0, void 0, function* () {
+            const json = (yield json_storage_1.getJson(this.keyName));
+            let version = _version || constants_1.default.INITIAL_VERSION;
+            if (json && json.version) {
+                version = json.version;
+            }
+            this.currentVersion = version;
+        });
+    }
+    saveCurrentVersion(_version = '') {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.currentVersion = _version;
+            yield json_storage_1.setJson(this.keyName, { 'version': _version });
+        });
+    }
+    getCurrentVersion() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.currentVersion;
+        });
     }
     /**
      * loadLatestJsonUrl - latestJsonUrl を返す関数
