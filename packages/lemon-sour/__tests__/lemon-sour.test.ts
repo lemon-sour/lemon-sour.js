@@ -2,7 +2,7 @@ import { CliArgsInterface } from '@lemon-sour/cli';
 import { lemonSour } from '../src/lemon-sour';
 
 describe('lemon-sour', () => {
-  test('return value is promise object.', async () => {
+  test('should return value is promise object', async () => {
     expect.assertions(1);
 
     const args: CliArgsInterface = {
@@ -13,7 +13,7 @@ describe('lemon-sour', () => {
     expect(typeof lemonSour.run(args)).toBe('object');
   });
 
-  test('type of catch error object is string.', async () => {
+  test('should type of catch error object is string', async () => {
     expect.assertions(1);
 
     const args: CliArgsInterface = {
@@ -25,7 +25,7 @@ describe('lemon-sour', () => {
     });
   });
 
-  test('yml does not has version.', async () => {
+  test('should yml does not has version', async () => {
     expect.assertions(1);
 
     const args: CliArgsInterface = {
