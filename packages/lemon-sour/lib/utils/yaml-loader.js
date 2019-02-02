@@ -14,8 +14,12 @@ const yaml = require("js-yaml");
  * yml ファイルを load する関数
  * @param yml
  */
-const yamlLoader = (yml = '') => __awaiter(this, void 0, void 0, function* () {
+const yamlLoader = (yml) => __awaiter(this, void 0, void 0, function* () {
     return new Promise((resolve, reject) => {
+        if (!yml) {
+            reject('yml argument is null');
+            return;
+        }
         let doc = yaml.safeLoad(
         // https://stackoverflow.com/questions/15149274/getting-directory-from-which-node-js-was-executed
         fs.readFileSync(process.cwd() + '/' + yml, 'utf8'));
