@@ -4,7 +4,8 @@
     "outDir": "./lib",                        /* Redirect output structure to the directory. */
     "rootDir": "./src",                       /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
     "paths": {
-      "@lemon-sour/cli": ["types/lemon-sour__cli"],
+//      "@lemon-sour/cli": ["types/lemon-sour__cli"],
+//      "@lemon-sour/json-storage": ["types/lemon-sour__json-storage"],
       "*": ["types/*"]
     },                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
 //    "typeRoots": ["types", "node_modules/@types", "../../node_modules/@types"],                       /* List of folders to include type definitions from. */
