@@ -5,7 +5,7 @@
   "author": "hisasann <hisasann25@gmail.com>",
   "homepage": "https://github.com/lemon-sour/lemon-sour.js#readme",
   "license": "MIT",
-  "main": "lib/index.ts",
+  "main": "lib/index.js",
   "types": "types/index.d.ts",
   "scripts": {
     "build": "rimraf lib/* && tsc",
