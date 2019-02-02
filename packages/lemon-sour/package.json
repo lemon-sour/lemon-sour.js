@@ -54,7 +54,8 @@
   },
   "files": [
     "lib",
-    "bin"
+    "bin",
+    "types"
   ],
   "repository": {
     "type": "git",
