@@ -51,7 +51,7 @@ class AppUpdater extends base_app_updater_1.BaseAppUpdater {
     saveCurrentVersion(_version = '') {
         return __awaiter(this, void 0, void 0, function* () {
             this.currentVersion = _version;
-            yield json_storage_1.setJson(this.keyName, { 'version': _version });
+            yield json_storage_1.setJson(this.keyName, { version: _version });
         });
     }
     getCurrentVersion() {
