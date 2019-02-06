@@ -61,6 +61,10 @@
     "type": "git",
     "url": "git+https://github.com/lemon-sour/lemon-sour.js.git"
   },
+  "keywords": [
+    "deployment",
+    "autoupdater"
+  ],
   "bugs": {
     "url": "https://github.com/lemon-sour/lemon-sour.js/issues"
   },
