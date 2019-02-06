@@ -1,7 +1,9 @@
+import axios from 'axios';
 import { CliArgsInterface } from '@lemon-sour/cli';
 import { yamlLoader } from './utils/yaml-loader';
 import { YmlInterface } from './interface/yml-interface';
 import { UpdateOrchestration } from './updater/update-orchestration';
+import C from './common/constants';
 
 /**
  * LemonSour クラス
@@ -15,7 +17,14 @@ class LemonSour {
    */
   async run(args: CliArgsInterface) {
     try {
-      // TODO オフラインか判定うまくできるならここでやりたい
+      // オフラインかどうかの判定
+      // https://stackoverflow.com/questions/5725430/http-test-server-accepting-get-post-requests
+      const response = await axios.get(C.offLineJudgmentHttpUrl);
+      console.log(response.status);
+      if (response.status !== C.HTTP_OK) {
+        throw new Error('This is offline.');
+      }
+
       // TODO args.yml がない場合の処理をここでやりたい
 
       // Load yml file

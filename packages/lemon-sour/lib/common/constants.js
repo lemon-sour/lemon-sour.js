@@ -11,6 +11,8 @@ const pjName = require('../../package.json').name;
 const Constants = {
     pjName,
     INITIAL_VERSION: '0.0.0',
+    offLineJudgmentHttpUrl: 'http://httpbin.org/get',
+    HTTP_OK: 200,
 };
 console.log('Constants: ', Constants);
 exports.default = Constants;

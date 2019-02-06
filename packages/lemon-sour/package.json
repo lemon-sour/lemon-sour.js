@@ -73,6 +73,7 @@
     "@lemon-sour/cli": "^1.0.24",
     "@lemon-sour/json-storage": "^1.0.25",
     "@sentry/node": "4.5.3",
+    "axios": "^0.18.0",
     "eventemitter3": "^3.1.0",
     "js-yaml": "^3.12.1",
     "lint-staged": "^8.1.0",
