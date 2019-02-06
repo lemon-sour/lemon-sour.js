@@ -8,10 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const axios_1 = require("axios");
 const yaml_loader_1 = require("./utils/yaml-loader");
 const update_orchestration_1 = require("./updater/update-orchestration");
-const constants_1 = require("./common/constants");
+const judgment_online_1 = require("./utils/judgment-online");
 const env_1 = require("./common/env");
 /**
  * LemonSour クラス
@@ -25,13 +24,11 @@ class LemonSour {
     run(args) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                // オフラインかどうかの判定
-                // https://stackoverflow.com/questions/5725430/http-test-server-accepting-get-post-requests
-                if (env_1.default.envName !== 'dev') {
-                    const response = yield axios_1.default.get(constants_1.default.offLineJudgmentHttpUrl);
-                    if (response.status !== constants_1.default.HTTP_OK) {
-                        throw new Error('This is offline.');
-                    }
+                // オンライの判定
+                const isOnLine = yield judgment_online_1.judgmentOnLine(env_1.default);
+                console.log(1111, isOnLine);
+                if (isOnLine) {
+                    throw new Error('This is offline.');
                 }
                 // TODO args.yml がない場合の処理をここでやりたい
                 // Load yml file
