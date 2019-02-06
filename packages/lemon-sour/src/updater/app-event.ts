@@ -83,7 +83,7 @@ class AppEvent {
   }
 
   // https://stackoverflow.com/questions/13796594/how-to-split-string-into-arguments-and-options-in-javascript
-  commandArgs2Array(text: string) {
+  private commandArgs2Array(text: string) {
     const re = /^"[^"]*"$/; // Check if argument is surrounded with double-quotes
     const re2 = /^([^"]|[^"].*?[^"])$/; // Check if argument is NOT surrounded with double-quotes
 
