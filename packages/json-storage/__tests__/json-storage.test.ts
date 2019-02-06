@@ -3,7 +3,7 @@
 const jsonStorage = require('../src/index');
 
 describe('json-storage', () => {
-  const jsonKeyName = 'foo';
+  const jsonKeyName = 'json-storage';
 
   test('set json', async () => {
     expect.assertions(1);

@@ -3,7 +3,7 @@
 import { setJson } from '../src/set-json';
 
 describe('set-json', () => {
-  const jsonKeyName = 'foo';
+  const jsonKeyName = 'set-json';
 
   test('should return value calling set-json', async () => {
     expect.assertions(1);

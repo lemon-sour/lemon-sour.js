@@ -4,7 +4,7 @@ import { setJson } from '../src/set-json';
 import { getJson } from '../src/get-json';
 
 describe('get-json', () => {
-  const jsonKeyName = 'foo';
+  const jsonKeyName = 'get-json';
 
   beforeEach(async () => {
     console.log('beforeEach');
