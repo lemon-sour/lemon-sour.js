@@ -57,7 +57,7 @@ class AppEvent {
                     p.unref();
                     setTimeout(() => {
                         resolve();
-                    }, 5000);
+                    }, 1000);
                 }
                 catch (e) {
                     reject(e);
