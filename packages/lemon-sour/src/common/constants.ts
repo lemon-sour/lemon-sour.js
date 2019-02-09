@@ -13,6 +13,8 @@ const Constants = {
 
   offLineJudgmentHttpUrl: 'http://httpbin.org/get',
   HTTP_OK: 200,
+
+  tempDirectoryName: '/temp',
 };
 
 console.log('Constants: ', Constants);

@@ -1,5 +1,6 @@
 import { getJson, setJson } from '@lemon-sour/json-storage';
 import { InstallApp, Events } from '../interface/yml-interface';
+import { LatestJsonInterface } from '../interface/latest-json-interface';
 import { BaseAppUpdater } from './base-app-updater';
 import { EventsManager } from './events-manager';
 import { VersionInterface } from '../interface/version-interface';
@@ -14,7 +15,10 @@ class AppUpdater extends BaseAppUpdater {
   // イベントマネージャー
   eventsManager: EventsManager;
   // アップデートがあるかどうか
-  isHasUpdate: boolean;
+  isNeedsUpdate: boolean;
+
+  // latest.json の情報
+  latest: LatestJsonInterface | null;
 
   // jobs の中のアプリのキー名
   keyName: string;
@@ -41,7 +45,8 @@ class AppUpdater extends BaseAppUpdater {
     super();
 
     this.currentVersion = '';
-    this.isHasUpdate = false;
+    this.isNeedsUpdate = false;
+    this.latest = null;
     this.keyName = keyName;
     this.name = installApp.name;
     this.latest_json_url = installApp.latest_json_url;
@@ -52,11 +57,19 @@ class AppUpdater extends BaseAppUpdater {
     this.eventsManager = this.appEventsSetup(this.events);
   }
 
+  /**
+   * appEventsSetup
+   * @param events
+   */
   private appEventsSetup(events: Events) {
     const eventsManager: EventsManager = new EventsManager(events);
     return eventsManager;
   }
 
+  /**
+   * loadCurrentVersion
+   * @param _version
+   */
   public async loadCurrentVersion(_version: string = '') {
     const json: VersionInterface | null = (await getJson(
       this.keyName,
@@ -66,15 +79,33 @@ class AppUpdater extends BaseAppUpdater {
       version = json.version;
     }
     this.currentVersion = version;
+
+    // TODO: テスト用
+    this.currentVersion = C.INITIAL_VERSION;
   }
 
+  /**
+   * saveCurrentVersion
+   * @param _version
+   */
   public async saveCurrentVersion(_version: string = '') {
     this.currentVersion = _version;
     await setJson(this.keyName, { version: _version } as VersionInterface);
   }
 
+  /**
+   * getCurrentVersion
+   */
   public async getCurrentVersion(): Promise<string> {
     return this.currentVersion;
+  }
+
+  /**
+   * setLatest
+   * @param _latest
+   */
+  public setLatest(_latest: LatestJsonInterface) {
+    this.latest = _latest;
   }
 
   /**

@@ -13,6 +13,7 @@ const Constants = {
     INITIAL_VERSION: '0.0.0',
     offLineJudgmentHttpUrl: 'http://httpbin.org/get',
     HTTP_OK: 200,
+    tempDirectoryName: '/temp',
 };
 console.log('Constants: ', Constants);
 exports.default = Constants;

@@ -3,6 +3,10 @@ import { YmlInterface } from '../interface/yml-interface';
 import { LatestJsonInterface } from '../interface/latest-json-interface';
 import { AppUpdater } from './app-updater';
 import { Workflow } from './workflow';
+import { makeDirectory } from '../utils/make-directory';
+import { clearDirectory } from '../utils/clear-directory';
+import getUserHome from '../utils/get-user-home';
+import C from '../common/constants';
 
 /**
  * アプリケーションのアップデートの指揮者となるオーケストレーション
@@ -105,6 +109,21 @@ class UpdateOrchestration {
   }
 
   /**
+   * findAppHasUpdate - アップデートがひとつでもあるか確認
+   */
+  private findAppHasUpdate(): boolean {
+    return (
+      _.find(this.appUpdaters, (o: AppUpdater) => {
+        return o.isNeedsUpdate;
+      }) !== null
+    );
+  }
+
+  private getTempDirectory(): string {
+    return [getUserHome(), '/', C.pjName, C.tempDirectoryName].join('');
+  }
+
+  /**
    * checkForUpdates - アップデートがあるかチェックするための外から呼ばれる関数
    */
   public async checkForUpdates() {
@@ -128,6 +147,8 @@ class UpdateOrchestration {
         const latest: LatestJsonInterface = (await this.getLatestJson(
           appUpdatersOrderByWorkflow,
         )) as LatestJsonInterface;
+        appUpdatersOrderByWorkflow.setLatest(latest);
+
         console.log('latest: ', latest);
         console.log('name: ', appUpdatersOrderByWorkflow.name);
         console.log(
@@ -147,20 +168,44 @@ class UpdateOrchestration {
           'latestVersion:',
           latest.latestVersion,
         );
-        // アップデートがある場合
         if (currentVersion <= latest.latestVersion) {
-          appUpdatersOrderByWorkflow.isHasUpdate = true;
+          // アップデートがある場合
+          appUpdatersOrderByWorkflow.isNeedsUpdate = true;
+        } else {
+          // アップデートがない場合
+          appUpdatersOrderByWorkflow.isNeedsUpdate = false;
         }
         await appUpdatersOrderByWorkflow.eventsManager.updateAvailable.exec();
         await appUpdatersOrderByWorkflow.eventsManager.downloadProgress.exec();
 
-        // 現在のバージョンを保存する
+        // 更新後のバージョンを保存する
         await appUpdatersOrderByWorkflow.saveCurrentVersion(
           latest.latestVersion,
         );
       }
 
-      // Workflow
+      if (!this.findAppHasUpdate()) {
+        console.log('There is no update.');
+        for (let i = 0, len = this.workflows.length; i < len; i++) {
+          let appUpdatersOrderByWorkflow = this.findAppUpdater(
+            this.workflows[i].keyName,
+          );
+          if (!appUpdatersOrderByWorkflow) {
+            continue;
+          }
+
+          await appUpdatersOrderByWorkflow.eventsManager.updateNotAvailable.exec();
+        }
+
+        return;
+      }
+
+      console.log('There are updates.');
+      console.log('Download apps...');
+
+      await makeDirectory(this.getTempDirectory());
+      await clearDirectory(this.getTempDirectory());
+
       for (let i = 0, len = this.workflows.length; i < len; i++) {
         let appUpdatersOrderByWorkflow = this.findAppUpdater(
           this.workflows[i].keyName,
@@ -169,8 +214,8 @@ class UpdateOrchestration {
           continue;
         }
 
-        await appUpdatersOrderByWorkflow.eventsManager.updateNotAvailable.exec();
         await appUpdatersOrderByWorkflow.eventsManager.updateDownloaded.exec();
+        await appUpdatersOrderByWorkflow.eventsManager.updateNotAvailable.exec();
       }
     } catch (e) {
       for (let i = 0, len = this.workflows.length; i < len; i++) {
@@ -183,6 +228,8 @@ class UpdateOrchestration {
 
         await appUpdatersOrderByWorkflow.eventsManager.error.exec();
       }
+
+      throw e;
     }
   }
 

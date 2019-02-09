@@ -75,10 +75,13 @@
     "@sentry/node": "4.5.3",
     "axios": "^0.18.0",
     "eventemitter3": "^3.1.0",
+    "follow-redirects": "^1.6.1",
     "js-yaml": "^3.12.1",
     "lint-staged": "^8.1.0",
     "lodash": "^4.17.11",
-    "node-fetch": "^2.3.0"
+    "mkdirp": "^0.5.1",
+    "node-fetch": "^2.3.0",
+    "rimraf": "^2.6.3"
   },
   "devDependencies": {
     "@types/jest": "^23.3.12",
@@ -86,12 +89,12 @@
     "@types/node": "^10.12.18",
     "@types/node-fetch": "^2.1.4",
     "@types/request": "^2.48.1",
+    "@types/rimraf": "^2.0.2",
     "cross-env": "^5.2.0",
     "esm": "^3.0.84",
     "jest": "^23.6.0",
     "nodemon": "^1.18.9",
     "prettier": "^1.15.3",
-    "rimraf": "^2.6.3",
     "ts-jest": "^23.10.5",
     "typescript": "^3.2.2"
   }

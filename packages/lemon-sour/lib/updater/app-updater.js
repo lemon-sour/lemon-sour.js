@@ -25,7 +25,8 @@ class AppUpdater extends base_app_updater_1.BaseAppUpdater {
         console.log('AppUpdater: ', 'constructor');
         super();
         this.currentVersion = '';
-        this.isHasUpdate = false;
+        this.isNeedsUpdate = false;
+        this.latest = null;
         this.keyName = keyName;
         this.name = installApp.name;
         this.latest_json_url = installApp.latest_json_url;
@@ -34,10 +35,18 @@ class AppUpdater extends base_app_updater_1.BaseAppUpdater {
         this.events = installApp.events;
         this.eventsManager = this.appEventsSetup(this.events);
     }
+    /**
+     * appEventsSetup
+     * @param events
+     */
     appEventsSetup(events) {
         const eventsManager = new events_manager_1.EventsManager(events);
         return eventsManager;
     }
+    /**
+     * loadCurrentVersion
+     * @param _version
+     */
     loadCurrentVersion(_version = '') {
         return __awaiter(this, void 0, void 0, function* () {
             const json = (yield json_storage_1.getJson(this.keyName));
@@ -46,18 +55,34 @@ class AppUpdater extends base_app_updater_1.BaseAppUpdater {
                 version = json.version;
             }
             this.currentVersion = version;
+            // TODO: テスト用
+            this.currentVersion = constants_1.default.INITIAL_VERSION;
         });
     }
+    /**
+     * saveCurrentVersion
+     * @param _version
+     */
     saveCurrentVersion(_version = '') {
         return __awaiter(this, void 0, void 0, function* () {
             this.currentVersion = _version;
             yield json_storage_1.setJson(this.keyName, { version: _version });
         });
     }
+    /**
+     * getCurrentVersion
+     */
     getCurrentVersion() {
         return __awaiter(this, void 0, void 0, function* () {
             return this.currentVersion;
         });
+    }
+    /**
+     * setLatest
+     * @param _latest
+     */
+    setLatest(_latest) {
+        this.latest = _latest;
     }
     /**
      * loadLatestJsonUrl - latestJsonUrl を返す関数

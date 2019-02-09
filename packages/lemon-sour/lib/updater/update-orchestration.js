@@ -11,6 +11,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const _ = require("lodash");
 const app_updater_1 = require("./app-updater");
 const workflow_1 = require("./workflow");
+const make_directory_1 = require("../utils/make-directory");
+const clear_directory_1 = require("../utils/clear-directory");
+const get_user_home_1 = require("../utils/get-user-home");
+const constants_1 = require("../common/constants");
 /**
  * アプリケーションのアップデートの指揮者となるオーケストレーション
  */
@@ -86,6 +90,17 @@ class UpdateOrchestration {
         }) || null);
     }
     /**
+     * findAppHasUpdate - アップデートがひとつでもあるか確認
+     */
+    findAppHasUpdate() {
+        return _.find(this.appUpdaters, (o) => {
+            return o.isNeedsUpdate;
+        }) !== null;
+    }
+    getTempDirectory() {
+        return [get_user_home_1.default(), '/', constants_1.default.pjName, constants_1.default.tempDirectoryName].join('');
+    }
+    /**
      * checkForUpdates - アップデートがあるかチェックするための外から呼ばれる関数
      */
     checkForUpdates() {
@@ -103,6 +118,7 @@ class UpdateOrchestration {
                     yield appUpdatersOrderByWorkflow.eventsManager.checkingForUpdate.exec();
                     // latestJson をロードする
                     const latest = (yield this.getLatestJson(appUpdatersOrderByWorkflow));
+                    appUpdatersOrderByWorkflow.setLatest(latest);
                     console.log('latest: ', latest);
                     console.log('name: ', appUpdatersOrderByWorkflow.name);
                     console.log('latest_json_url: ', appUpdatersOrderByWorkflow.latest_json_url);
@@ -112,23 +128,41 @@ class UpdateOrchestration {
                     // Events
                     const currentVersion = yield appUpdatersOrderByWorkflow.getCurrentVersion();
                     console.log(appUpdatersOrderByWorkflow.name, 'currentVersion:', currentVersion, 'latestVersion:', latest.latestVersion);
-                    // アップデートがある場合
                     if (currentVersion <= latest.latestVersion) {
-                        appUpdatersOrderByWorkflow.isHasUpdate = true;
+                        // アップデートがある場合
+                        appUpdatersOrderByWorkflow.isNeedsUpdate = true;
+                    }
+                    else {
+                        // アップデートがない場合
+                        appUpdatersOrderByWorkflow.isNeedsUpdate = false;
                     }
                     yield appUpdatersOrderByWorkflow.eventsManager.updateAvailable.exec();
                     yield appUpdatersOrderByWorkflow.eventsManager.downloadProgress.exec();
-                    // 現在のバージョンを保存する
+                    // 更新後のバージョンを保存する
                     yield appUpdatersOrderByWorkflow.saveCurrentVersion(latest.latestVersion);
                 }
-                // Workflow
+                if (!this.findAppHasUpdate()) {
+                    console.log('There is no update.');
+                    for (let i = 0, len = this.workflows.length; i < len; i++) {
+                        let appUpdatersOrderByWorkflow = this.findAppUpdater(this.workflows[i].keyName);
+                        if (!appUpdatersOrderByWorkflow) {
+                            continue;
+                        }
+                        yield appUpdatersOrderByWorkflow.eventsManager.updateNotAvailable.exec();
+                    }
+                    return;
+                }
+                console.log('There are updates.');
+                console.log('Download apps...');
+                yield make_directory_1.makeDirectory(this.getTempDirectory());
+                yield clear_directory_1.clearDirectory(this.getTempDirectory());
                 for (let i = 0, len = this.workflows.length; i < len; i++) {
                     let appUpdatersOrderByWorkflow = this.findAppUpdater(this.workflows[i].keyName);
                     if (!appUpdatersOrderByWorkflow) {
                         continue;
                     }
-                    yield appUpdatersOrderByWorkflow.eventsManager.updateNotAvailable.exec();
                     yield appUpdatersOrderByWorkflow.eventsManager.updateDownloaded.exec();
+                    yield appUpdatersOrderByWorkflow.eventsManager.updateNotAvailable.exec();
                 }
             }
             catch (e) {
@@ -139,6 +173,7 @@ class UpdateOrchestration {
                     }
                     yield appUpdatersOrderByWorkflow.eventsManager.error.exec();
                 }
+                throw e;
             }
         });
     }
