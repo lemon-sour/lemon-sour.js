@@ -14,6 +14,7 @@ const Constants = {
     offLineJudgmentHttpUrl: 'http://httpbin.org/get',
     HTTP_OK: 200,
     tempDirectoryName: '/temp',
+    backupDirectoryName: '/backup',
 };
 console.log('Constants: ', Constants);
 exports.default = Constants;

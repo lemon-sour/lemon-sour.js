@@ -18,10 +18,12 @@ class AppUpdater extends BaseAppUpdater {
   isNeedsUpdate: boolean;
 
   // latest.json の情報
-  latest: LatestJsonInterface | null;
+  latest: LatestJsonInterface;
 
   // jobs の中のアプリのキー名
   keyName: string;
+  // 拡張子
+  extension: string;
 
   // アプリの名前
   name: string;
@@ -46,8 +48,14 @@ class AppUpdater extends BaseAppUpdater {
 
     this.currentVersion = '';
     this.isNeedsUpdate = false;
-    this.latest = null;
+    this.latest = {
+      latestVersion: '',
+      fileUrl: '',
+      sha1: '',
+      releaseDate: '',
+    };
     this.keyName = keyName;
+    this.extension = '';
     this.name = installApp.name;
     this.latest_json_url = installApp.latest_json_url;
     this.is_archive = installApp.is_archive;
@@ -86,11 +94,11 @@ class AppUpdater extends BaseAppUpdater {
 
   /**
    * saveCurrentVersion
-   * @param _version
    */
-  public async saveCurrentVersion(_version: string = '') {
-    this.currentVersion = _version;
-    await setJson(this.keyName, { version: _version } as VersionInterface);
+  public async saveCurrentVersion() {
+    await setJson(this.keyName, {
+      version: this.latest.latestVersion,
+    } as VersionInterface);
   }
 
   /**
@@ -105,6 +113,7 @@ class AppUpdater extends BaseAppUpdater {
    * @param _latest
    */
   public setLatest(_latest: LatestJsonInterface) {
+    console.log('latest:', _latest);
     this.latest = _latest;
   }
 

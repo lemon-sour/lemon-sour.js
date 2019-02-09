@@ -15,6 +15,7 @@ const Constants = {
   HTTP_OK: 200,
 
   tempDirectoryName: '/temp',
+  backupDirectoryName: '/backup',
 };
 
 console.log('Constants: ', Constants);

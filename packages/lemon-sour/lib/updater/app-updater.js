@@ -26,8 +26,14 @@ class AppUpdater extends base_app_updater_1.BaseAppUpdater {
         super();
         this.currentVersion = '';
         this.isNeedsUpdate = false;
-        this.latest = null;
+        this.latest = {
+            latestVersion: '',
+            fileUrl: '',
+            sha1: '',
+            releaseDate: '',
+        };
         this.keyName = keyName;
+        this.extension = '';
         this.name = installApp.name;
         this.latest_json_url = installApp.latest_json_url;
         this.is_archive = installApp.is_archive;
@@ -61,12 +67,12 @@ class AppUpdater extends base_app_updater_1.BaseAppUpdater {
     }
     /**
      * saveCurrentVersion
-     * @param _version
      */
-    saveCurrentVersion(_version = '') {
+    saveCurrentVersion() {
         return __awaiter(this, void 0, void 0, function* () {
-            this.currentVersion = _version;
-            yield json_storage_1.setJson(this.keyName, { version: _version });
+            yield json_storage_1.setJson(this.keyName, {
+                version: this.latest.latestVersion,
+            });
         });
     }
     /**
@@ -82,6 +88,7 @@ class AppUpdater extends base_app_updater_1.BaseAppUpdater {
      * @param _latest
      */
     setLatest(_latest) {
+        console.log('latest:', _latest);
         this.latest = _latest;
     }
     /**

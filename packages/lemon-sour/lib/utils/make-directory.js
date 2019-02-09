@@ -12,7 +12,7 @@ const mkdirp = require("mkdirp");
 const makeDirectory = (directoryPath) => __awaiter(this, void 0, void 0, function* () {
     console.log('makeDirectory:', directoryPath);
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-        mkdirp(directoryPath, (err) => {
+        mkdirp(directoryPath, err => {
             if (err) {
                 reject(err);
                 return;

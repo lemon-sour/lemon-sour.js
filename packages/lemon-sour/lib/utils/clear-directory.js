@@ -12,6 +12,7 @@ const rimraf = require("rimraf");
 const clearDirectory = (directoryPath) => __awaiter(this, void 0, void 0, function* () {
     console.log('clearDirectory:', directoryPath + '/*');
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+        // https://stackoverflow.com/questions/27072866/how-to-remove-all-files-from-directory-without-removing-directory-in-node-js
         rimraf(directoryPath + '/*', () => {
             console.log('done');
             resolve(true);
