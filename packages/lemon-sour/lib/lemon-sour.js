@@ -26,8 +26,7 @@ class LemonSour {
             try {
                 // オンライの判定
                 const isOnLine = yield judgment_online_1.judgmentOnLine(env_1.default);
-                console.log(1111, isOnLine);
-                if (isOnLine) {
+                if (!isOnLine) {
                     throw new Error('This is offline.');
                 }
                 // TODO args.yml がない場合の処理をここでやりたい

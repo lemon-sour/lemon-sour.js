@@ -15,6 +15,6 @@ Sentry.init({
  */
 const args = cli_1.cli();
 lemon_sour_1.lemonSour.run(args).catch(err => {
-    console.error(err);
+    console.error('index: ', err);
     Sentry.captureException(err);
 });

@@ -12,13 +12,13 @@ const axios_1 = require("axios");
 const constants_1 = require("../common/constants");
 /**
  * オフライン・オンラインの判定をする関数
- * @param yml
+ * @param env
  */
 const judgmentOnLine = (env) => __awaiter(this, void 0, void 0, function* () {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
         // オフラインかどうかの判定
-        // https://stackoverflow.com/questions/5725430/http-test-server-accepting-get-post-requests
         if (env.envName !== 'dev') {
+            // https://stackoverflow.com/questions/5725430/http-test-server-accepting-get-post-requests
             const response = yield axios_1.default.get(constants_1.default.offLineJudgmentHttpUrl);
             if (response.status !== constants_1.default.HTTP_OK) {
                 // offline

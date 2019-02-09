@@ -16,6 +16,6 @@ Sentry.init({
  */
 const args: CliArgsInterface = cli();
 lemonSour.run(args).catch(err => {
-  console.error(err);
+  console.error('index: ', err);
   Sentry.captureException(err);
 });
