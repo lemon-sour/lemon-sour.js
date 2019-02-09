@@ -25,9 +25,6 @@ const judgmentOnLine = (env) => __awaiter(this, void 0, void 0, function* () {
                 reject(false);
                 return;
             }
-            // online
-            resolve(true);
-            return;
         }
         // online
         resolve(true);

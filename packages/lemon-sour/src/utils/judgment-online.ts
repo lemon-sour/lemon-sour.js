@@ -21,10 +21,6 @@ const judgmentOnLine = async (env: EnvInterface) => {
           reject(false);
           return;
         }
-
-        // online
-        resolve(true);
-        return;
       }
 
       // online
