@@ -1,11 +1,11 @@
 {
-  "version": "1.0.25",
+  "version": "1.0.26",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "packages": [
     "packages/*"
   ],
-   "command": {
+  "command": {
     "publish": {
       "npmClient": "npm"
     },

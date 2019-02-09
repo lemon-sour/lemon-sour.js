@@ -1,6 +1,6 @@
 {
   "name": "lemon-sour",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "> TODO: description",
   "author": "hisasann <hisasann25@gmail.com>",
   "homepage": "https://github.com/lemon-sour/lemon-sour.js/tree/master/packages/lemon-sour#readme",
@@ -70,8 +70,8 @@
   },
   "gitHead": "b6ad574816588dd8328ca67b04347ee12d0e7076",
   "dependencies": {
-    "@lemon-sour/cli": "^1.0.24",
-    "@lemon-sour/json-storage": "^1.0.25",
+    "@lemon-sour/cli": "^1.0.26",
+    "@lemon-sour/json-storage": "^1.0.26",
     "@sentry/node": "4.5.3",
     "axios": "^0.18.0",
     "eventemitter3": "^3.1.0",
