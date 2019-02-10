@@ -5,5 +5,5 @@ import getBaseDir from './get-base-dir';
  * @param jsonKeyName
  */
 export default function makeJsonPathFromJsonName(jsonKeyName: string): string {
-  return `${getBaseDir()}${jsonKeyName}.json`;
+  return `${getBaseDir()}/${jsonKeyName}.json`;
 }

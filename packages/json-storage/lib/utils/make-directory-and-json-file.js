@@ -15,7 +15,7 @@ function makeDirectoryAndJsonFile(jsonKeyName) {
                 reject(err);
                 return;
             }
-            fs.writeFile(`${get_base_dir_1.default()}${jsonKeyName}.json`, null, err => {
+            fs.writeFile(`${get_base_dir_1.default()}/${jsonKeyName}.json`, null, err => {
                 if (err) {
                     console.error(err);
                     reject(err);

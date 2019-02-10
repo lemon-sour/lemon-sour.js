@@ -6,6 +6,6 @@ const get_base_dir_1 = require("./get-base-dir");
  * @param jsonKeyName
  */
 function makeJsonPathFromJsonName(jsonKeyName) {
-    return `${get_base_dir_1.default()}${jsonKeyName}.json`;
+    return `${get_base_dir_1.default()}/${jsonKeyName}.json`;
 }
 exports.default = makeJsonPathFromJsonName;
