@@ -1,4 +1,5 @@
 import { CliArgsInterface } from '@lemon-sour/cli';
+import razer from 'razer';
 import { yamlLoader } from './utils/yaml-loader';
 import { YmlInterface } from './interface/yml-interface';
 import { UpdateOrchestration } from './updater/update-orchestration';
@@ -9,7 +10,9 @@ import Env from './common/env';
  * LemonSour クラス
  */
 class LemonSour {
-  constructor() {}
+  constructor() {
+    razer('start LemonSour');
+  }
 
   /**
    * run - lemon-sour の一番最上階

@@ -82,6 +82,7 @@
     "mkdirp": "^0.5.1",
     "mv": "^2.1.1",
     "node-fetch": "^2.3.0",
+    "razer": "^0.0.6",
     "rimraf": "^2.6.3"
   },
   "devDependencies": {
