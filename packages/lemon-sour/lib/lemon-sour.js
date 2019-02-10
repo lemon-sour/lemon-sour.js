@@ -30,7 +30,7 @@ class LemonSour {
                 // オンラインの判定
                 const isOnLine = yield judgment_online_1.judgmentOnLine(env_1.default);
                 if (!isOnLine) {
-                    throw new Error('This is offline.');
+                    throw new Error('It seems to be offline.');
                 }
                 // TODO args.yml がない場合の処理をここでやりたい
                 // Load yml file
