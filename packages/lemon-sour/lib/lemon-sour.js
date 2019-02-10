@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const node_log_rotate_1 = require("node-log-rotate");
 const razer_1 = require("razer");
 const yaml_loader_1 = require("./utils/yaml-loader");
 const update_orchestration_1 = require("./updater/update-orchestration");
@@ -18,6 +19,7 @@ const env_1 = require("./common/env");
  */
 class LemonSour {
     constructor() {
+        node_log_rotate_1.log('start LemonSour');
         razer_1.default('start LemonSour');
     }
     /**

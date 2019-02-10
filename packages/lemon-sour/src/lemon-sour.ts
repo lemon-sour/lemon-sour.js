@@ -1,4 +1,5 @@
 import { CliArgsInterface } from '@lemon-sour/cli';
+import { log } from 'node-log-rotate';
 import razer from 'razer';
 import { yamlLoader } from './utils/yaml-loader';
 import { YmlInterface } from './interface/yml-interface';
@@ -11,6 +12,7 @@ import Env from './common/env';
  */
 class LemonSour {
   constructor() {
+    log('start LemonSour');
     razer('start LemonSour');
   }
 
