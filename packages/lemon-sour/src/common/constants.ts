@@ -1,3 +1,5 @@
+import razer from 'razer';
+
 /**
  * プロジェクト名
  * @type {string}
@@ -18,6 +20,6 @@ const Constants = {
   backupDirectoryName: '/backup',
 };
 
-console.log('Constants: ', Constants);
+razer('Constants: ', Constants);
 
 export default Constants;

@@ -1,4 +1,5 @@
 import * as mv from 'mv';
+import razer from 'razer';
 
 /**
  * moveAppFile
@@ -25,7 +26,7 @@ const moveAppFile = (
             return;
           }
 
-          console.log(
+          razer(
             appName,
             `Moving up the ${tempPath} file to the ${distPath} directory`,
           );

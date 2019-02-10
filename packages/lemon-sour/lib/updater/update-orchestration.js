@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const _ = require("lodash");
+const razer_1 = require("razer");
 const app_updater_1 = require("./app-updater");
 const workflow_1 = require("./workflow");
 const make_directory_1 = require("../utils/make-directory");
@@ -41,7 +42,7 @@ class UpdateOrchestration {
     checkForUpdates() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log('checkForUpdates...');
+                razer_1.default('checkForUpdates...');
                 for (let i = 0, len = this.workflows.length; i < len; i++) {
                     let appUpdatersOrderByWorkflow = this.findAppUpdater(this.workflows[i].keyName);
                     if (!appUpdatersOrderByWorkflow) {
@@ -73,7 +74,7 @@ class UpdateOrchestration {
                     yield this.execUpdateNotAvailable();
                     return;
                 }
-                console.log('There are updates.');
+                razer_1.default('There are updates.');
                 // TODO: temp ディレクトリを作る
                 yield make_directory_1.makeDirectory(this.getTempDirectory());
                 // TODO: temp デイレクトリの中身を掃除する
@@ -83,7 +84,7 @@ class UpdateOrchestration {
                 // TODO: backup デイレクトリの中身を掃除する
                 yield clear_directory_1.clearDirectory(this.getBackupDirectory());
                 // TODO: アプリケーションを temp ディレクトリにダウンロードする
-                console.log('Download apps...');
+                razer_1.default('Download apps...');
                 yield this.downloadAppsToTempDirectory();
                 // TODO: アプリケーションを解凍する
                 for (let i = 0, len = this.workflows.length; i < len; i++) {
@@ -122,8 +123,7 @@ class UpdateOrchestration {
      * @param latest
      */
     showVersionLogger(appUpdatersOrderByWorkflow, currentVersion, latest) {
-        console.log(appUpdatersOrderByWorkflow.name);
-        console.log('currentVersion:', currentVersion, 'latestVersion:', latest.latestVersion);
+        razer_1.default(appUpdatersOrderByWorkflow.name, 'currentVersion:', currentVersion, 'latestVersion:', latest.latestVersion);
     }
     /**
      * validateYml
@@ -139,10 +139,10 @@ class UpdateOrchestration {
      * @param doc
      */
     appUpdatersSetup(doc) {
-        console.log('version: ', doc.version);
+        razer_1.default('doc version: ', doc.version);
         const keys = Object.keys(doc.jobs);
         _.forEach(keys, (value, index) => {
-            console.log('app: ', doc.jobs[value]);
+            razer_1.default('app: ', doc.jobs[value]);
             const appUpdater = new app_updater_1.AppUpdater(value, doc.jobs[value]);
             this.addAppUpdater(appUpdater);
         });
@@ -154,7 +154,7 @@ class UpdateOrchestration {
     workflowsSetup(doc) {
         const jobs = doc.workflows.main.jobs;
         _.forEach(jobs, (value, index) => {
-            console.log('workflow: ', value);
+            razer_1.default('workflow: ', value);
             const workflow = new workflow_1.Workflow(value);
             this.addWorkflow(workflow);
         });
@@ -184,11 +184,11 @@ class UpdateOrchestration {
         if (!appUpdater) {
             return null;
         }
-        console.log('name: ', appUpdater.name);
-        console.log('latest_json_url: ', appUpdater.latest_json_url);
-        console.log('is_archive: ', appUpdater.is_archive);
-        console.log('output_path: ', appUpdater.output_path);
-        console.log('events: ', appUpdater.events);
+        razer_1.default('name: ', appUpdater.name);
+        razer_1.default('latest_json_url: ', appUpdater.latest_json_url);
+        razer_1.default('is_archive: ', appUpdater.is_archive);
+        razer_1.default('output_path: ', appUpdater.output_path);
+        razer_1.default('events: ', appUpdater.events);
         return appUpdater;
     }
     /**
@@ -245,12 +245,12 @@ class UpdateOrchestration {
                     return;
                 }
                 _percent = percent;
-                console.log(percent);
+                razer_1.default(percent);
                 yield eventManager.downloadProgress.exec();
                 // eventManager.downloadProgress.exec(percent, bytes);
             }), () => {
                 let dEndTime = Date.now();
-                console.log(appName, 'Download end... ' + (dEndTime - dStartTime) + 'ms');
+                razer_1.default(appName, 'Download end... ' + (dEndTime - dStartTime) + 'ms');
             });
         });
     }
@@ -259,7 +259,7 @@ class UpdateOrchestration {
      */
     execUpdateNotAvailable() {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('execUpdateNotAvailable');
+            razer_1.default('execUpdateNotAvailable');
             for (let i = 0, len = this.workflows.length; i < len; i++) {
                 let appUpdatersOrderByWorkflow = this.findAppUpdater(this.workflows[i].keyName);
                 if (!appUpdatersOrderByWorkflow) {
@@ -274,7 +274,7 @@ class UpdateOrchestration {
      */
     execUpdateAvailable() {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('execUpdateAvailable');
+            razer_1.default('execUpdateAvailable');
             for (let i = 0, len = this.workflows.length; i < len; i++) {
                 let appUpdatersOrderByWorkflow = this.findAppUpdater(this.workflows[i].keyName);
                 if (!appUpdatersOrderByWorkflow) {
@@ -289,7 +289,7 @@ class UpdateOrchestration {
      */
     execError() {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('execError');
+            razer_1.default('execError');
             for (let i = 0, len = this.workflows.length; i < len; i++) {
                 let appUpdatersOrderByWorkflow = this.findAppUpdater(this.workflows[i].keyName);
                 if (!appUpdatersOrderByWorkflow) {

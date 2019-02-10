@@ -1,4 +1,5 @@
 import { getJson, setJson } from '@lemon-sour/json-storage';
+import razer from 'razer';
 import { InstallApp, Events } from '../interface/yml-interface';
 import { LatestJsonInterface } from '../interface/latest-json-interface';
 import { BaseAppUpdater } from './base-app-updater';
@@ -42,7 +43,7 @@ class AppUpdater extends BaseAppUpdater {
    * @param installApp
    */
   constructor(keyName: string, installApp: InstallApp) {
-    console.log('AppUpdater: ', 'constructor');
+    razer('AppUpdater: ', 'constructor', keyName);
 
     super();
 
@@ -113,7 +114,7 @@ class AppUpdater extends BaseAppUpdater {
    * @param _latest
    */
   public setLatest(_latest: LatestJsonInterface) {
-    console.log('latest:', _latest);
+    razer('latest:', _latest);
     this.latest = _latest;
   }
 

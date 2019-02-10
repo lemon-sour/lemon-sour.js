@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_fetch_1 = require("node-fetch");
+const razer_1 = require("razer");
 const FETCH_TIMEOUT = 10000;
 function fetchWithTimeout(_fullUrl, myInit) {
     return new Promise((resolve, reject) => {
@@ -14,7 +15,7 @@ function fetchWithTimeout(_fullUrl, myInit) {
         let myRequest = new node_fetch_1.Request(_fullUrl);
         node_fetch_1.default(myRequest, myInit)
             .then((response) => {
-            console.log(`${_fullUrl} handleErrors`);
+            razer_1.default(`${_fullUrl} handleErrors`);
             // Clear the timeout as cleanup
             clearTimeout(timeout);
             if (didTimeOut) {
@@ -27,25 +28,25 @@ function fetchWithTimeout(_fullUrl, myInit) {
             return response;
         })
             .then((response) => {
-            console.log(`${_fullUrl} prepare`);
+            razer_1.default(`${_fullUrl} prepare`);
             if (didTimeOut) {
                 return;
             }
             // ステータスコードとステータステキストを表示
-            console.info(`${_fullUrl} ok?: `, response.ok);
-            console.info(`${_fullUrl} status: `, response.status);
-            console.info(`${_fullUrl} statusText: `, response.statusText);
+            razer_1.default(`${_fullUrl} ok?: `, response.ok);
+            razer_1.default(`${_fullUrl} status: `, response.status);
+            razer_1.default(`${_fullUrl} statusText: `, response.statusText);
             return response.json().then((json) => ({ json, response }));
         })
             .then(({ json, response }) => {
-            console.log(`fetch then: ${_fullUrl} onFulfilled`);
+            razer_1.default(`fetch then: ${_fullUrl} onFulfilled`);
             if (didTimeOut) {
                 return;
             }
             resolve(Object.assign({}, json), response);
         })
             .catch(error => {
-            console.log(`fetch catch: ${_fullUrl} onRejected: ${error}`);
+            razer_1.default(`fetch catch: ${_fullUrl} onRejected: ${error}`);
             // Clear the timeout as cleanup
             clearTimeout(timeout);
             return reject(error);

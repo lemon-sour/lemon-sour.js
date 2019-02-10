@@ -9,12 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const childProcess = require("child_process");
+const razer_1 = require("razer");
 /**
  * AppEvent - 個別のイベントを管理するクラス
  */
 class AppEvent {
     constructor(eventName) {
-        console.log('AppEvent: ', 'constructor');
         this.eventName = eventName;
         this.steps = [];
     }
@@ -29,7 +29,7 @@ class AppEvent {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             try {
                 for (let run of this.steps) {
-                    console.log(run.name);
+                    razer_1.default(run.name, run.command);
                     if (run.sync) {
                         yield this.execCommandSync(run.command);
                     }
@@ -69,11 +69,10 @@ class AppEvent {
         return new Promise((resolve, reject) => {
             childProcess.exec(sh, (err, stdout, stderr) => {
                 if (err) {
-                    console.log(err);
                     reject(err);
                     return;
                 }
-                console.log(stdout);
+                razer_1.default(stdout);
                 resolve();
             });
         });

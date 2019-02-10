@@ -8,7 +8,6 @@ const _ = require("lodash");
  */
 class EventsManager {
     constructor(events) {
-        console.log('EventsManager: ', 'constructor');
         this.checkingForUpdate = this.makeAppEvent(events, event_names_enum_1.EventNamesEnum.CheckingForUpdate);
         this.updateNotAvailable = this.makeAppEvent(events, event_names_enum_1.EventNamesEnum.UpdateNotAvailable);
         this.updateAvailable = this.makeAppEvent(events, event_names_enum_1.EventNamesEnum.UpdateAvailable);

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mv = require("mv");
+const razer_1 = require("razer");
 /**
  * moveAppFile
  * @param appName
@@ -15,7 +16,7 @@ const moveAppFile = (appName, extension, tempPath, distPath) => {
                 reject(err);
                 return;
             }
-            console.log(appName, `Moving up the ${tempPath} file to the ${distPath} directory`);
+            razer_1.default(appName, `Moving up the ${tempPath} file to the ${distPath} directory`);
             resolve();
         });
     });

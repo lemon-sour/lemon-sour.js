@@ -9,8 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mkdirp = require("mkdirp");
+const razer_1 = require("razer");
 const makeDirectory = (directoryPath) => __awaiter(this, void 0, void 0, function* () {
-    console.log('makeDirectory:', directoryPath);
+    razer_1.default('the path where  make directory:', directoryPath);
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
         mkdirp(directoryPath, err => {
             if (err) {

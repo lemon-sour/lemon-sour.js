@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const json_storage_1 = require("@lemon-sour/json-storage");
+const razer_1 = require("razer");
 const base_app_updater_1 = require("./base-app-updater");
 const events_manager_1 = require("./events-manager");
 const constants_1 = require("../common/constants");
@@ -22,7 +23,7 @@ class AppUpdater extends base_app_updater_1.BaseAppUpdater {
      * @param installApp
      */
     constructor(keyName, installApp) {
-        console.log('AppUpdater: ', 'constructor');
+        razer_1.default('AppUpdater: ', 'constructor', keyName);
         super();
         this.currentVersion = '';
         this.isNeedsUpdate = false;
@@ -88,7 +89,7 @@ class AppUpdater extends base_app_updater_1.BaseAppUpdater {
      * @param _latest
      */
     setLatest(_latest) {
-        console.log('latest:', _latest);
+        razer_1.default('latest:', _latest);
         this.latest = _latest;
     }
     /**

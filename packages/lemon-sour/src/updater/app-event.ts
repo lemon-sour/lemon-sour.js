@@ -1,5 +1,6 @@
 import * as childProcess from 'child_process';
 import { RunInterface } from '../interface/run-interface';
+import razer from 'razer';
 
 /**
  * AppEvent - 個別のイベントを管理するクラス
@@ -9,8 +10,6 @@ class AppEvent {
   steps: RunInterface[];
 
   constructor(eventName: string) {
-    console.log('AppEvent: ', 'constructor');
-
     this.eventName = eventName;
     this.steps = [];
   }
@@ -28,7 +27,7 @@ class AppEvent {
       async (resolve: (value?: object) => void, reject: (err: any) => void) => {
         try {
           for (let run of this.steps) {
-            console.log(run.name);
+            razer(run.name, run.command);
             if (run.sync) {
               await this.execCommandSync(run.command);
             } else {
@@ -70,12 +69,11 @@ class AppEvent {
       (resolve: (value?: object) => void, reject: (err: any) => void) => {
         childProcess.exec(sh, (err, stdout, stderr) => {
           if (err) {
-            console.log(err);
             reject(err);
             return;
           }
 
-          console.log(stdout);
+          razer(stdout);
           resolve();
         });
       },

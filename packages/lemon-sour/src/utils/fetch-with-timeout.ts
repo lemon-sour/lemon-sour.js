@@ -1,4 +1,5 @@
 import fetch, { Request } from 'node-fetch';
+import razer from 'razer';
 
 const FETCH_TIMEOUT = 10000;
 
@@ -20,7 +21,7 @@ function fetchWithTimeout(_fullUrl: string, myInit: object) {
 
       fetch(myRequest, myInit)
         .then((response: any) => {
-          console.log(`${_fullUrl} handleErrors`);
+          razer(`${_fullUrl} handleErrors`);
 
           // Clear the timeout as cleanup
           clearTimeout(timeout);
@@ -37,21 +38,21 @@ function fetchWithTimeout(_fullUrl: string, myInit: object) {
           return response;
         })
         .then((response: any) => {
-          console.log(`${_fullUrl} prepare`);
+          razer(`${_fullUrl} prepare`);
 
           if (didTimeOut) {
             return;
           }
 
           // ステータスコードとステータステキストを表示
-          console.info(`${_fullUrl} ok?: `, response.ok);
-          console.info(`${_fullUrl} status: `, response.status);
-          console.info(`${_fullUrl} statusText: `, response.statusText);
+          razer(`${_fullUrl} ok?: `, response.ok);
+          razer(`${_fullUrl} status: `, response.status);
+          razer(`${_fullUrl} statusText: `, response.statusText);
 
           return response.json().then((json: any) => ({ json, response }));
         })
         .then(({ json, response }) => {
-          console.log(`fetch then: ${_fullUrl} onFulfilled`);
+          razer(`fetch then: ${_fullUrl} onFulfilled`);
 
           if (didTimeOut) {
             return;
@@ -60,7 +61,7 @@ function fetchWithTimeout(_fullUrl: string, myInit: object) {
           resolve(Object.assign({}, json), response);
         })
         .catch(error => {
-          console.log(`fetch catch: ${_fullUrl} onRejected: ${error}`);
+          razer(`fetch catch: ${_fullUrl} onRejected: ${error}`);
 
           // Clear the timeout as cleanup
           clearTimeout(timeout);

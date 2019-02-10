@@ -6,9 +6,7 @@ import { EventsManager } from './events-manager';
  * 個々のアプリのアップデート処理を実行、イベントを実行する親クラス
  */
 class BaseAppUpdater {
-  constructor() {
-    console.log('BaseAppUpdater: ', 'constructor');
-  }
+  constructor() {}
 
   /**
    * loadLatestJsonUrl

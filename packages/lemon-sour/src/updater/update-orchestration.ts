@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+import razer from 'razer';
 import { YmlInterface } from '../interface/yml-interface';
 import { LatestJsonInterface } from '../interface/latest-json-interface';
 import { AppUpdater } from './app-updater';
@@ -45,7 +46,7 @@ class UpdateOrchestration {
    */
   public async checkForUpdates() {
     try {
-      console.log('checkForUpdates...');
+      razer('checkForUpdates...');
       for (let i = 0, len = this.workflows.length; i < len; i++) {
         let appUpdatersOrderByWorkflow = this.findAppUpdater(
           this.workflows[i].keyName,
@@ -91,7 +92,7 @@ class UpdateOrchestration {
         return;
       }
 
-      console.log('There are updates.');
+      razer('There are updates.');
 
       // TODO: temp ディレクトリを作る
       await makeDirectory(this.getTempDirectory());
@@ -104,7 +105,7 @@ class UpdateOrchestration {
       await clearDirectory(this.getBackupDirectory());
 
       // TODO: アプリケーションを temp ディレクトリにダウンロードする
-      console.log('Download apps...');
+      razer('Download apps...');
       await this.downloadAppsToTempDirectory();
 
       // TODO: アプリケーションを解凍する
@@ -167,8 +168,8 @@ class UpdateOrchestration {
     currentVersion: string,
     latest: LatestJsonInterface,
   ) {
-    console.log(appUpdatersOrderByWorkflow.name);
-    console.log(
+    razer(
+      appUpdatersOrderByWorkflow.name,
       'currentVersion:',
       currentVersion,
       'latestVersion:',
@@ -191,11 +192,11 @@ class UpdateOrchestration {
    * @param doc
    */
   private appUpdatersSetup(doc: YmlInterface) {
-    console.log('version: ', doc.version);
+    razer('doc version: ', doc.version);
 
     const keys: string[] = Object.keys(doc.jobs);
     _.forEach(keys, (value, index) => {
-      console.log('app: ', doc.jobs[value]);
+      razer('app: ', doc.jobs[value]);
 
       const appUpdater: AppUpdater = new AppUpdater(value, doc.jobs[value]);
 
@@ -210,7 +211,7 @@ class UpdateOrchestration {
   private workflowsSetup(doc: YmlInterface) {
     const jobs: string[] = doc.workflows.main.jobs;
     _.forEach(jobs, (value, index) => {
-      console.log('workflow: ', value);
+      razer('workflow: ', value);
 
       const workflow: Workflow = new Workflow(value);
 
@@ -246,11 +247,11 @@ class UpdateOrchestration {
       return null;
     }
 
-    console.log('name: ', appUpdater.name);
-    console.log('latest_json_url: ', appUpdater.latest_json_url);
-    console.log('is_archive: ', appUpdater.is_archive);
-    console.log('output_path: ', appUpdater.output_path);
-    console.log('events: ', appUpdater.events);
+    razer('name: ', appUpdater.name);
+    razer('latest_json_url: ', appUpdater.latest_json_url);
+    razer('is_archive: ', appUpdater.is_archive);
+    razer('output_path: ', appUpdater.output_path);
+    razer('events: ', appUpdater.events);
 
     return appUpdater;
   }
@@ -331,16 +332,13 @@ class UpdateOrchestration {
         }
 
         _percent = percent;
-        console.log(percent);
+        razer(percent);
         await eventManager.downloadProgress.exec();
         // eventManager.downloadProgress.exec(percent, bytes);
       },
       () => {
         let dEndTime = Date.now();
-        console.log(
-          appName,
-          'Download end... ' + (dEndTime - dStartTime) + 'ms',
-        );
+        razer(appName, 'Download end... ' + (dEndTime - dStartTime) + 'ms');
       },
     );
   }
@@ -349,7 +347,7 @@ class UpdateOrchestration {
    * execUpdateNotAvailable
    */
   private async execUpdateNotAvailable() {
-    console.log('execUpdateNotAvailable');
+    razer('execUpdateNotAvailable');
     for (let i = 0, len = this.workflows.length; i < len; i++) {
       let appUpdatersOrderByWorkflow = this.findAppUpdater(
         this.workflows[i].keyName,
@@ -365,7 +363,7 @@ class UpdateOrchestration {
    * execUpdateAvailable
    */
   private async execUpdateAvailable() {
-    console.log('execUpdateAvailable');
+    razer('execUpdateAvailable');
     for (let i = 0, len = this.workflows.length; i < len; i++) {
       let appUpdatersOrderByWorkflow = this.findAppUpdater(
         this.workflows[i].keyName,
@@ -381,7 +379,7 @@ class UpdateOrchestration {
    * execError
    */
   private async execError() {
-    console.log('execError');
+    razer('execError');
     for (let i = 0, len = this.workflows.length; i < len; i++) {
       let appUpdatersOrderByWorkflow = this.findAppUpdater(
         this.workflows[i].keyName,

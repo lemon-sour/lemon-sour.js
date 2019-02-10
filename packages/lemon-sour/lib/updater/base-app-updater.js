@@ -13,9 +13,7 @@ const fetch_with_timeout_1 = require("../utils/fetch-with-timeout");
  * 個々のアプリのアップデート処理を実行、イベントを実行する親クラス
  */
 class BaseAppUpdater {
-    constructor() {
-        console.log('BaseAppUpdater: ', 'constructor');
-    }
+    constructor() { }
     /**
      * loadLatestJsonUrl
      */

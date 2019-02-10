@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const razer_1 = require("razer");
 /**
  * プロジェクト名
  * @type {string}
@@ -16,5 +17,5 @@ const Constants = {
     tempDirectoryName: '/temp',
     backupDirectoryName: '/backup',
 };
-console.log('Constants: ', Constants);
+razer_1.default('Constants: ', Constants);
 exports.default = Constants;

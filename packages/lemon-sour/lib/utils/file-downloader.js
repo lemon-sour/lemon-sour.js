@@ -8,6 +8,7 @@ const http = require('follow-redirects').http;
 const https = require('follow-redirects').https;
 const URL = require("url");
 const fs = require("fs");
+const razer_1 = require("razer");
 const constants_1 = require("../common/constants");
 function download(fileUrl, distPath, progress, callback) {
     return new Promise((resolve, reject) => {
@@ -33,7 +34,11 @@ function download(fileUrl, distPath, progress, callback) {
                 .on('data', (chunk) => {
                 file.write(chunk);
                 downloaded += chunk.length;
-                // console.log('Downloading ' + (100.0 * downloaded / len).toFixed(2) + '% ' + downloaded + ' bytes');
+                razer_1.default('Downloading ' +
+                    ((100.0 * downloaded) / len).toFixed(2) +
+                    '% ' +
+                    downloaded +
+                    ' bytes');
                 progress(((100.0 * downloaded) / len).toFixed(0), downloaded);
                 // reset timeout
                 clearTimeout(timeoutId);
@@ -43,20 +48,20 @@ function download(fileUrl, distPath, progress, callback) {
                 // clear timeout
                 clearTimeout(timeoutId);
                 file.end();
-                console.log('downloaded to: ' + distPath);
+                razer_1.default('downloaded to: ' + distPath);
                 resolve();
                 callback();
             })
                 .on('error', (err) => {
                 // clear timeout
-                console.log('res.on(error): ' + err.message);
+                razer_1.default('res.on(error): ' + err.message);
                 clearTimeout(timeoutId);
                 reject(err);
             });
         });
         // error handler
         request.on('error', (err) => {
-            console.log('request.on(error): ' + err.message);
+            razer_1.default('request.on(error): ' + err.message);
             clearTimeout(timeoutId);
             reject(new Error(err.message));
         });

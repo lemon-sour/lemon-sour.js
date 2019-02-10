@@ -6,6 +6,7 @@ const http = require('follow-redirects').http;
 const https = require('follow-redirects').https;
 import * as URL from 'url';
 import * as fs from 'fs';
+import razer from 'razer';
 import C from '../common/constants';
 
 function download(
@@ -42,7 +43,13 @@ function download(
           .on('data', (chunk: any) => {
             file.write(chunk);
             downloaded += chunk.length;
-            // console.log('Downloading ' + (100.0 * downloaded / len).toFixed(2) + '% ' + downloaded + ' bytes');
+            razer(
+              'Downloading ' +
+                ((100.0 * downloaded) / len).toFixed(2) +
+                '% ' +
+                downloaded +
+                ' bytes',
+            );
             progress(((100.0 * downloaded) / len).toFixed(0), downloaded);
 
             // reset timeout
@@ -53,13 +60,13 @@ function download(
             // clear timeout
             clearTimeout(timeoutId);
             file.end();
-            console.log('downloaded to: ' + distPath);
+            razer('downloaded to: ' + distPath);
             resolve();
             callback();
           })
           .on('error', (err: any) => {
             // clear timeout
-            console.log('res.on(error): ' + err.message);
+            razer('res.on(error): ' + err.message);
             clearTimeout(timeoutId);
             reject(err);
           });
@@ -67,7 +74,7 @@ function download(
 
       // error handler
       request.on('error', (err: any) => {
-        console.log('request.on(error): ' + err.message);
+        razer('request.on(error): ' + err.message);
         clearTimeout(timeoutId);
         reject(new Error(err.message));
       });
