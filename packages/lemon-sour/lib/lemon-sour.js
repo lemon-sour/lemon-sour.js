@@ -27,7 +27,7 @@ class LemonSour {
     run(args) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                // オンライの判定
+                // オンラインの判定
                 const isOnLine = yield judgment_online_1.judgmentOnLine(env_1.default);
                 if (!isOnLine) {
                     throw new Error('This is offline.');

@@ -20,7 +20,7 @@ class LemonSour {
    */
   async run(args: CliArgsInterface) {
     try {
-      // オンライの判定
+      // オンラインの判定
       const isOnLine = await judgmentOnLine(Env);
       if (!isOnLine) {
         throw new Error('This is offline.');
