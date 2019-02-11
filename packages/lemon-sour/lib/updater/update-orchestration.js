@@ -75,6 +75,7 @@ class UpdateOrchestration {
                     return;
                 }
                 razer_1.default('There are updates.');
+                yield this.execUpdateAvailable();
                 // TODO: temp ディレクトリを作る
                 yield make_directory_1.makeDirectory(this.getTempDirectory());
                 // TODO: temp デイレクトリの中身を掃除する
@@ -97,17 +98,19 @@ class UpdateOrchestration {
                     // TODO: アプリケーションを配置する
                     yield move_file_1.moveAppFile(appUpdatersOrderByWorkflow.name, appUpdatersOrderByWorkflow.extension, this.getTempDirectory(), appUpdatersOrderByWorkflow.output_path);
                 }
-                yield this.execUpdateAvailable();
                 for (let i = 0, len = this.workflows.length; i < len; i++) {
                     let appUpdatersOrderByWorkflow = this.findAppUpdater(this.workflows[i].keyName);
                     if (!appUpdatersOrderByWorkflow) {
                         continue;
                     }
-                    yield appUpdatersOrderByWorkflow.eventsManager.updateDownloaded.exec();
-                    yield appUpdatersOrderByWorkflow.eventsManager.updateNotAvailable.exec();
-                    yield appUpdatersOrderByWorkflow.eventsManager.updateAvailable.exec();
-                    // 更新後のバージョンを保存する
-                    yield appUpdatersOrderByWorkflow.saveCurrentVersion();
+                    if (appUpdatersOrderByWorkflow.isNeedsUpdate) {
+                        yield appUpdatersOrderByWorkflow.eventsManager.updateDownloaded.exec();
+                        // 更新後のバージョンを保存する
+                        yield appUpdatersOrderByWorkflow.saveCurrentVersion();
+                    }
+                    else {
+                        yield appUpdatersOrderByWorkflow.eventsManager.updateNotAvailable.exec();
+                    }
                 }
             }
             catch (e) {

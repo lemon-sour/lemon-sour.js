@@ -94,6 +94,8 @@ class UpdateOrchestration {
 
       razer('There are updates.');
 
+      await this.execUpdateAvailable();
+
       // TODO: temp ディレクトリを作る
       await makeDirectory(this.getTempDirectory());
       // TODO: temp デイレクトリの中身を掃除する
@@ -134,8 +136,6 @@ class UpdateOrchestration {
         );
       }
 
-      await this.execUpdateAvailable();
-
       for (let i = 0, len = this.workflows.length; i < len; i++) {
         let appUpdatersOrderByWorkflow = this.findAppUpdater(
           this.workflows[i].keyName,
@@ -144,12 +144,14 @@ class UpdateOrchestration {
           continue;
         }
 
-        await appUpdatersOrderByWorkflow.eventsManager.updateDownloaded.exec();
-        await appUpdatersOrderByWorkflow.eventsManager.updateNotAvailable.exec();
-        await appUpdatersOrderByWorkflow.eventsManager.updateAvailable.exec();
+        if (appUpdatersOrderByWorkflow.isNeedsUpdate) {
+          await appUpdatersOrderByWorkflow.eventsManager.updateDownloaded.exec();
 
-        // 更新後のバージョンを保存する
-        await appUpdatersOrderByWorkflow.saveCurrentVersion();
+          // 更新後のバージョンを保存する
+          await appUpdatersOrderByWorkflow.saveCurrentVersion();
+        } else {
+          await appUpdatersOrderByWorkflow.eventsManager.updateNotAvailable.exec();
+        }
       }
     } catch (e) {
       await this.execError();
