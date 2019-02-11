@@ -1,41 +1,45 @@
 import * as mv from 'mv';
+import * as fs from 'fs';
 import razer from 'razer';
 
 /**
- * moveAppFile
- * @param appName
- * @param extension
- * @param tempPath
- * @param distPath
+ * moveFile
+ * @param prevPath
+ * @param nextPath
  */
-const moveAppFile = (
-  appName: string,
-  extension: string,
-  tempPath: string,
-  distPath: string,
-) => {
+const moveFile = (prevPath: string, nextPath: string) => {
   return new Promise(
     (resolve: (value?: any) => void, reject: (err: any) => void) => {
-      mv(
-        tempPath + '/' + appName + '.' + extension,
-        distPath + '/' + appName + '.' + extension,
-        { mkdirp: true },
-        (err: any) => {
-          if (err) {
-            // 一番最初はまだファイルがないので失敗するので、ここのエラーは基本的に無視する
-            // reject(err);
-            return;
-          }
+      fs.readdir(prevPath, (err, files) => {
+        if (err) {
+          reject(err);
+          return;
+        }
 
-          razer(
-            appName,
-            `Moving up the ${tempPath} file to the ${distPath} directory`,
+        const fileList: string[] = [];
+        files.forEach(file => {
+          fileList.push(file);
+          mv(
+            prevPath + '/' + file,
+            nextPath + '/' + file,
+            { mkdirp: true },
+            (err: any) => {
+              if (err) {
+                // 一番最初はまだファイルがないので失敗するので、ここのエラーは基本的に無視する
+                // reject(err);
+                // return;
+              }
+            },
           );
-          resolve();
-        },
-      );
+        });
+
+        razer(
+          `Moving up the file list: ${fileList} to the ${nextPath} directory`,
+        );
+        resolve();
+      });
     },
   );
 };
 
-export { moveAppFile };
+export { moveFile };

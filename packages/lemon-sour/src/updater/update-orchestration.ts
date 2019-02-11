@@ -5,13 +5,14 @@ import { LatestJsonInterface } from '../interface/latest-json-interface';
 import { AppUpdater } from './app-updater';
 import { Workflow } from './workflow';
 import { makeDirectory } from '../utils/make-directory';
-import { clearDirectory } from '../utils/clear-directory';
+import { cleanDirectory } from '../utils/clean-directory';
 import getUserHome from '../utils/get-user-home';
 import download from '../utils/file-downloader';
+import unzip from '../utils/unzip';
 import C from '../common/constants';
 import { EventsManager } from './events-manager';
 import { splitExtension } from '../utils/split-extension';
-import { moveAppFile } from '../utils/move-file';
+import { moveFile } from '../utils/move-file';
 
 /**
  * アプリケーションのアップデートの指揮者となるオーケストレーション
@@ -55,11 +56,11 @@ class UpdateOrchestration {
           continue;
         }
 
-        // 現在のバージョンをロードしておく
-        await appUpdatersOrderByWorkflow.loadCurrentVersion();
-
         // event fire - checkingForUpdate
         await appUpdatersOrderByWorkflow.eventsManager.checkingForUpdate.exec();
+
+        // 現在のバージョンをロードしておく
+        await appUpdatersOrderByWorkflow.loadCurrentVersion();
 
         // latestJson をロードする
         const latest: LatestJsonInterface = (await this.getLatestJson(
@@ -68,13 +69,15 @@ class UpdateOrchestration {
         appUpdatersOrderByWorkflow.setLatest(latest);
         appUpdatersOrderByWorkflow.extension = splitExtension(latest);
 
-        // Events
         const currentVersion = await appUpdatersOrderByWorkflow.getCurrentVersion();
         this.showVersionLogger(
           appUpdatersOrderByWorkflow,
           currentVersion,
           latest,
         );
+
+        // output_path ディレクトリを作る
+        await makeDirectory(appUpdatersOrderByWorkflow.output_path);
 
         if (currentVersion <= latest.latestVersion) {
           // アップデートがある場合
@@ -94,47 +97,35 @@ class UpdateOrchestration {
 
       razer('There are updates.');
 
+      // event fire - UpdateAvailable
       await this.execUpdateAvailable();
 
-      // TODO: temp ディレクトリを作る
-      await makeDirectory(this.getTempDirectory());
-      // TODO: temp デイレクトリの中身を掃除する
-      await clearDirectory(this.getTempDirectory());
+      // download ディレクトリを作る
+      await makeDirectory(this.getDownloadDirectory());
+      // download デイレクトリの中身を掃除する
+      await cleanDirectory(this.getDownloadDirectory());
 
-      // TODO: backup ディレクトリを作る
+      // backup ディレクトリを作る
       await makeDirectory(this.getBackupDirectory());
-      // TODO: backup デイレクトリの中身を掃除する
-      await clearDirectory(this.getBackupDirectory());
+      // backup デイレクトリの中身を掃除する
+      await cleanDirectory(this.getBackupDirectory());
 
-      // TODO: アプリケーションを temp ディレクトリにダウンロードする
-      razer('Download apps...');
-      await this.downloadAppsToTempDirectory();
+      // extract ディレクトリを作る
+      await makeDirectory(this.getExtractDirectory());
+      // extract デイレクトリの中身を掃除する
+      await cleanDirectory(this.getExtractDirectory());
 
-      // TODO: アプリケーションを解凍する
+      // アプリケーションを download ディレクトリにダウンロードする
+      await this.downloadAppsToDownloadDirectory();
 
-      for (let i = 0, len = this.workflows.length; i < len; i++) {
-        let appUpdatersOrderByWorkflow = this.findAppUpdater(
-          this.workflows[i].keyName,
-        );
-        if (!appUpdatersOrderByWorkflow) {
-          continue;
-        }
+      // is_archive: true なアプリケーションを解凍する
+      await this.unzipApp();
 
-        // TODO: 既存のファイルを backup に移動する
-        await moveAppFile(
-          appUpdatersOrderByWorkflow.name,
-          appUpdatersOrderByWorkflow.extension,
-          appUpdatersOrderByWorkflow.output_path,
-          this.getBackupDirectory(),
-        );
-        // TODO: アプリケーションを配置する
-        await moveAppFile(
-          appUpdatersOrderByWorkflow.name,
-          appUpdatersOrderByWorkflow.extension,
-          this.getTempDirectory(),
-          appUpdatersOrderByWorkflow.output_path,
-        );
-      }
+      // 既存のファイルを backup に移動する
+      await this.saveAppToBackup();
+
+      // アプリケーションを配置する
+      await this.loadAppToTargetDirectory();
 
       for (let i = 0, len = this.workflows.length; i < len; i++) {
         let appUpdatersOrderByWorkflow = this.findAppUpdater(
@@ -145,15 +136,18 @@ class UpdateOrchestration {
         }
 
         if (appUpdatersOrderByWorkflow.isNeedsUpdate) {
+          // event fire - UpdateDownload
           await appUpdatersOrderByWorkflow.eventsManager.updateDownloaded.exec();
 
           // 更新後のバージョンを保存する
           await appUpdatersOrderByWorkflow.saveCurrentVersion();
         } else {
+          // event fire - UpdateNotAvailable
           await appUpdatersOrderByWorkflow.eventsManager.updateNotAvailable.exec();
         }
       }
     } catch (e) {
+      // event fire - Error
       await this.execError();
       throw e;
     }
@@ -270,10 +264,10 @@ class UpdateOrchestration {
   }
 
   /**
-   * getTempDirectory
+   * getDownloadDirectory
    */
-  private getTempDirectory(): string {
-    return [getUserHome(), '/', C.pjName, C.tempDirectoryName].join('');
+  private getDownloadDirectory(): string {
+    return [getUserHome(), '/', C.pjName, C.downloadDirectoryName].join('');
   }
 
   /**
@@ -284,9 +278,17 @@ class UpdateOrchestration {
   }
 
   /**
-   * downloadAppsToTempDirectory
+   * getExtractDirectory
    */
-  private async downloadAppsToTempDirectory() {
+  private getExtractDirectory(): string {
+    return [getUserHome(), '/', C.pjName, C.extractDirectoryName].join('');
+  }
+
+  /**
+   * downloadAppsToDownloadDirectory
+   */
+  private async downloadAppsToDownloadDirectory() {
+    razer('Download apps...');
     for (let i = 0, len = this.workflows.length; i < len; i++) {
       let appUpdatersOrderByWorkflow = this.findAppUpdater(
         this.workflows[i].keyName,
@@ -308,20 +310,20 @@ class UpdateOrchestration {
 
   /**
    * downloadUpdateFile
-   * @param appName
+   * @param name
    * @param fileUrl
    * @param extension
    * @param eventManager
    */
   private async downloadUpdateFile(
-    appName: string,
+    name: string,
     fileUrl: string,
     extension: string,
     eventManager: EventsManager,
   ) {
     let dStartTime = Date.now();
 
-    const path = [this.getTempDirectory(), '/', appName, '.', extension].join(
+    const path = [this.getDownloadDirectory(), '/', name, '.', extension].join(
       '',
     );
     let _percent: string;
@@ -336,13 +338,99 @@ class UpdateOrchestration {
         _percent = percent;
         razer(percent);
         await eventManager.downloadProgress.exec();
-        // eventManager.downloadProgress.exec(percent, bytes);
       },
       () => {
         let dEndTime = Date.now();
-        razer(appName, 'Download end... ' + (dEndTime - dStartTime) + 'ms');
+        razer(name, 'Download end... ' + (dEndTime - dStartTime) + 'ms');
       },
     );
+  }
+
+  /**
+   * unzipApp
+   */
+  private async unzipApp() {
+    for (let i = 0, len = this.workflows.length; i < len; i++) {
+      let appUpdatersOrderByWorkflow = this.findAppUpdater(
+        this.workflows[i].keyName,
+      );
+      if (!appUpdatersOrderByWorkflow) {
+        continue;
+      }
+      if (!appUpdatersOrderByWorkflow.is_archive) {
+        continue;
+      }
+      await this.unzipFile(
+        appUpdatersOrderByWorkflow.name,
+        appUpdatersOrderByWorkflow.is_archive,
+        appUpdatersOrderByWorkflow.extension,
+      );
+    }
+  }
+
+  /**
+   * unzipFile
+   * @param name
+   * @param is_archive
+   * @param extension
+   */
+  private async unzipFile(
+    name: string,
+    is_archive: boolean,
+    extension: string,
+  ) {
+    if (!is_archive) {
+      return;
+    }
+
+    const path = [this.getDownloadDirectory(), '/', name, '.', extension].join(
+      '',
+    );
+
+    razer(name, 'Unzip start...');
+    let unzipStartTime = Date.now();
+    return await unzip(name, path, this.getExtractDirectory(), () => {
+      let unzipEndTime = Date.now();
+      razer(name, 'Unzip end... ', unzipEndTime - unzipStartTime, 'ms');
+    });
+  }
+
+  /**
+   * saveAppToBackup
+   */
+  private async saveAppToBackup() {
+    for (let i = 0, len = this.workflows.length; i < len; i++) {
+      let appUpdatersOrderByWorkflow = this.findAppUpdater(
+        this.workflows[i].keyName,
+      );
+      if (!appUpdatersOrderByWorkflow) {
+        continue;
+      }
+
+      await moveFile(
+        appUpdatersOrderByWorkflow.output_path,
+        this.getBackupDirectory(),
+      );
+    }
+  }
+
+  /**
+   * loadAppToTargetDirectory
+   */
+  private async loadAppToTargetDirectory() {
+    for (let i = 0, len = this.workflows.length; i < len; i++) {
+      let appUpdatersOrderByWorkflow = this.findAppUpdater(
+        this.workflows[i].keyName,
+      );
+      if (!appUpdatersOrderByWorkflow) {
+        continue;
+      }
+
+      await moveFile(
+        this.getExtractDirectory(),
+        appUpdatersOrderByWorkflow.output_path,
+      );
+    }
   }
 
   /**
@@ -371,6 +459,9 @@ class UpdateOrchestration {
         this.workflows[i].keyName,
       );
       if (!appUpdatersOrderByWorkflow) {
+        continue;
+      }
+      if (!appUpdatersOrderByWorkflow.isNeedsUpdate) {
         continue;
       }
       await appUpdatersOrderByWorkflow.eventsManager.updateAvailable.exec();

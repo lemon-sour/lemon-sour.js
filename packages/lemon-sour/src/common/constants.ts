@@ -16,8 +16,9 @@ const Constants = {
   offLineJudgmentHttpUrl: 'http://httpbin.org/get',
   HTTP_OK: 200,
 
-  tempDirectoryName: '/temp',
+  downloadDirectoryName: '/download',
   backupDirectoryName: '/backup',
+  extractDirectoryName: '/extract',
 };
 
 razer('Constants: ', Constants);

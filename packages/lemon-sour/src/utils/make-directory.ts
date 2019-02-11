@@ -2,7 +2,7 @@ import * as mkdirp from 'mkdirp';
 import razer from 'razer';
 
 const makeDirectory = async (directoryPath: string) => {
-  razer('the path where  make directory:', directoryPath);
+  razer('make directory:', directoryPath);
   return new Promise<boolean>(
     async (resolve: (value: boolean) => void, reject: (err: any) => void) => {
       mkdirp(directoryPath, err => {
