@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const rimraf = require("rimraf");
 const razer_1 = require("razer");
-const clearDirectory = (directoryPath) => __awaiter(this, void 0, void 0, function* () {
-    razer_1.default('the path where  clear directory:', directoryPath + '/*');
+const cleanDirectory = (directoryPath) => __awaiter(this, void 0, void 0, function* () {
+    razer_1.default('clean directory:', directoryPath + '/*');
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
         // https://stackoverflow.com/questions/27072866/how-to-remove-all-files-from-directory-without-removing-directory-in-node-js
         rimraf(directoryPath + '/*', () => {
@@ -19,4 +19,4 @@ const clearDirectory = (directoryPath) => __awaiter(this, void 0, void 0, functi
         });
     }));
 });
-exports.clearDirectory = clearDirectory;
+exports.cleanDirectory = cleanDirectory;
