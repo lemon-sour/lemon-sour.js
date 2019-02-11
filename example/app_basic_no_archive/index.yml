@@ -4,7 +4,7 @@ jobs:
     name: app_a
     latest_json_url: http://localhost:3000/app_basic_no_archive/latest.json
     is_archive: false
-    output_path: C:\lemon-sour\app_basic_no_archive
+    output_path: C:/lemon-sour/app_basic_no_archive
     events:
       checking_for_update:
         steps:

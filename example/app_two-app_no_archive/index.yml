@@ -17,7 +17,7 @@ jobs:
               command: node --version
           - run:
               name: boot text file
-              command: tail C:\lemon-sour\app_two-app_no_archive\app_a.txt
+              command: tail C:/lemon-sour/app_two-app_no_archive/app_a.txt
       error:
   install_app_b:
     name: app_b
