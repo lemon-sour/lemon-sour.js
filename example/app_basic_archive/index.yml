@@ -1,0 +1,24 @@
+version: 1.0
+jobs:
+  install_app_a:
+    name: app_a
+    latest_json_url: http://localhost:3000/app_basic_archive/latest.json
+    is_archive: true
+    output_path: C:/lemon-sour/app_basic_archive
+    events:
+      checking_for_update:
+      update_not_available:
+      update_available:
+      download_progress:
+      update_downloaded:
+        steps:
+          - run:
+              name: Open index.txt of file
+              command: tail C:/lemon-sour/app_basic_archive/index.txt
+              sync: true
+      error:
+
+workflows:
+  main:
+    jobs:
+      - install_app_a

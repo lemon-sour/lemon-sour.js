@@ -10,7 +10,7 @@
     "build": "cross-env NODE_ENV=prod rimraf lib/* && tsc",
     "watch": "cross-env NODE_ENV=dev tsc -w",
     "dev": "npm run build && cross-env NODE_ENV=prod node -r esm bin/lemon-sour --yml ../../example/app_basic_no_archive/index.yml",
-    "node:watch": "cross-env NODE_ENV=dev nodemon bin/lemon-sour --yml ../../example/app_two-app_no_archive/index.yml",
+    "node:watch": "cross-env NODE_ENV=dev nodemon bin/lemon-sour --yml ../../example/app_basic_archive/index.yml",
     "test": "cross-env NODE_ENV=prod jest",
     "test:coverage": "cross-env NODE_ENV=prod jest --no-cache --forceExit --coverage",
     "tsc:init": "tsc --init",
@@ -73,6 +73,7 @@
     "@lemon-sour/cli": "^1.0.26",
     "@lemon-sour/json-storage": "^1.0.26",
     "@sentry/node": "4.5.3",
+    "adm-zip": "^0.4.13",
     "axios": "^0.18.0",
     "eventemitter3": "^3.1.0",
     "follow-redirects": "^1.6.1",
@@ -87,6 +88,7 @@
     "rimraf": "^2.6.3"
   },
   "devDependencies": {
+    "@types/adm-zip": "^0.4.32",
     "@types/jest": "^23.3.12",
     "@types/js-yaml": "^3.11.4",
     "@types/mv": "^2.1.0",
