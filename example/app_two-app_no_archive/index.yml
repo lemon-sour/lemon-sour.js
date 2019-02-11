@@ -4,42 +4,36 @@ jobs:
     name: app_a
     latest_json_url: http://localhost:3000/app_two-app_no_archive/latest.json
     is_archive: false
-    output_path: C:\lemon-sour\app_two-app_no_archive
+    output_path: C:/lemon-sour/app_two-app_no_archive
     events:
       checking_for_update:
+      update_not_available:
+      update_available:
+      download_progress:
+      update_downloaded:
         steps:
           - run:
               name: Nodejs Version
               command: node --version
-      update_not_available:
-        steps:
           - run:
-              name: NPM Version
-              command: npm --version
-              sync: true
-      update_available:
-      download_progress:
-      update_downloaded:
+              name: boot text file
+              command: tail C:\lemon-sour\app_two-app_no_archive\app_a.txt
       error:
   install_app_b:
     name: app_b
     latest_json_url: http://localhost:3000/app_two-app_no_archive/latest.json
     is_archive: false
-    output_path: C:\lemon-sour\app_two-app_no_archive
+    output_path: C:/lemon-sour/app_two-app_no_archive
     events:
       checking_for_update:
       update_not_available:
       update_available:
-        steps:
-          - run:
-              name: Nodejs Version
-              command: node --version
       download_progress:
       update_downloaded:
         steps:
           - run:
-              name: NPM Version
-              command: npm --version
+              name: boot text file
+              command: tail C:/lemon-sour/app_two-app_no_archive/app_b.txt
               sync: true
       error:
 
