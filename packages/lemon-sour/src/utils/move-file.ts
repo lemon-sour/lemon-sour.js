@@ -22,7 +22,8 @@ const moveAppFile = (
         { mkdirp: true },
         (err: any) => {
           if (err) {
-            reject(err);
+            // 一番最初はまだファイルがないので失敗するので、ここのエラーは基本的に無視する
+            // reject(err);
             return;
           }
 
