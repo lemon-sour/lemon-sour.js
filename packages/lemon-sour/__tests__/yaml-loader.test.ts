@@ -7,7 +7,7 @@ describe('yaml-loader', () => {
     expect.assertions(1);
 
     const args: CliArgsInterface = {
-      yml: '../../example/app_basic_no_archive/index.yml',
+      yml: '../../example/app_basic_no_archive/config.yml',
     };
     const doc: YmlInterface = await yamlLoader(args.yml);
 
@@ -18,7 +18,7 @@ describe('yaml-loader', () => {
     expect.assertions(2);
 
     const args: CliArgsInterface = {
-      yml: '../../example/app_basic_no_archive/index.yml',
+      yml: '../../example/app_basic_no_archive/config.yml',
     };
 
     return yamlLoader(args.yml).then(data => {

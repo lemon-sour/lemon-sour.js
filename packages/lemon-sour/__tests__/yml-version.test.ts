@@ -6,7 +6,7 @@ describe('yml version test', () => {
     expect.assertions(1);
 
     const args: CliArgsInterface = {
-      yml: '../../example/app_yml_no_version/index.yml',
+      yml: '../../example/app_yml_no_version/config.yml',
     };
 
     await lemonSour.run(args).catch(e => {
@@ -18,7 +18,7 @@ describe('yml version test', () => {
     expect.assertions(1);
 
     const args: CliArgsInterface = {
-      yml: '../../example/app_yml_version_is_not_valid/index.yml',
+      yml: '../../example/app_yml_version_is_not_valid/config.yml',
     };
 
     await lemonSour.run(args).catch(e => {

@@ -10,8 +10,8 @@
   "scripts": {
     "build": "rimraf lib/* && tsc",
     "watch": "tsc -w",
-    "dev": "npm run build && node -r esm lib/index.js --yml ../../example/app_basic_no_archive/index.yml",
-    "node:watch": "nodemon lib/index.js --yml ../../example/app_basic_no_archive/index.yml",
+    "dev": "npm run build && node -r esm lib/index.js --yml ../../example/app_basic_no_archive/config.yml",
+    "node:watch": "nodemon lib/index.js --yml ../../example/app_basic_no_archive/config.yml",
     "test": "jest",
     "test:coverage": "jest --no-cache --forceExit --coverage",
     "tsc:init": "tsc --init",

@@ -9,8 +9,8 @@
   "scripts": {
     "build": "cross-env NODE_ENV=prod rimraf lib/* && tsc",
     "watch": "cross-env NODE_ENV=dev tsc -w",
-    "dev": "npm run build && cross-env NODE_ENV=prod node -r esm bin/lemon-sour --yml ../../example/app_basic_no_archive/index.yml",
-    "node:watch": "cross-env NODE_ENV=dev nodemon bin/lemon-sour --yml ../../example/app_basic_archive/index.yml",
+    "dev": "npm run build && cross-env NODE_ENV=prod node -r esm bin/lemon-sour --yml ../../example/app_basic_no_archive/config.yml",
+    "node:watch": "cross-env NODE_ENV=dev nodemon bin/lemon-sour --yml ../../example/app_basic_archive/config.yml",
     "test": "cross-env NODE_ENV=prod jest",
     "test:coverage": "cross-env NODE_ENV=prod jest --no-cache --forceExit --coverage",
     "tsc:init": "tsc --init",

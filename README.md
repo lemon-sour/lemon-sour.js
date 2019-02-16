@@ -84,7 +84,7 @@ workflows:
 And then run:
 
 ```
-$ lemon-sour --yml index.yml
+$ lemon-sour --yml config.yml
 ```
 
 ## Maintainers
