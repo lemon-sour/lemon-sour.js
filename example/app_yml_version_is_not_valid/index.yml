@@ -1,0 +1,19 @@
+version: 9.9
+jobs:
+  install_app_a:
+    name: app_a
+    latest_json_url: http://localhost:3000/app_yml_version_is_not_valid/latest.json
+    is_archive: false
+    output_path: C:/lemon-sour/app_yml_version_is_not_valid
+    events:
+      checking_for_update:
+      update_not_available:
+      update_available:
+      download_progress:
+      update_downloaded:
+      error:
+
+workflows:
+  main:
+    jobs:
+      - install_app_a

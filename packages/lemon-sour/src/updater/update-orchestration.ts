@@ -6,13 +6,14 @@ import { AppUpdater } from './app-updater';
 import { Workflow } from './workflow';
 import { makeDirectory } from '../utils/make-directory';
 import { cleanDirectory } from '../utils/clean-directory';
-import getUserHome from '../utils/get-user-home';
-import download from '../utils/file-downloader';
-import unzip from '../utils/unzip';
-import C from '../common/constants';
 import { EventsManager } from './events-manager';
 import { splitExtension } from '../utils/split-extension';
 import { moveFile } from '../utils/move-file';
+import getUserHome from '../utils/get-user-home';
+import download from '../utils/file-downloader';
+import unzip from '../utils/unzip';
+import ymlValidator from '../validator/yml-validator';
+import C from '../common/constants';
 
 /**
  * アプリケーションのアップデートの指揮者となるオーケストレーション
@@ -178,8 +179,10 @@ class UpdateOrchestration {
    * @param doc
    */
   private validateYml(doc: YmlInterface) {
-    if (!doc.hasOwnProperty('version')) {
-      throw new Error('yml does not has version');
+    try {
+      ymlValidator(doc);
+    } catch (e) {
+      throw e;
     }
   }
 

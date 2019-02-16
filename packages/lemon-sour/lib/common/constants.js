@@ -12,6 +12,7 @@ const pjName = require('../../package.json').name;
 const Constants = {
     pjName,
     INITIAL_VERSION: '0.0.0',
+    VALID_YML_VERSION: 1,
     offLineJudgmentHttpUrl: 'http://httpbin.org/get',
     HTTP_OK: 200,
     downloadDirectoryName: '/download',

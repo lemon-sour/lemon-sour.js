@@ -13,6 +13,8 @@ const Constants = {
   pjName,
   INITIAL_VERSION: '0.0.0', // 一番はじめに保持するバージョン
 
+  VALID_YML_VERSION: 1,
+
   offLineJudgmentHttpUrl: 'http://httpbin.org/get',
   HTTP_OK: 200,
 

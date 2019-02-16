@@ -17,23 +17,11 @@ describe('lemon-sour', () => {
     expect.assertions(1);
 
     const args: CliArgsInterface = {
-      yml: '../../example/app_no_version/index.yml',
+      yml: '../../example/app_yml_no_version/index.yml',
     };
 
     await lemonSour.run(args).catch(e => {
       expect(typeof e.message).toBe('string');
-    });
-  });
-
-  test('should yml does not has version', async () => {
-    expect.assertions(1);
-
-    const args: CliArgsInterface = {
-      yml: '../../example/app_no_version/index.yml',
-    };
-
-    await lemonSour.run(args).catch(e => {
-      expect(e.message).toEqual('yml does not has version');
     });
   });
 });

@@ -14,12 +14,13 @@ const app_updater_1 = require("./app-updater");
 const workflow_1 = require("./workflow");
 const make_directory_1 = require("../utils/make-directory");
 const clean_directory_1 = require("../utils/clean-directory");
+const split_extension_1 = require("../utils/split-extension");
+const move_file_1 = require("../utils/move-file");
 const get_user_home_1 = require("../utils/get-user-home");
 const file_downloader_1 = require("../utils/file-downloader");
 const unzip_1 = require("../utils/unzip");
+const yml_validator_1 = require("../validator/yml-validator");
 const constants_1 = require("../common/constants");
-const split_extension_1 = require("../utils/split-extension");
-const move_file_1 = require("../utils/move-file");
 /**
  * アプリケーションのアップデートの指揮者となるオーケストレーション
  */
@@ -137,8 +138,11 @@ class UpdateOrchestration {
      * @param doc
      */
     validateYml(doc) {
-        if (!doc.hasOwnProperty('version')) {
-            throw new Error('yml does not has version');
+        try {
+            yml_validator_1.default(doc);
+        }
+        catch (e) {
+            throw e;
         }
     }
     /**
