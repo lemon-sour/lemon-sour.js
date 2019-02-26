@@ -586,40 +586,40 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@sentry/core@4.5.3":
-  version "4.5.3"
-  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-4.5.3.tgz#e55a42c694deec903aec2479e4a282d5a7a43878"
+"@sentry/core@4.6.4":
+  version "4.6.4"
+  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-4.6.4.tgz#7236e08115423b81b96a13c2c37f29bcc1477745"
   dependencies:
-    "@sentry/hub" "4.5.3"
-    "@sentry/minimal" "4.5.3"
+    "@sentry/hub" "4.6.4"
+    "@sentry/minimal" "4.6.4"
     "@sentry/types" "4.5.3"
-    "@sentry/utils" "4.5.3"
+    "@sentry/utils" "4.6.4"
     tslib "^1.9.3"
 
-"@sentry/hub@4.5.3":
-  version "4.5.3"
-  resolved "https://registry.yarnpkg.com/@sentry/hub/-/hub-4.5.3.tgz#54ce5988ac6dedbe9bba99e2c00f8f26eb677dfe"
+"@sentry/hub@4.6.4":
+  version "4.6.4"
+  resolved "https://registry.yarnpkg.com/@sentry/hub/-/hub-4.6.4.tgz#2bd5d67ccd43d4f5afc45005a330a11b14d46cea"
   dependencies:
     "@sentry/types" "4.5.3"
-    "@sentry/utils" "4.5.3"
+    "@sentry/utils" "4.6.4"
     tslib "^1.9.3"
 
-"@sentry/minimal@4.5.3":
-  version "4.5.3"
-  resolved "https://registry.yarnpkg.com/@sentry/minimal/-/minimal-4.5.3.tgz#7b69481df2d61e4b935d067be62a52824190f616"
+"@sentry/minimal@4.6.4":
+  version "4.6.4"
+  resolved "https://registry.yarnpkg.com/@sentry/minimal/-/minimal-4.6.4.tgz#dc4bb47df90dad6025d832852ac11fe29ed50147"
   dependencies:
-    "@sentry/hub" "4.5.3"
+    "@sentry/hub" "4.6.4"
     "@sentry/types" "4.5.3"
     tslib "^1.9.3"
 
-"@sentry/node@4.5.3":
-  version "4.5.3"
-  resolved "https://registry.yarnpkg.com/@sentry/node/-/node-4.5.3.tgz#f6b57747991c300d4f5f70add673ea3d1e78c873"
+"@sentry/node@4.6.4":
+  version "4.6.4"
+  resolved "https://registry.yarnpkg.com/@sentry/node/-/node-4.6.4.tgz#933c2e3ce93bc7861de6d4310ed1fe66f85da301"
   dependencies:
-    "@sentry/core" "4.5.3"
-    "@sentry/hub" "4.5.3"
+    "@sentry/core" "4.6.4"
+    "@sentry/hub" "4.6.4"
     "@sentry/types" "4.5.3"
-    "@sentry/utils" "4.5.3"
+    "@sentry/utils" "4.6.4"
     "@types/stack-trace" "0.0.29"
     cookie "0.3.1"
     https-proxy-agent "2.2.1"
@@ -632,12 +632,18 @@
   version "4.5.3"
   resolved "https://registry.yarnpkg.com/@sentry/types/-/types-4.5.3.tgz#3350dce2b7f9b936a8c327891c12e3aef7bd8852"
 
-"@sentry/utils@4.5.3":
-  version "4.5.3"
-  resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-4.5.3.tgz#6893fca9fde230b230360779362752e9b5570852"
+"@sentry/utils@4.6.4":
+  version "4.6.4"
+  resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-4.6.4.tgz#ca254c142b519b4f20d63c2f9edf1a89966be36f"
   dependencies:
     "@sentry/types" "4.5.3"
     tslib "^1.9.3"
+
+"@types/adm-zip@^0.4.32":
+  version "0.4.32"
+  resolved "https://registry.yarnpkg.com/@types/adm-zip/-/adm-zip-0.4.32.tgz#6de01309af60677065d2e52b417a023303220931"
+  dependencies:
+    "@types/node" "*"
 
 "@types/caseless@*":
   version "0.12.1"
@@ -771,6 +777,10 @@ acorn@^5.5.3:
 acorn@^6.0.1:
   version "6.0.5"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.0.5.tgz#81730c0815f3f3b34d8efa95cb7430965f4d887a"
+
+adm-zip@^0.4.13:
+  version "0.4.13"
+  resolved "https://registry.yarnpkg.com/adm-zip/-/adm-zip-0.4.13.tgz#597e2f8cc3672151e1307d3e95cddbc75672314a"
 
 agent-base@4, agent-base@^4.1.0, agent-base@~4.2.0:
   version "4.2.1"
@@ -4384,6 +4394,10 @@ modify-values@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/modify-values/-/modify-values-1.0.1.tgz#b3939fa605546474e3e3e3c63d64bd43b4ee6022"
 
+moment@^2.24.0:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
@@ -4504,6 +4518,14 @@ node-gyp@^3.8.0:
 node-int64@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/node-int64/-/node-int64-0.4.0.tgz#87a9065cdb355d3182d8f94ce11188b825c68a3b"
+
+node-log-rotate@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/node-log-rotate/-/node-log-rotate-0.0.7.tgz#41e55ca43225b43c02bb2933d8dbb46d18da4fd0"
+  dependencies:
+    lint-staged "^8.1.0"
+    lodash "^4.17.11"
+    moment "^2.24.0"
 
 node-notifier@^5.2.1:
   version "5.3.0"
@@ -5193,6 +5215,12 @@ raw-body@2.3.3:
     http-errors "1.6.3"
     iconv-lite "0.4.23"
     unpipe "1.0.0"
+
+razer@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/razer/-/razer-0.0.6.tgz#f81c5679469a2bfa8aeb10963e6542480e136e0a"
+  dependencies:
+    lint-staged "^8.1.0"
 
 rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
   version "1.2.8"
