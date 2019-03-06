@@ -4557,9 +4557,9 @@ node-int64@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/node-int64/-/node-int64-0.4.0.tgz#87a9065cdb355d3182d8f94ce11188b825c68a3b"
 
-node-log-rotate@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/node-log-rotate/-/node-log-rotate-0.0.7.tgz#41e55ca43225b43c02bb2933d8dbb46d18da4fd0"
+node-log-rotate@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/node-log-rotate/-/node-log-rotate-0.0.9.tgz#7f0235fe577660813e7af83dcf96331437b57f70"
   dependencies:
     lint-staged "^8.1.0"
     lodash "^4.17.11"
