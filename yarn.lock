@@ -5295,9 +5295,9 @@ raw-body@2.3.3:
     iconv-lite "0.4.23"
     unpipe "1.0.0"
 
-razer@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/razer/-/razer-0.0.6.tgz#f81c5679469a2bfa8aeb10963e6542480e136e0a"
+razer@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/razer/-/razer-0.0.10.tgz#ef4a8077f28d460fd5e5e3581ce8dd4b7251ff28"
   dependencies:
     lint-staged "^8.1.0"
 
