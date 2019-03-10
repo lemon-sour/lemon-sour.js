@@ -70,20 +70,20 @@
   },
   "gitHead": "b6ad574816588dd8328ca67b04347ee12d0e7076",
   "dependencies": {
-    "lint-staged": "^8.1.0",
+    "lint-staged": "^8.1.5",
     "lodash": "^4.17.11",
     "minimist": "^1.2.0"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.12",
-    "@types/lodash": "^4.14.119",
+    "@types/jest": "^24.0.11",
+    "@types/lodash": "^4.14.122",
     "@types/minimist": "^1.2.0",
-    "@types/node": "^10.12.18",
-    "jest": "^23.6.0",
-    "nodemon": "^1.18.9",
-    "prettier": "^1.15.3",
+    "@types/node": "^11.11.0",
+    "jest": "^24.3.1",
+    "nodemon": "^1.18.10",
+    "prettier": "^1.16.4",
     "rimraf": "^2.6.3",
-    "ts-jest": "^23.10.5",
-    "typescript": "^3.2.2"
+    "ts-jest": "^24.0.0",
+    "typescript": "^3.3.3333"
   }
 }
