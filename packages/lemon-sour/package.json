@@ -83,7 +83,7 @@
     "mkdirp": "^0.5.1",
     "mv": "^2.1.1",
     "node-fetch": "^2.3.0",
-    "node-log-rotate": "^0.0.9",
+    "node-log-rotate": "^0.0.10",
     "razer": "^0.0.10",
     "rimraf": "^2.6.3"
   },
