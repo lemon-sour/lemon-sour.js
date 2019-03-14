@@ -1,10 +1,10 @@
-import razer from 'razer';
+import razer from 'razer'
 
 /**
  * プロジェクト名
  * @type {string}
  */
-const pjName: string = require('../../package.json').name;
+const pjName: string = require('../../package.json').name
 
 /**
  * 定数
@@ -20,9 +20,9 @@ const Constants = {
 
   downloadDirectoryName: '/download',
   backupDirectoryName: '/backup',
-  extractDirectoryName: '/extract',
-};
+  extractDirectoryName: '/extract'
+}
 
-razer('Constants: ', Constants);
+razer('Constants: ', Constants)
 
-export default Constants;
+export default Constants

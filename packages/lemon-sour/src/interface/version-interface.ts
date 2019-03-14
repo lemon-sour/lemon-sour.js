@@ -1,3 +1,3 @@
 export interface VersionInterface {
-  version: string;
+  version: string
 }

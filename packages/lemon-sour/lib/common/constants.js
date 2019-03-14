@@ -17,7 +17,7 @@ const Constants = {
     HTTP_OK: 200,
     downloadDirectoryName: '/download',
     backupDirectoryName: '/backup',
-    extractDirectoryName: '/extract',
+    extractDirectoryName: '/extract'
 };
 razer_1.default('Constants: ', Constants);
 exports.default = Constants;

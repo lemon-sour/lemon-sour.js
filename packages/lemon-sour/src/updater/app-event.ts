@@ -1,25 +1,25 @@
-import * as childProcess from 'child_process';
-import { RunInterface } from '../interface/run-interface';
-import razer from 'razer';
+import * as childProcess from 'child_process'
+import { RunInterface } from '../interface/run-interface'
+import razer from 'razer'
 
 /**
  * AppEvent - 個別のイベントを管理するクラス
  */
 class AppEvent {
-  eventName: string;
-  steps: RunInterface[];
+  eventName: string
+  steps: RunInterface[]
 
   constructor(eventName: string) {
-    this.eventName = eventName;
-    this.steps = [];
+    this.eventName = eventName
+    this.steps = []
   }
 
   public add(name: string, command: string, sync: boolean) {
     this.steps.push({
       name,
       command,
-      sync,
-    } as RunInterface);
+      sync
+    } as RunInterface)
   }
 
   public exec() {
@@ -27,41 +27,41 @@ class AppEvent {
       async (resolve: (value?: object) => void, reject: (err: any) => void) => {
         try {
           for (let run of this.steps) {
-            razer(run.name, run.command);
+            razer(run.name, run.command)
             if (run.sync) {
-              await this.execCommandSync(run.command);
+              await this.execCommandSync(run.command)
             } else {
-              await this.execCommand(run.command);
+              await this.execCommand(run.command)
             }
           }
-          resolve();
+          resolve()
         } catch (e) {
-          reject(e);
+          reject(e)
         }
-      },
-    );
+      }
+    )
   }
 
   private async execCommand(sh: string) {
     return new Promise<object>(
       async (resolve: (value?: object) => void, reject: (err: any) => void) => {
         try {
-          const args: string[] = this.commandArgs2Array(sh);
-          const c = args.shift() || '';
+          const args: string[] = this.commandArgs2Array(sh)
+          const c = args.shift() || ''
           let p = childProcess.spawn(c, [...args], {
             detached: true,
-            stdio: ['ignore', 'ignore', 'ignore'],
-          });
-          p.unref();
+            stdio: ['ignore', 'ignore', 'ignore']
+          })
+          p.unref()
 
           setTimeout(() => {
-            resolve();
-          }, 1000);
+            resolve()
+          }, 1000)
         } catch (e) {
-          reject(e);
+          reject(e)
         }
-      },
-    );
+      }
+    )
   }
 
   private execCommandSync(sh: string) {
@@ -69,41 +69,41 @@ class AppEvent {
       (resolve: (value?: object) => void, reject: (err: any) => void) => {
         childProcess.exec(sh, (err, stdout, stderr) => {
           if (err) {
-            reject(err);
-            return;
+            reject(err)
+            return
           }
 
-          razer(stdout);
-          resolve();
-        });
-      },
-    );
+          razer(stdout)
+          resolve()
+        })
+      }
+    )
   }
 
   // https://stackoverflow.com/questions/13796594/how-to-split-string-into-arguments-and-options-in-javascript
   private commandArgs2Array(text: string) {
-    const re = /^"[^"]*"$/; // Check if argument is surrounded with double-quotes
-    const re2 = /^([^"]|[^"].*?[^"])$/; // Check if argument is NOT surrounded with double-quotes
+    const re = /^"[^"]*"$/ // Check if argument is surrounded with double-quotes
+    const re2 = /^([^"]|[^"].*?[^"])$/ // Check if argument is NOT surrounded with double-quotes
 
-    let arr: string[] = [];
-    let argPart: string | null = null;
+    let arr: string[] = []
+    let argPart: string | null = null
 
     text &&
       text.split(' ').forEach(function(arg) {
         if ((re.test(arg) || re2.test(arg)) && !argPart) {
-          arr.push(arg);
+          arr.push(arg)
         } else {
-          argPart = argPart ? argPart + ' ' + arg : arg;
+          argPart = argPart ? argPart + ' ' + arg : arg
           // If part is complete (ends with a double quote), we can add it to the array
           if (/"$/.test(argPart)) {
-            arr.push(argPart);
-            argPart = null;
+            arr.push(argPart)
+            argPart = null
           }
         }
-      });
+      })
 
-    return arr;
+    return arr
   }
 }
 
-export { AppEvent };
+export { AppEvent }

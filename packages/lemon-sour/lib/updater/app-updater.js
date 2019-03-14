@@ -31,7 +31,7 @@ class AppUpdater extends base_app_updater_1.BaseAppUpdater {
             latestVersion: '',
             fileUrl: '',
             sha1: '',
-            releaseDate: '',
+            releaseDate: ''
         };
         this.keyName = keyName;
         this.extension = '';
@@ -72,7 +72,7 @@ class AppUpdater extends base_app_updater_1.BaseAppUpdater {
     saveCurrentVersion() {
         return __awaiter(this, void 0, void 0, function* () {
             yield json_storage_1.setJson(this.keyName, {
-                version: this.latest.latestVersion,
+                version: this.latest.latestVersion
             });
         });
     }

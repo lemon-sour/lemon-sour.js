@@ -6,7 +6,7 @@ const APP_NAME = 'json-storage';
 const BASE_DIR = [
     get_user_home_1.default(),
     '/',
-    process.env.npm_package_name || APP_NAME,
+    process.env.npm_package_name || APP_NAME
 ].join('');
 /**
  * getBaseDir
