@@ -9,6 +9,7 @@ executors:
       - image: circleci/node:8.10.0
     environment:
       TZ: /usr/share/zoneinfo/Asia/Tokyo # add time zone
+      CACHE_VERSION: 1.16
 
 commands:
   restore_built:
