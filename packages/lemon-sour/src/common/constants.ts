@@ -15,6 +15,11 @@ const Constants = {
 
   VALID_YML_VERSION: 1,
 
+  HEARTS_SPINNER: {
+    interval: 100,
+    frames: ['💛 ', '💙 ', '💜 ', '💚 ']
+  },
+
   offLineJudgmentHttpUrl: 'http://httpbin.org/get',
   HTTP_OK: 200,
 
