@@ -1,26 +1,31 @@
 import { CliArgsInterface } from '@lemon-sour/cli'
 import { log } from 'node-log-rotate'
 import razer from 'razer'
+import chalk from 'chalk'
 import { yamlLoader } from './utils/yaml-loader'
 import { YmlInterface } from './interface/yml-interface'
 import { UpdateOrchestration } from './updater/update-orchestration'
 import { judgmentOnLine } from './utils/judgment-online'
+import getOra from './utils/get-ora'
 import Env from './common/env'
 
 /**
  * LemonSour クラス
  */
 class LemonSour {
-  constructor() {
-    log('start LemonSour')
-    razer('start LemonSour')
-  }
+  constructor() {}
 
   /**
    * run - lemon-sour の一番最上階
    * @param args
    */
   async run(args: CliArgsInterface) {
+    log('start LemonSour')
+    razer('start LemonSour')
+
+    const spinner = getOra()
+    spinner.text = chalk`Running {cyan LemonSour}...\n`
+
     try {
       // オンラインの判定
       const isOnLine = await judgmentOnLine(Env)
@@ -39,7 +44,12 @@ class LemonSour {
         doc
       )
       await updateOrchestration.checkForUpdates()
+
+      spinner.succeed(chalk`{magenta LemonSour!} is succeed✨\n`)
     } catch (e) {
+      spinner.fail(
+        chalk`{red LemonSour} is stopped because getting Error! 😆\n`
+      )
       throw e
     }
   }
