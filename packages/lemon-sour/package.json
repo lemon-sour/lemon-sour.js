@@ -60,7 +60,7 @@
     "eventemitter3": "^3.1.0",
     "follow-redirects": "^1.7.0",
     "js-yaml": "^3.13.1",
-    "lint-staged": "^8.1.5",
+    "lint-staged": "^9.0.0",
     "lodash": "^4.17.11",
     "mkdirp": "^0.5.1",
     "mv": "^2.1.1",

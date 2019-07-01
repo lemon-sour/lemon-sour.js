@@ -51,7 +51,7 @@
   },
   "gitHead": "b6ad574816588dd8328ca67b04347ee12d0e7076",
   "dependencies": {
-    "lint-staged": "^8.1.5",
+    "lint-staged": "^9.0.0",
     "lodash": "^4.17.11",
     "minimist": "^1.2.0"
   },
