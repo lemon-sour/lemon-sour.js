@@ -5413,6 +5413,13 @@ raw-body@2.3.3:
     iconv-lite "0.4.23"
     unpipe "1.0.0"
 
+razer@^0.2.0:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/razer/-/razer-0.2.1.tgz#9511fc85350f0ad1ac8c413dc9583f43c36d6703"
+  integrity sha512-Taw8hvXNaj7rr+SI4fF/IEvr6Z8XkUvg5D2unPFsL6ZSPRDCIM+a5W3sxtJsFAtlKCqBCt69O7B7yzCSsHi68A==
+  dependencies:
+    lint-staged "^8.1.5"
+
 rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/rc/-/rc-1.2.8.tgz#cd924bf5200a075b83c188cd6b9e211b7fc0d3ed"
