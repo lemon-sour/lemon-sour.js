@@ -20,12 +20,10 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "linters": {
-      "{src,__tests__}/**/*.{js,ts,tsx,json}": [
-        "npm run lint:format",
-        "git add"
-      ]
-    }
+    "{src,__tests__}/**/*.{js,ts,tsx,json}": [
+      "npm run lint:format",
+      "git add"
+    ]
   },
   "directories": {
     "lib": "lib",
@@ -51,21 +49,21 @@
   },
   "dependencies": {
     "jsonfile": "^5.0.0",
-    "lint-staged": "^8.1.5",
-    "lodash": "^4.17.11",
+    "lint-staged": "^9.2.5",
+    "lodash": "^4.17.15",
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.11",
+    "@types/jest": "^24.0.18",
     "@types/jsonfile": "^5.0.0",
-    "@types/lodash": "^4.14.123",
+    "@types/lodash": "^4.14.138",
     "@types/mkdirp": "^0.5.2",
-    "@types/node": "^11.13.4",
-    "jest": "^24.7.1",
-    "nodemon": "^1.18.11",
-    "prettier": "^1.17.0",
-    "rimraf": "^2.6.3",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.4.3"
+    "@types/node": "^12.7.5",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.2",
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.3"
   }
 }

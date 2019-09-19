@@ -19,12 +19,10 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "linters": {
-      "{src,__tests__}/**/*.{js,ts,tsx,json}": [
-        "npm run lint:format",
-        "git add"
-      ]
-    }
+    "{src,__tests__}/**/*.{js,ts,tsx,json}": [
+      "npm run lint:format",
+      "git add"
+    ]
   },
   "bin": {
     "lemon-sour": "bin/lemon-sour"
@@ -53,38 +51,38 @@
   "dependencies": {
     "@lemon-sour/cli": "^1.1.6",
     "@lemon-sour/json-storage": "^1.1.6",
-    "@sentry/node": "5.0.8",
+    "@sentry/node": "5.6.2",
     "adm-zip": "^0.4.13",
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "chalk": "^2.4.2",
-    "eventemitter3": "^3.1.0",
-    "follow-redirects": "^1.7.0",
+    "eventemitter3": "^4.0.0",
+    "follow-redirects": "^1.9.0",
     "js-yaml": "^3.13.1",
-    "lint-staged": "^8.1.5",
-    "lodash": "^4.17.11",
+    "lint-staged": "^9.2.5",
+    "lodash": "^4.17.15",
     "mkdirp": "^0.5.1",
     "mv": "^2.1.1",
-    "node-fetch": "^2.3.0",
-    "node-log-rotate": "^0.0.11",
+    "node-fetch": "^2.6.0",
+    "node-log-rotate": "^0.1.0",
     "ora": "^3.4.0",
-    "razer": "^0.2.0",
-    "rimraf": "^2.6.3"
+    "razer": "^0.3.0",
+    "rimraf": "^3.0.0"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.4.32",
-    "@types/jest": "^24.0.11",
+    "@types/jest": "^24.0.18",
     "@types/js-yaml": "^3.12.1",
     "@types/mv": "^2.1.0",
-    "@types/node": "^11.13.4",
-    "@types/node-fetch": "^2.3.2",
-    "@types/request": "^2.48.1",
+    "@types/node": "^12.7.5",
+    "@types/node-fetch": "^2.5.1",
+    "@types/request": "^2.48.3",
     "@types/rimraf": "^2.0.2",
-    "cross-env": "^5.2.0",
-    "esm": "^3.2.22",
-    "jest": "^24.7.1",
-    "nodemon": "^1.18.11",
-    "prettier": "^1.17.0",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.4.3"
+    "cross-env": "^6.0.0",
+    "esm": "^3.2.25",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.2",
+    "prettier": "^1.18.2",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.3"
   }
 }
