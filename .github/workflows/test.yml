@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-      - run: yarn install
-      - run: lerna run test
+      - run: npx lerna bootstrap
+      - run: npx lerna run test
         env:
           NAME: hisasann
