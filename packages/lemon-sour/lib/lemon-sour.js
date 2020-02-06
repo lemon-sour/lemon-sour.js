@@ -8,15 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_log_rotate_1 = require("node-log-rotate");
-const razer_1 = require("razer");
-const chalk_1 = require("chalk");
+const razer_1 = __importDefault(require("razer"));
+const chalk_1 = __importDefault(require("chalk"));
 const yaml_loader_1 = require("./utils/yaml-loader");
 const update_orchestration_1 = require("./updater/update-orchestration");
 const judgment_online_1 = require("./utils/judgment-online");
-const get_ora_1 = require("./utils/get-ora");
-const env_1 = require("./common/env");
+const get_ora_1 = __importDefault(require("./utils/get-ora"));
+const env_1 = __importDefault(require("./common/env"));
 /**
  * LemonSour クラス
  */

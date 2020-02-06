@@ -1,4 +1,4 @@
-import * as mkdirp from 'mkdirp'
+import mkdirp from 'mkdirp'
 import razer from 'razer'
 
 const makeDirectory = async (directoryPath: string) => {

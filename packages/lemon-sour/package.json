@@ -20,7 +20,8 @@
   },
   "lint-staged": {
     "{src,__tests__}/**/*.{js,ts,tsx,json}": [
-      "npm run lint:format"
+      "npm run lint:format",
+      "git add"
     ]
   },
   "bin": {
@@ -57,7 +58,7 @@
     "eventemitter3": "^4.0.0",
     "follow-redirects": "^1.10.0",
     "js-yaml": "^3.13.1",
-    "lint-staged": "^10.0.7",
+    "lint-staged": "^9.2.5",
     "lodash": "^4.17.15",
     "mkdirp": "^1.0.3",
     "mv": "^2.1.1",

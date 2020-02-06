@@ -28,7 +28,7 @@ export interface Events {
   error: Steps
 }
 export interface Steps {
-  steps?: (StepsEntity)[] | null
+  steps?: StepsEntity[] | null
 }
 export interface StepsEntity {
   run: Run
@@ -42,5 +42,5 @@ export interface Workflows {
   main: Main
 }
 export interface Main {
-  jobs: (string)[]
+  jobs: string[]
 }

@@ -8,12 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const json_storage_1 = require("@lemon-sour/json-storage");
-const razer_1 = require("razer");
+const razer_1 = __importDefault(require("razer"));
 const base_app_updater_1 = require("./base-app-updater");
 const events_manager_1 = require("./events-manager");
-const constants_1 = require("../common/constants");
+const constants_1 = __importDefault(require("../common/constants"));
 /**
  * 個々のアプリのアップデート処理を実行、イベントを実行するクラス
  */

@@ -21,7 +21,8 @@
   },
   "lint-staged": {
     "{src,__tests__}/**/*.{js,ts,tsx,json}": [
-      "npm run lint:format"
+      "npm run lint:format",
+      "git add"
     ]
   },
   "directories": {
@@ -48,7 +49,7 @@
   },
   "dependencies": {
     "jsonfile": "^5.0.0",
-    "lint-staged": "^10.0.7",
+    "lint-staged": "^9.2.5",
     "lodash": "^4.17.15",
     "mkdirp": "^1.0.3"
   },

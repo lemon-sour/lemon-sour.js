@@ -8,10 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 // import * as childProcess from 'child_process';
-const AdmZip = require("adm-zip");
-const razer_1 = require("razer");
+const adm_zip_1 = __importDefault(require("adm-zip"));
+const razer_1 = __importDefault(require("razer"));
 function unzip(appName, zipFile, tempPath, callback = function () { }) {
     return __awaiter(this, void 0, void 0, function* () {
         // const zipFile = tempPath + '/' + appName + '.' + extension;
@@ -19,7 +22,7 @@ function unzip(appName, zipFile, tempPath, callback = function () { }) {
         return new Promise((resolve, reject) => {
             // https://github.com/cthackers/adm-zip
             // reading archives
-            const zip = new AdmZip(zipFile);
+            const zip = new adm_zip_1.default(zipFile);
             const zipEntries = zip.getEntries(); // an array of ZipEntry records
             zipEntries.forEach(function (zipEntry) {
                 razer_1.default('zipEntry.entryName:', zipEntry.entryName.toString()); // outputs zip entries information

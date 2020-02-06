@@ -1,5 +1,5 @@
 // import * as childProcess from 'child_process';
-import * as AdmZip from 'adm-zip'
+import AdmZip from 'adm-zip'
 import razer from 'razer'
 
 async function unzip(

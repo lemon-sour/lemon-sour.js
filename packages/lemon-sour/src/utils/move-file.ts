@@ -1,4 +1,4 @@
-import * as mv from 'mv'
+import mv from 'mv'
 import * as fs from 'fs'
 import razer from 'razer'
 

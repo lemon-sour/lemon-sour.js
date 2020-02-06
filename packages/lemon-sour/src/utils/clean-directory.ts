@@ -1,4 +1,4 @@
-import * as rimraf from 'rimraf'
+import rimraf from 'rimraf'
 import razer from 'razer'
 
 const cleanDirectory = async (directoryPath: string) => {

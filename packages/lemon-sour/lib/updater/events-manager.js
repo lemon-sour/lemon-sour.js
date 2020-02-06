@@ -1,8 +1,15 @@
 "use strict";
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_event_1 = require("./app-event");
 const event_names_enum_1 = require("../enum/event-names-enum");
-const _ = require("lodash");
+const _ = __importStar(require("lodash"));
 /**
  * EventsManager
  */

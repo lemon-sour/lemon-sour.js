@@ -1,4 +1,14 @@
 "use strict";
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 // https://stackoverflow.com/questions/7323932/how-do-you-follow-an-http-redirect-in-node-js
 // https://github.com/follow-redirects/follow-redirects
@@ -6,10 +16,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // import * as https from 'https';
 const http = require('follow-redirects').http;
 const https = require('follow-redirects').https;
-const URL = require("url");
-const fs = require("fs");
-const razer_1 = require("razer");
-const constants_1 = require("../common/constants");
+const URL = __importStar(require("url"));
+const fs = __importStar(require("fs"));
+const razer_1 = __importDefault(require("razer"));
+const constants_1 = __importDefault(require("../common/constants"));
 function download(fileUrl, distPath, progress, callback) {
     return new Promise((resolve, reject) => {
         let timeout = 10000;

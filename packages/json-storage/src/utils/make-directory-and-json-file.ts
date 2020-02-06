@@ -1,4 +1,4 @@
-import * as mkdirp from 'mkdirp'
+import mkdirp from 'mkdirp'
 import * as fs from 'fs'
 import getBaseDir from './get-base-dir'
 

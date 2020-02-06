@@ -8,20 +8,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const _ = require("lodash");
-const razer_1 = require("razer");
+const _ = __importStar(require("lodash"));
+const razer_1 = __importDefault(require("razer"));
 const app_updater_1 = require("./app-updater");
 const workflow_1 = require("./workflow");
 const make_directory_1 = require("../utils/make-directory");
 const clean_directory_1 = require("../utils/clean-directory");
 const split_extension_1 = require("../utils/split-extension");
 const move_file_1 = require("../utils/move-file");
-const get_user_home_1 = require("../utils/get-user-home");
-const file_downloader_1 = require("../utils/file-downloader");
-const unzip_1 = require("../utils/unzip");
-const yml_validator_1 = require("../validator/yml-validator");
-const constants_1 = require("../common/constants");
+const get_user_home_1 = __importDefault(require("../utils/get-user-home"));
+const file_downloader_1 = __importDefault(require("../utils/file-downloader"));
+const unzip_1 = __importDefault(require("../utils/unzip"));
+const yml_validator_1 = __importDefault(require("../validator/yml-validator"));
+const constants_1 = __importDefault(require("../common/constants"));
 /**
  * アプリケーションのアップデートの指揮者となるオーケストレーション
  */

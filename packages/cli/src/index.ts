@@ -1,4 +1,4 @@
-import * as minimist from 'minimist'
+import minimist from 'minimist'
 import { CliArgsInterface } from './interface/cli-args-interface'
 
 // コマンド引数を slice して使える状態にする
