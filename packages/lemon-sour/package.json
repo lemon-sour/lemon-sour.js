@@ -20,8 +20,7 @@
   },
   "lint-staged": {
     "{src,__tests__}/**/*.{js,ts,tsx,json}": [
-      "npm run lint:format",
-      "git add"
+      "npm run lint:format"
     ]
   },
   "bin": {
