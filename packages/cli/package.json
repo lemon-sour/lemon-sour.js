@@ -49,20 +49,20 @@
   },
   "gitHead": "b6ad574816588dd8328ca67b04347ee12d0e7076",
   "dependencies": {
-    "lint-staged": "^9.2.5",
+    "lint-staged": "^10.0.7",
     "lodash": "^4.17.15",
     "minimist": "^1.2.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.18",
-    "@types/lodash": "^4.14.138",
+    "@types/jest": "^25.1.1",
+    "@types/lodash": "^4.14.149",
     "@types/minimist": "^1.2.0",
-    "@types/node": "^12.7.5",
-    "jest": "^24.9.0",
-    "nodemon": "^1.19.2",
-    "prettier": "^1.18.2",
-    "rimraf": "^3.0.0",
-    "ts-jest": "^24.1.0",
-    "typescript": "^3.6.3"
+    "@types/node": "^13.7.0",
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.1",
+    "ts-jest": "^25.2.0",
+    "typescript": "^3.7.5"
   }
 }
