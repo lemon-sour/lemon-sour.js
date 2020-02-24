@@ -87,12 +87,11 @@ And then run:
 $ lemon-sour --yml config.yml
 ```
 
-## Maintainers
+## Author
 
-- [hisasann (Yoshiyuki Hisamatsu)](https://github.com/hisasann)
+- [github/hisasann](https://github.com/hisasann)
+- [twitter/hisasann](https://twitter.com/hisasann)
 
 ## License
 
 MIT © [hisasann (Yoshiyuki Hisamatsu)](https://github.com/hisasann)
-
-<a href="https://twitter.com/hisasann"><img src="https://badgen.net/twitter/follow/hisasann" alt="twitter"></a>
