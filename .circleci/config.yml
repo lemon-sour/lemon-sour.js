@@ -9,15 +9,15 @@ executors:
       - image: circleci/node:12.13
 
 commands:
-#  restore_built:
-#    description: "Restore the build result from cache"
-#    steps:
-#      - restore_cache:
-#          key: v{{ .Environment.CACHE_VERSION }}-built-cli-{{ .Revision }}
-#      - restore_cache:
-#          key: v{{ .Environment.CACHE_VERSION }}-built-json-storage-{{ .Revision }}
-#      - restore_cache:
-#          key: v{{ .Environment.CACHE_VERSION }}-built-lemon-sour-{{ .Revision }}
+  restore_built:
+    description: "Restore the build result from cache"
+    steps:
+      - restore_cache:
+          key: v{{ .Branch }}-built-cli-{{ .Revision }}
+      - restore_cache:
+          key: v{{ .Branch }}-built-json-storage-{{ .Revision }}
+      - restore_cache:
+          key: v{{ .Branch }}-built-lemon-sour-{{ .Revision }}
   restore_dependency:
     description: "Restore the dependencies result from cache"
     steps:
