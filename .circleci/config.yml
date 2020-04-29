@@ -7,20 +7,17 @@ executors:
   node:
     docker:
       - image: circleci/node:12.13
-    environment:
-      TZ: /usr/share/zoneinfo/Asia/Tokyo # add time zone
-      CACHE_VERSION: 1.21
 
 commands:
-  restore_built:
-    description: "Restore the build result from cache"
-    steps:
-      - restore_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-built-cli-{{ .Revision }}
-      - restore_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-built-json-storage-{{ .Revision }}
-      - restore_cache:
-          key: v{{ .Environment.CACHE_VERSION }}-built-lemon-sour-{{ .Revision }}
+#  restore_built:
+#    description: "Restore the build result from cache"
+#    steps:
+#      - restore_cache:
+#          key: v{{ .Environment.CACHE_VERSION }}-built-cli-{{ .Revision }}
+#      - restore_cache:
+#          key: v{{ .Environment.CACHE_VERSION }}-built-json-storage-{{ .Revision }}
+#      - restore_cache:
+#          key: v{{ .Environment.CACHE_VERSION }}-built-lemon-sour-{{ .Revision }}
   restore_dependency:
     description: "Restore the dependencies result from cache"
     steps:
@@ -28,21 +25,21 @@ commands:
           keys:
             # Find a cache corresponding to this specific package.json checksum
             # when this file is changed, this key will fail
-            - v{{ .Environment.CACHE_VERSION }}-dependencies-root-{{ checksum "package.json" }}
+            - v{{ .Branch }}-dependencies-root-{{ checksum "package.json" }}
             # Find the most recent cache used from any branch
-            - v{{ .Environment.CACHE_VERSION }}-dependencies-root-
+            - v{{ .Branch }}-dependencies-root-
       - restore_cache:
           keys:
-            - v{{ .Environment.CACHE_VERSION }}-dependencies-cli-{{ checksum "packages/cli/package.json" }}
-            - v{{ .Environment.CACHE_VERSION }}-dependencies-cli-
+            - v{{ .Branch }}-dependencies-cli-{{ checksum "packages/cli/package.json" }}
+            - v{{ .Branch }}-dependencies-cli-
       - restore_cache:
           keys:
-            - v{{ .Environment.CACHE_VERSION }}-dependencies-json-storage-{{ checksum "packages/json-storage/package.json" }}
-            - v{{ .Environment.CACHE_VERSION }}-dependencies-json-storage-
+            - v{{ .Branch }}-dependencies-json-storage-{{ checksum "packages/json-storage/package.json" }}
+            - v{{ .Branch }}-dependencies-json-storage-
       - restore_cache:
           keys:
-            - v{{ .Environment.CACHE_VERSION }}-dependencies-lemon-sour-{{ checksum "packages/lemon-sour/package.json" }}
-            - v{{ .Environment.CACHE_VERSION }}-dependencies-lemon-sour-
+            - v{{ .Branch }}-dependencies-lemon-sour-{{ checksum "packages/lemon-sour/package.json" }}
+            - v{{ .Branch }}-dependencies-lemon-sour-
 
 jobs:
   install_dependency:
@@ -84,19 +81,19 @@ jobs:
       - save_cache:
           paths:
             - ./node_modules/
-          key: v{{ .Environment.CACHE_VERSION }}-dependencies-root-{{ checksum "package.copy.json" }}
+          key: v{{ .Branch }}-dependencies-root-{{ checksum "package.copy.json" }}
       - save_cache:
           paths:
             - ./packages/cli/node_modules/
-          key: v{{ .Environment.CACHE_VERSION }}-dependencies-cli-{{ checksum "packages/cli/package.copy.json" }}
+          key: v{{ .Branch }}-dependencies-cli-{{ checksum "packages/cli/package.copy.json" }}
       - save_cache:
           paths:
             - ./packages/json-storage/node_modules/
-          key: v{{ .Environment.CACHE_VERSION }}-dependencies-json-storage-{{ checksum "packages/json-storage/package.copy.json" }}
+          key: v{{ .Branch }}-dependencies-json-storage-{{ checksum "packages/json-storage/package.copy.json" }}
       - save_cache:
           paths:
             - ./packages/lemon-sour/node_modules/
-          key: v{{ .Environment.CACHE_VERSION }}-dependencies-lemon-sour-{{ checksum "packages/lemon-sour/package.copy.json" }}
+          key: v{{ .Branch }}-dependencies-lemon-sour-{{ checksum "packages/lemon-sour/package.copy.json" }}
 
   build:
     executor: node
