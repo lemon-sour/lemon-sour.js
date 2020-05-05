@@ -5,7 +5,8 @@
   ],
   "scripts": {
     "tsc:init": "tsc --init",
-    "server": "node ./scripts/server.js"
+    "server": "node ./scripts/server.js",
+    "release": "lerna publish"
   },
   "husky": {
     "hooks": {
