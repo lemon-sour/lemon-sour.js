@@ -9,14 +9,14 @@ import getBaseDir from './get-base-dir'
 export default function makeDirectoryAndJsonFile(jsonKeyName: string) {
   return new Promise<boolean>(
     (resolve: (value: boolean) => void, reject: (err: any) => void) => {
-      mkdirp(`${getBaseDir()}`, err => {
+      mkdirp(`${getBaseDir()}`, (err) => {
         if (err) {
           console.error(err)
           reject(err)
           return
         }
 
-        fs.writeFile(`${getBaseDir()}/${jsonKeyName}.json`, null, err => {
+        fs.writeFile(`${getBaseDir()}/${jsonKeyName}.json`, null, (err) => {
           if (err) {
             console.error(err)
             reject(err)

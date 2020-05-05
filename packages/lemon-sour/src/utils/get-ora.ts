@@ -3,7 +3,7 @@ import C from '../common/constants'
 
 const spinner = ora({
   spinner: C.HEARTS_SPINNER,
-  color: 'yellow'
+  color: 'yellow',
 }).start()
 
 export default function getOra() {

@@ -6,7 +6,7 @@ async function unzip(
   appName: string,
   zipFile: string,
   tempPath: string,
-  callback: () => void = function() {}
+  callback: () => void = function () {}
 ) {
   // const zipFile = tempPath + '/' + appName + '.' + extension;
   // let _tempPath = tempPath + '\\' + appName;
@@ -18,7 +18,7 @@ async function unzip(
       const zip = new AdmZip(zipFile)
       const zipEntries = zip.getEntries() // an array of ZipEntry records
 
-      zipEntries.forEach(function(zipEntry) {
+      zipEntries.forEach(function (zipEntry) {
         razer('zipEntry.entryName:', zipEntry.entryName.toString()) // outputs zip entries information
         // console.log(zipEntry.data.toString('utf8'));
       })

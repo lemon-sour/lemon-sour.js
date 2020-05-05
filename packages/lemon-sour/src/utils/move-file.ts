@@ -17,7 +17,7 @@ const moveFile = (prevPath: string, nextPath: string) => {
         }
 
         const fileList: string[] = []
-        files.forEach(file => {
+        files.forEach((file) => {
           fileList.push(file)
           mv(
             prevPath + '/' + file,

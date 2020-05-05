@@ -17,8 +17,8 @@ export function getJson(jsonKeyName: string): Promise<object | null> {
 
       jsonfile
         .readFile(jsonPath)
-        .then(obj => resolve(obj))
-        .catch(err => reject(err))
+        .then((obj) => resolve(obj))
+        .catch((err) => reject(err))
     }
   )
 }

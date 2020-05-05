@@ -53,7 +53,7 @@ class AppUpdater extends BaseAppUpdater {
       latestVersion: '',
       fileUrl: '',
       sha1: '',
-      releaseDate: ''
+      releaseDate: '',
     }
     this.keyName = keyName
     this.extension = ''
@@ -98,7 +98,7 @@ class AppUpdater extends BaseAppUpdater {
    */
   public async saveCurrentVersion() {
     await setJson(this.keyName, {
-      version: this.latest.latestVersion
+      version: this.latest.latestVersion,
     } as VersionInterface)
   }
 

@@ -5,7 +5,7 @@ const APP_NAME: string = 'json-storage'
 const BASE_DIR: string = [
   getUserHome(),
   '/',
-  process.env.npm_package_name || APP_NAME
+  process.env.npm_package_name || APP_NAME,
 ].join('')
 
 /**

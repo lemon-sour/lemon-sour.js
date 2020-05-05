@@ -18,7 +18,7 @@ class AppEvent {
     this.steps.push({
       name,
       command,
-      sync
+      sync,
     } as RunInterface)
   }
 
@@ -50,7 +50,7 @@ class AppEvent {
           const c = args.shift() || ''
           let p = childProcess.spawn(c, [...args], {
             detached: true,
-            stdio: ['ignore', 'ignore', 'ignore']
+            stdio: ['ignore', 'ignore', 'ignore'],
           })
           p.unref()
 
@@ -89,7 +89,7 @@ class AppEvent {
     let argPart: string | null = null
 
     text &&
-      text.split(' ').forEach(function(arg) {
+      text.split(' ').forEach(function (arg) {
         if ((re.test(arg) || re2.test(arg)) && !argPart) {
           arr.push(arg)
         } else {
