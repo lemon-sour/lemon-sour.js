@@ -17,7 +17,7 @@ class BaseAppUpdater {
         const myInit = {
           method: 'GET',
           mode: 'cors',
-          credentials: 'include'
+          credentials: 'include',
         }
 
         await fetchWithTimeout(url, myInit)

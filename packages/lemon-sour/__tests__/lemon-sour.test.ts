@@ -6,7 +6,7 @@ describe('lemon-sour', () => {
     expect.assertions(1)
 
     const args: CliArgsInterface = {
-      yml: '../../example/app_basic_no_archive/config.yml'
+      yml: '../../example/app_basic_no_archive/config.yml',
     }
 
     // Promise が返ってきてることだけをテスト
@@ -17,10 +17,10 @@ describe('lemon-sour', () => {
     expect.assertions(1)
 
     const args: CliArgsInterface = {
-      yml: '../../example/app_yml_no_version/config.yml'
+      yml: '../../example/app_yml_no_version/config.yml',
     }
 
-    await lemonSour.run(args).catch(e => {
+    await lemonSour.run(args).catch((e) => {
       expect(typeof e.message).toBe('string')
     })
   })

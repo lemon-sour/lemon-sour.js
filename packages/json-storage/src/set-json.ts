@@ -16,7 +16,7 @@ export function setJson(jsonKeyName: string, obj: any): Promise<boolean> {
         await makeDirectoryAndJsonFile(jsonKeyName)
       }
 
-      jsonfile.writeFile(jsonPath, obj, err => {
+      jsonfile.writeFile(jsonPath, obj, (err) => {
         if (err) {
           console.error(err)
           reject(err)

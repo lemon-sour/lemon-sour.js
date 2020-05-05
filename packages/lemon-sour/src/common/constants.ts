@@ -17,7 +17,7 @@ const Constants = {
 
   HEARTS_SPINNER: {
     interval: 100,
-    frames: ['💛 ', '💙 ', '💜 ', '💚 ']
+    frames: ['💛 ', '💙 ', '💜 ', '💚 '],
   },
 
   offLineJudgmentHttpUrl: 'http://httpbin.org/get',
@@ -25,7 +25,7 @@ const Constants = {
 
   downloadDirectoryName: '/download',
   backupDirectoryName: '/backup',
-  extractDirectoryName: '/extract'
+  extractDirectoryName: '/extract',
 }
 
 razer('Constants: ', Constants)

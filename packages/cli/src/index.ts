@@ -6,7 +6,7 @@ const convertArgv = minimist(process.argv.slice(2))
 console.log('convertArgv: ', convertArgv)
 
 const argv = {
-  yml: convertArgv.yml
+  yml: convertArgv.yml,
 } as CliArgsInterface
 
 const cli = (): CliArgsInterface => {

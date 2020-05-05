@@ -1,5 +1,5 @@
 const Env = {
-  envName: 'dev'
+  envName: 'dev',
 }
 
 export default Env
