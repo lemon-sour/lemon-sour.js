@@ -1,6 +1,6 @@
 {
   "name": "lemon-sour",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "lemon-sour",
   "author": "hisasann <hisasann25@gmail.com>",
   "homepage": "https://github.com/lemon-sour/lemon-sour.js/tree/master/packages/lemon-sour#readme",
@@ -49,8 +49,8 @@
   },
   "gitHead": "b6ad574816588dd8328ca67b04347ee12d0e7076",
   "dependencies": {
-    "@lemon-sour/cli": "^1.2.3",
-    "@lemon-sour/json-storage": "^1.2.3",
+    "@lemon-sour/cli": "^1.2.4",
+    "@lemon-sour/json-storage": "^1.2.4",
     "@sentry/node": "5.12.3",
     "adm-zip": "^0.4.13",
     "axios": "^0.19.2",
