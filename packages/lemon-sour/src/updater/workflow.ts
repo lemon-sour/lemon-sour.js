@@ -3,11 +3,11 @@
  */
 class Workflow {
   // jobs の中のアプリのキー名
-  keyName: string
+  keyName: string;
 
   constructor(keyName: string) {
-    this.keyName = keyName
+    this.keyName = keyName;
   }
 }
 
-export { Workflow }
+export { Workflow };

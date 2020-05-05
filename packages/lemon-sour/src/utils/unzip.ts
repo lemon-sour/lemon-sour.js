@@ -1,6 +1,6 @@
 // import * as childProcess from 'child_process';
-import AdmZip from 'adm-zip'
-import razer from 'razer'
+import AdmZip from 'adm-zip';
+import razer from 'razer';
 
 async function unzip(
   appName: string,
@@ -15,21 +15,21 @@ async function unzip(
     (resolve: (value?: object) => void, reject: (err: any) => void) => {
       // https://github.com/cthackers/adm-zip
       // reading archives
-      const zip = new AdmZip(zipFile)
-      const zipEntries = zip.getEntries() // an array of ZipEntry records
+      const zip = new AdmZip(zipFile);
+      const zipEntries = zip.getEntries(); // an array of ZipEntry records
 
       zipEntries.forEach(function (zipEntry) {
-        razer('zipEntry.entryName:', zipEntry.entryName.toString()) // outputs zip entries information
+        razer('zipEntry.entryName:', zipEntry.entryName.toString()); // outputs zip entries information
         // console.log(zipEntry.data.toString('utf8'));
-      })
+      });
       // outputs the content of some_folder/my_file.txt
       // console.log(zip.readAsText("some_folder/my_file.txt"));
       // extracts the specified file to the specified location
       // zip.extractEntryTo(/*entry name*/zipFile, /*target path*/C.tempPath, /*maintainEntryPath*/false, /*overwrite*/true);
       // extracts everything
-      zip.extractAllTo(/*target path*/ tempPath, /*overwrite*/ true)
-      callback()
-      resolve()
+      zip.extractAllTo(/*target path*/ tempPath, /*overwrite*/ true);
+      callback();
+      resolve();
 
       // https://github.com/maxogden/extract-zip
       // extract(zipFile, {dir: C.tempPath}, function (err) {
@@ -97,7 +97,7 @@ async function unzip(
       // let result = childProcess.execSync('".\\tools\\7za920\\7za.exe" x -y -o.\\temp\\ .\\temp\\electron.zip');
       // console.log(result);
     }
-  )
+  );
 }
 
-export default unzip
+export default unzip;

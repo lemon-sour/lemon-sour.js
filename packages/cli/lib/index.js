@@ -8,7 +8,7 @@ const minimist_1 = __importDefault(require("minimist"));
 const convertArgv = minimist_1.default(process.argv.slice(2));
 console.log('convertArgv: ', convertArgv);
 const argv = {
-    yml: convertArgv.yml
+    yml: convertArgv.yml,
 };
 const cli = () => {
     return argv;

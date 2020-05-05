@@ -1,4 +1,4 @@
-import { setJson } from './set-json'
-import { getJson } from './get-json'
+import { setJson } from './set-json';
+import { getJson } from './get-json';
 
-export { setJson, getJson }
+export { setJson, getJson };

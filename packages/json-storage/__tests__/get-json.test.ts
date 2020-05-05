@@ -1,21 +1,21 @@
-'use strict'
+'use strict';
 
-import { setJson } from '../src/set-json'
-import { getJson } from '../src/get-json'
+import { setJson } from '../src/set-json';
+import { getJson } from '../src/get-json';
 
 describe('get-json', () => {
-  const jsonKeyName = 'get-json'
+  const jsonKeyName = 'get-json';
 
   beforeEach(async () => {
-    console.log('beforeEach')
+    console.log('beforeEach');
 
-    await setJson(jsonKeyName, { a: 'foo' })
-  })
+    await setJson(jsonKeyName, { a: 'foo' });
+  });
 
   test('should return value calling get-json', async () => {
-    expect.assertions(1)
+    expect.assertions(1);
 
-    const o: any = await getJson(jsonKeyName)
-    expect(o.a).toEqual('foo')
-  })
-})
+    const o: any = await getJson(jsonKeyName);
+    expect(o.a).toEqual('foo');
+  });
+});

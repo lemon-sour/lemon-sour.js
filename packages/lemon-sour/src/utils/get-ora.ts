@@ -1,11 +1,11 @@
-import ora from 'ora'
-import C from '../common/constants'
+import ora from 'ora';
+import C from '../common/constants';
 
 const spinner = ora({
   spinner: C.HEARTS_SPINNER,
   color: 'yellow',
-}).start()
+}).start();
 
 export default function getOra() {
-  return spinner
+  return spinner;
 }

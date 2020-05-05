@@ -24,7 +24,7 @@ class BaseAppUpdater {
                 const myInit = {
                     method: 'GET',
                     mode: 'cors',
-                    credentials: 'include'
+                    credentials: 'include',
                 };
                 yield fetch_with_timeout_1.fetchWithTimeout(url, myInit)
                     .then((json) => {

@@ -10,4 +10,4 @@ enum EventNamesEnum {
   DownloadProgress = 'download_progress',
 }
 
-export { EventNamesEnum }
+export { EventNamesEnum };

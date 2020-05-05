@@ -1,6 +1,6 @@
-import mkdirp from 'mkdirp'
-import * as fs from 'fs'
-import getBaseDir from './get-base-dir'
+import mkdirp from 'mkdirp';
+import * as fs from 'fs';
+import getBaseDir from './get-base-dir';
 
 /**
  * makeDirectoryAndJsonFile
@@ -11,21 +11,21 @@ export default function makeDirectoryAndJsonFile(jsonKeyName: string) {
     (resolve: (value: boolean) => void, reject: (err: any) => void) => {
       mkdirp(`${getBaseDir()}`, (err) => {
         if (err) {
-          console.error(err)
-          reject(err)
-          return
+          console.error(err);
+          reject(err);
+          return;
         }
 
         fs.writeFile(`${getBaseDir()}/${jsonKeyName}.json`, null, (err) => {
           if (err) {
-            console.error(err)
-            reject(err)
-            return
+            console.error(err);
+            reject(err);
+            return;
           }
 
-          resolve(true)
-        })
-      })
+          resolve(true);
+        });
+      });
     }
-  )
+  );
 }

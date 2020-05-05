@@ -1,41 +1,41 @@
-import { getJson, setJson } from '@lemon-sour/json-storage'
-import razer from 'razer'
-import { InstallApp, Events } from '../interface/yml-interface'
-import { LatestJsonInterface } from '../interface/latest-json-interface'
-import { BaseAppUpdater } from './base-app-updater'
-import { EventsManager } from './events-manager'
-import { VersionInterface } from '../interface/version-interface'
-import C from '../common/constants'
+import { getJson, setJson } from '@lemon-sour/json-storage';
+import razer from 'razer';
+import { InstallApp, Events } from '../interface/yml-interface';
+import { LatestJsonInterface } from '../interface/latest-json-interface';
+import { BaseAppUpdater } from './base-app-updater';
+import { EventsManager } from './events-manager';
+import { VersionInterface } from '../interface/version-interface';
+import C from '../common/constants';
 
 /**
  * 個々のアプリのアップデート処理を実行、イベントを実行するクラス
  */
 class AppUpdater extends BaseAppUpdater {
   // 現在のバージョン
-  currentVersion: string
+  currentVersion: string;
   // イベントマネージャー
-  eventsManager: EventsManager
+  eventsManager: EventsManager;
   // アップデートがあるかどうか
-  isNeedsUpdate: boolean
+  isNeedsUpdate: boolean;
 
   // latest.json の情報
-  latest: LatestJsonInterface
+  latest: LatestJsonInterface;
 
   // jobs の中のアプリのキー名
-  keyName: string
+  keyName: string;
   // 拡張子
-  extension: string
+  extension: string;
 
   // アプリの名前
-  name: string
+  name: string;
   // latest.json の URL
-  latest_json_url: string
+  latest_json_url: string;
   // アーカイブされたファイルかどうか、アーカイブされている場合は解答しないといけないため
-  is_archive: boolean
+  is_archive: boolean;
   // 展開先のパス
-  output_path: string
+  output_path: string;
   // 各イベントたち
-  events: Events
+  events: Events;
 
   /**
    * constructor
@@ -43,27 +43,27 @@ class AppUpdater extends BaseAppUpdater {
    * @param installApp
    */
   constructor(keyName: string, installApp: InstallApp) {
-    razer('AppUpdater: ', 'constructor', keyName)
+    razer('AppUpdater: ', 'constructor', keyName);
 
-    super()
+    super();
 
-    this.currentVersion = ''
-    this.isNeedsUpdate = false
+    this.currentVersion = '';
+    this.isNeedsUpdate = false;
     this.latest = {
       latestVersion: '',
       fileUrl: '',
       sha1: '',
       releaseDate: '',
-    }
-    this.keyName = keyName
-    this.extension = ''
-    this.name = installApp.name
-    this.latest_json_url = installApp.latest_json_url
-    this.is_archive = installApp.is_archive
-    this.output_path = installApp.output_path
-    this.events = installApp.events
+    };
+    this.keyName = keyName;
+    this.extension = '';
+    this.name = installApp.name;
+    this.latest_json_url = installApp.latest_json_url;
+    this.is_archive = installApp.is_archive;
+    this.output_path = installApp.output_path;
+    this.events = installApp.events;
 
-    this.eventsManager = this.appEventsSetup(this.events)
+    this.eventsManager = this.appEventsSetup(this.events);
   }
 
   /**
@@ -71,8 +71,8 @@ class AppUpdater extends BaseAppUpdater {
    * @param events
    */
   private appEventsSetup(events: Events) {
-    const eventsManager: EventsManager = new EventsManager(events)
-    return eventsManager
+    const eventsManager: EventsManager = new EventsManager(events);
+    return eventsManager;
   }
 
   /**
@@ -82,15 +82,15 @@ class AppUpdater extends BaseAppUpdater {
   public async loadCurrentVersion(_version: string = '') {
     const json: VersionInterface | null = (await getJson(
       this.keyName
-    )) as VersionInterface
-    let version = _version || C.INITIAL_VERSION
+    )) as VersionInterface;
+    let version = _version || C.INITIAL_VERSION;
     if (json && json.version) {
-      version = json.version
+      version = json.version;
     }
-    this.currentVersion = version
+    this.currentVersion = version;
 
     // TODO: テスト用
-    this.currentVersion = C.INITIAL_VERSION
+    this.currentVersion = C.INITIAL_VERSION;
   }
 
   /**
@@ -99,14 +99,14 @@ class AppUpdater extends BaseAppUpdater {
   public async saveCurrentVersion() {
     await setJson(this.keyName, {
       version: this.latest.latestVersion,
-    } as VersionInterface)
+    } as VersionInterface);
   }
 
   /**
    * getCurrentVersion
    */
   public async getCurrentVersion(): Promise<string> {
-    return this.currentVersion
+    return this.currentVersion;
   }
 
   /**
@@ -114,8 +114,8 @@ class AppUpdater extends BaseAppUpdater {
    * @param _latest
    */
   public setLatest(_latest: LatestJsonInterface) {
-    razer('latest:', _latest)
-    this.latest = _latest
+    razer('latest:', _latest);
+    this.latest = _latest;
   }
 
   /**
@@ -123,8 +123,8 @@ class AppUpdater extends BaseAppUpdater {
    * @param url
    */
   public async loadLatestJsonUrl(url: string) {
-    return await super.loadLatestJsonUrl(url)
+    return await super.loadLatestJsonUrl(url);
   }
 }
 
-export { AppUpdater }
+export { AppUpdater };

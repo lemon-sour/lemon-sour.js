@@ -18,13 +18,13 @@ const Constants = {
     VALID_YML_VERSION: 1,
     HEARTS_SPINNER: {
         interval: 100,
-        frames: ['💛 ', '💙 ', '💜 ', '💚 ']
+        frames: ['💛 ', '💙 ', '💜 ', '💚 '],
     },
     offLineJudgmentHttpUrl: 'http://httpbin.org/get',
     HTTP_OK: 200,
     downloadDirectoryName: '/download',
     backupDirectoryName: '/backup',
-    extractDirectoryName: '/extract'
+    extractDirectoryName: '/extract',
 };
 razer_1.default('Constants: ', Constants);
 exports.default = Constants;

@@ -1,6 +1,6 @@
-import mv from 'mv'
-import * as fs from 'fs'
-import razer from 'razer'
+import mv from 'mv';
+import * as fs from 'fs';
+import razer from 'razer';
 
 /**
  * moveFile
@@ -12,13 +12,13 @@ const moveFile = (prevPath: string, nextPath: string) => {
     (resolve: (value?: any) => void, reject: (err: any) => void) => {
       fs.readdir(prevPath, (err, files) => {
         if (err) {
-          reject(err)
-          return
+          reject(err);
+          return;
         }
 
-        const fileList: string[] = []
+        const fileList: string[] = [];
         files.forEach((file) => {
-          fileList.push(file)
+          fileList.push(file);
           mv(
             prevPath + '/' + file,
             nextPath + '/' + file,
@@ -30,16 +30,16 @@ const moveFile = (prevPath: string, nextPath: string) => {
                 // return;
               }
             }
-          )
-        })
+          );
+        });
 
         razer(
           `Moving up the file list: ${fileList} to the ${nextPath} directory`
-        )
-        resolve()
-      })
+        );
+        resolve();
+      });
     }
-  )
-}
+  );
+};
 
-export { moveFile }
+export { moveFile };

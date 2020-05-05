@@ -19,13 +19,13 @@ const get_base_dir_1 = __importDefault(require("./get-base-dir"));
  */
 function makeDirectoryAndJsonFile(jsonKeyName) {
     return new Promise((resolve, reject) => {
-        mkdirp_1.default(`${get_base_dir_1.default()}`, err => {
+        mkdirp_1.default(`${get_base_dir_1.default()}`, (err) => {
             if (err) {
                 console.error(err);
                 reject(err);
                 return;
             }
-            fs.writeFile(`${get_base_dir_1.default()}/${jsonKeyName}.json`, null, err => {
+            fs.writeFile(`${get_base_dir_1.default()}/${jsonKeyName}.json`, null, (err) => {
                 if (err) {
                     console.error(err);
                     reject(err);

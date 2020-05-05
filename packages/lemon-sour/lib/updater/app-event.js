@@ -33,7 +33,7 @@ class AppEvent {
         this.steps.push({
             name,
             command,
-            sync
+            sync,
         });
     }
     exec() {
@@ -63,7 +63,7 @@ class AppEvent {
                     const c = args.shift() || '';
                     let p = childProcess.spawn(c, [...args], {
                         detached: true,
-                        stdio: ['ignore', 'ignore', 'ignore']
+                        stdio: ['ignore', 'ignore', 'ignore'],
                     });
                     p.unref();
                     setTimeout(() => {

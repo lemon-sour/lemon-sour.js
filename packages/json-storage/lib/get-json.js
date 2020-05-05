@@ -26,8 +26,8 @@ function getJson(jsonKeyName) {
         }
         jsonfile
             .readFile(jsonPath)
-            .then(obj => resolve(obj))
-            .catch(err => reject(err));
+            .then((obj) => resolve(obj))
+            .catch((err) => reject(err));
     });
 }
 exports.getJson = getJson;

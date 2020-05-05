@@ -26,7 +26,7 @@ const moveFile = (prevPath, nextPath) => {
                 return;
             }
             const fileList = [];
-            files.forEach(file => {
+            files.forEach((file) => {
                 fileList.push(file);
                 mv_1.default(prevPath + '/' + file, nextPath + '/' + file, { mkdirp: true }, (err) => {
                     if (err) {

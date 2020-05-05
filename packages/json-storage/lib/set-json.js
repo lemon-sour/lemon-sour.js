@@ -34,7 +34,7 @@ function setJson(jsonKeyName, obj) {
         if (!is_exist_file_1.default(jsonPath)) {
             yield make_directory_and_json_file_1.default(jsonKeyName);
         }
-        jsonfile.writeFile(jsonPath, obj, err => {
+        jsonfile.writeFile(jsonPath, obj, (err) => {
             if (err) {
                 console.error(err);
                 reject(err);

@@ -55,7 +55,7 @@ function fetchWithTimeout(_fullUrl, myInit) {
             }
             resolve(Object.assign({}, json), response);
         })
-            .catch(error => {
+            .catch((error) => {
             razer_1.default(`fetch catch: ${_fullUrl} onRejected: ${error}`);
             // Clear the timeout as cleanup
             clearTimeout(timeout);

@@ -17,7 +17,7 @@ const razer_1 = __importDefault(require("razer"));
 const makeDirectory = (directoryPath) => __awaiter(void 0, void 0, void 0, function* () {
     razer_1.default('make directory:', directoryPath);
     return new Promise((resolve, reject) => __awaiter(void 0, void 0, void 0, function* () {
-        mkdirp_1.default(directoryPath, err => {
+        mkdirp_1.default(directoryPath, (err) => {
             if (err) {
                 reject(err);
                 return;
