@@ -58,7 +58,7 @@
     "@types/lodash": "^4.14.150",
     "@types/minimist": "^1.2.0",
     "@types/node": "^13.13.4",
-    "jest": "^25.5.4",
+    "jest": "^26.6.3",
     "nodemon": "^2.0.3",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
