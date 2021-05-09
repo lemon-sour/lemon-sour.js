@@ -6,7 +6,7 @@ version: 2.1
 executors:
   node:
     docker:
-      - image: circleci/node:12.13
+      - image: circleci/node:15.14
 
 commands:
   restore_built:
