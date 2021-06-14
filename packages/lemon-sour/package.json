@@ -51,7 +51,7 @@
   "dependencies": {
     "@lemon-sour/cli": "^1.2.5",
     "@lemon-sour/json-storage": "^1.2.5",
-    "@sentry/node": "5.15.5",
+    "@sentry/node": "6.7.0",
     "adm-zip": "^0.4.14",
     "axios": "^0.19.2",
     "chalk": "^3.0.0",
