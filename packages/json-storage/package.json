@@ -51,13 +51,13 @@
     "jsonfile": "^5.0.0",
     "lint-staged": "^9.5.0",
     "lodash": "^4.17.15",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^1.0.4"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "@types/jsonfile": "^5.0.0",
     "@types/lodash": "^4.14.150",
-    "@types/mkdirp": "^0.5.2",
+    "@types/mkdirp": "^1.0.2",
     "@types/node": "^13.13.4",
     "jest": "^25.5.4",
     "nodemon": "^2.0.3",
