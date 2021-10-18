@@ -76,7 +76,7 @@
     "@types/node": "^13.13.4",
     "@types/node-fetch": "^2.5.7",
     "@types/request": "^2.48.4",
-    "@types/rimraf": "^2.0.4",
+    "@types/rimraf": "^3.0.2",
     "cross-env": "^7.0.2",
     "esm": "^3.2.25",
     "jest": "^25.5.4",
