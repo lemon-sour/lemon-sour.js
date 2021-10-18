@@ -54,7 +54,7 @@
     "@sentry/node": "5.15.5",
     "adm-zip": "^0.4.14",
     "axios": "^0.19.2",
-    "chalk": "^3.0.0",
+    "chalk": "^4.1.2",
     "eventemitter3": "^4.0.0",
     "follow-redirects": "^1.11.0",
     "js-yaml": "^3.13.1",
