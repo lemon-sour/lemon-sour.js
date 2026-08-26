@@ -52,7 +52,7 @@
     "@lemon-sour/cli": "^1.2.5",
     "@lemon-sour/json-storage": "^1.2.5",
     "@sentry/node": "5.15.5",
-    "adm-zip": "^0.4.14",
+    "adm-zip": "^0.6.0",
     "axios": "^0.19.2",
     "chalk": "^3.0.0",
     "eventemitter3": "^4.0.0",
