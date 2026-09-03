@@ -51,7 +51,7 @@
     "jsonfile": "^5.0.0",
     "lint-staged": "^9.5.0",
     "lodash": "^4.17.15",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^3.0.1"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
