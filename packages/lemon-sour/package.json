@@ -55,7 +55,7 @@
     "adm-zip": "^0.4.14",
     "axios": "^0.19.2",
     "chalk": "^3.0.0",
-    "eventemitter3": "^4.0.0",
+    "eventemitter3": "^5.0.4",
     "follow-redirects": "^1.11.0",
     "js-yaml": "^3.13.1",
     "lint-staged": "^9.5.0",
